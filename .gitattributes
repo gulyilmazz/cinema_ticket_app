@@ -1,0 +1,6 @@
+# GitHub dil analizi için platform klasörlerini hariç tut
+windows/ linguist-vendored
+linux/ linguist-vendored
+macos/ linguist-vendored
+android/ linguist-vendored
+ios/ linguist-vendored
