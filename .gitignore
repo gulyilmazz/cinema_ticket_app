@@ -11,12 +11,16 @@
 .svn/
 .swiftpm/
 migrate_working_dir/
-# C++ files
+# C++ ve ilgili dosyaları hariç tut
 *.cpp
 *.h
 *.hpp
 *.cc
 *.cxx
+# CMake dosyalarını hariç tut
+CMakeLists.txt
+*.cmake
+
 # Windows runner klasörünü hariç tut
 /windows/runner/
 # IntelliJ related
