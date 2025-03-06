@@ -17,7 +17,8 @@ migrate_working_dir/
 *.hpp
 *.cc
 *.cxx
-
+# Windows runner klasörünü hariç tut
+/windows/runner/
 # IntelliJ related
 *.iml
 *.ipr
