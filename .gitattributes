@@ -1,18 +1,1 @@
-# Flutter platform-specific folders
-android/* linguist-vendored
-ios/* linguist-vendored
-linux/* linguist-vendored
-macos/* linguist-vendored
-windows/* linguist-vendored
-web/* linguist-vendored
-build/* linguist-vendored
-
-# Test dosyalarını da dışarda tutmak istersen
-test/* linguist-vendored
-
-# YAML ve diğer config dosyalarını da hariç tut
-#*.yaml linguist-generated
-*.lock linguist-generated
-*.iml linguist-generated
-*.gitignore linguist-generated
-*.metadata linguist-generated
+"linux/* linguist-vendored" 
