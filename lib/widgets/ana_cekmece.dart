@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../screens/filtreleme_secenekleri_sayfası.dart';
-import '../screens/giris_yap_sayfasi.dart';
 import '../screens/ayarlar_sayfası.dart';
 
 class AnaCekmece extends StatelessWidget {
@@ -37,7 +36,7 @@ class AnaCekmece extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => GirisYapSayfasi()),
+                MaterialPageRoute(builder: (context) => AyarlarSayfasi()),
               );
             },
           ),

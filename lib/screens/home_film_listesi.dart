@@ -1,7 +1,7 @@
 import 'package:cinemaa/screens/filtreleme_secenekleri_sayfası.dart';
 import 'package:flutter/material.dart';
 import '../widgets/ana_cekmece.dart';
-import '../models/film.dart';
+import '../models/film_model.dart';
 import 'package:cinemaa/utils/renkler.dart';
 
 class FilmListesi extends StatelessWidget {
