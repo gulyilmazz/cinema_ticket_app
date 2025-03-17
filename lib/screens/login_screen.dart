@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'register_screen.dart';
-import 'home_film_listesi.dart';
-import '../utils/renkler.dart';
+import 'register_screen.dart'; // Kayıt ekranını içe aktarır.
+import 'home_film_listesi.dart'; // Ana sayfa (film listesi) ekranını içe aktarır.
+import '../utils/renkler.dart'; // Renkleri tanımlayan dosyayı içe aktarır.
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -11,12 +11,18 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  // Kullanıcıdan e-posta ve şifre almak için controller'lar
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  // Şifrenin görünürlüğünü kontrol eden değişken
   bool _passwordVisible = false;
+
+  // Klavyeyi kontrol etmek için odak düğümleri
   final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
 
+  // Widget yok edildiğinde odakları temizleme işlemi
   @override
   void dispose() {
     _emailFocusNode.dispose();
@@ -27,14 +33,19 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      // Kullanıcı ekrana dokunduğunda klavyeyi kapatır
       onTap: () {
         WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
       },
       child: Scaffold(
-        resizeToAvoidBottomInset: true,
-        extendBodyBehindAppBar: true,
-        extendBody: true,
-        backgroundColor: Renkler.arkaPlanRengi,
+        resizeToAvoidBottomInset:
+            true, // Klavyenin içeriği kaydırmasını sağlar.
+        extendBodyBehindAppBar:
+            true, // İçeriğin üst çubuğun arkasına geçmesini sağlar.
+        extendBody: true, // İçeriği ekranın tamamına yayar.
+        backgroundColor:
+            Renkler
+                .arkaPlanRengi, // Arka plan rengi (renkler.dart'tan geliyor).
         body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
@@ -45,9 +56,13 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               child: ConstrainedBox(
                 constraints: BoxConstraints(
-                  minHeight: MediaQuery.of(context).size.height,
+                  minHeight:
+                      MediaQuery.of(
+                        context,
+                      ).size.height, // Ekran yüksekliği kadar genişlet.
                 ),
                 child: Container(
+                  // Arka plan tasarımı: Kenarlık ve renk geçişi (gradient)
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black, width: 2),
                     borderRadius: BorderRadius.circular(20),
@@ -65,12 +80,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        // GIF Alanı
+                        //  GIF Animasyonu (Video icon vb.)
                         Image.asset(
-                          'lib/assets/images/video.gif', // GIF dosyanızın yolunu buraya ekleyin
-                          height: 80, // GIF'in yüksekliğini ayarlayın
+                          'lib/assets/images/video.gif', // GIF dosyanın yolu
+                          height: 80, // GIF'in yüksekliği
                         ),
-                        SizedBox(height: 40),
+                        SizedBox(height: 40), // Boşluk bırak
+                        // Uygulama adı
                         Text(
                           'SAHNE',
                           style: TextStyle(
@@ -80,21 +96,24 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         SizedBox(height: 10),
+
+                        // Açıklama yazısı
                         Text(
                           'Film Dünyasına Giriş Yapın',
                           textAlign: TextAlign.center,
                           style: TextStyle(fontSize: 16, color: Colors.grey),
                         ),
                         SizedBox(height: 30),
+
+                        //  Kullanıcı Adı (Username) Giriş Alanı
                         TextField(
-                          controller: _emailController,
+                          controller:
+                              _emailController, // Kullanıcı adını kontrol eder.
                           focusNode: _emailFocusNode,
                           style: TextStyle(color: Colors.white),
                           decoration: InputDecoration(
                             labelText: 'Username',
-                            labelStyle: TextStyle(
-                              color: const Color.fromARGB(255, 158, 158, 158),
-                            ),
+                            labelStyle: TextStyle(color: Colors.grey),
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.grey),
                               borderRadius: BorderRadius.circular(10),
@@ -105,14 +124,21 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            prefixIcon: Icon(Icons.person, color: Colors.grey),
+                            prefixIcon: Icon(
+                              Icons.person,
+                              color: Colors.grey,
+                            ), // Kullanıcı ikonu
                           ),
                         ),
                         SizedBox(height: 20),
+
+                        //  Şifre Giriş Alanı
                         TextField(
-                          controller: _passwordController,
+                          controller:
+                              _passwordController, // Şifreyi kontrol eder.
                           focusNode: _passwordFocusNode,
-                          obscureText: !_passwordVisible,
+                          obscureText:
+                              !_passwordVisible, // Şifreyi gizler veya gösterir.
                           style: TextStyle(color: Colors.white),
                           decoration: InputDecoration(
                             labelText: 'Password',
@@ -127,7 +153,11 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            prefixIcon: Icon(Icons.lock, color: Colors.grey),
+                            prefixIcon: Icon(
+                              Icons.lock,
+                              color: Colors.grey,
+                            ), // Kilit ikonu
+                            // Şifreyi göster/gizle butonu
                             suffixIcon: IconButton(
                               icon: Icon(
                                 _passwordVisible
@@ -144,8 +174,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         SizedBox(height: 30),
+
+                        //  Giriş Yap Butonu
                         ElevatedButton(
                           onPressed: () {
+                            // Kullanıcı giriş yaptıktan sonra film listesi ekranına gider.
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
@@ -179,8 +212,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         SizedBox(height: 20),
+
+                        //Kayıt ol butonu
                         TextButton(
                           onPressed: () {
+                            // Kullanıcı, kayıt ekranına yönlendirilir.
                             Navigator.push(
                               context,
                               MaterialPageRoute(
