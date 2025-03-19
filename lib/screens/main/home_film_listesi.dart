@@ -1,4 +1,4 @@
-import 'package:cinemaa/screens/film_detail_screen.dart';
+import 'package:cinemaa/screens/main/film_detail_screen.dart';
 import 'package:cinemaa/screens/main/filtreleme_secenekleri_sayfas%C4%B1.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/drawer_screen.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/film_model.dart';
+import '../../models/film_model.dart';
 
 class FilmDetaySayfasi extends StatelessWidget {
   final Film film;
