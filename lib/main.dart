@@ -1,4 +1,4 @@
-import 'package:cinemaa/screens/splash_screen.dart';
+import 'package:cinemaa/screens/auth/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 //import 'screens/login_screen.dart'; // Giriş ekranını içe aktar

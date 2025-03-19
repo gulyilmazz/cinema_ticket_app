@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'register_screen.dart'; // Kayıt ekranını içe aktarır.
-import 'home_film_listesi.dart'; // Ana sayfa (film listesi) ekranını içe aktarır.
-import '../utils/renkler.dart'; // Renkleri tanımlayan dosyayı içe aktarır.
+import '../home_film_listesi.dart'; // Ana sayfa (film listesi) ekranını içe aktarır.
+import '../../utils/renkler.dart'; // Renkleri tanımlayan dosyayı içe aktarır.
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -182,7 +182,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => FilmListesi(),
+                                builder: (context) => FilmTry(),
                               ),
                             );
                           },

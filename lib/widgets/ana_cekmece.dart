@@ -11,16 +11,19 @@ class AnaCekmece extends StatelessWidget {
         children: <Widget>[
           DrawerHeader(
             decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 7, 146, 14),
+              color: const Color.fromARGB(255, 30, 197, 197),
             ),
             child: Text(
               'Menü',
-              style: TextStyle(color: Colors.white, fontSize: 24),
+              style: TextStyle(
+                color: const Color.fromARGB(255, 17, 0, 0),
+                fontSize: 24,
+              ),
             ),
           ),
           ListTile(
             leading: Icon(Icons.login),
-            title: Text('wdsas'),
+            title: Text('Giriş'),
             onTap: () {
               Navigator.push(
                 context,
@@ -32,7 +35,7 @@ class AnaCekmece extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.login),
-            title: Text('Giriş Yap'),
+            title: Text('Siparişler'),
             onTap: () {
               Navigator.push(
                 context,
@@ -52,7 +55,7 @@ class AnaCekmece extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.settings),
-            title: Text('Biletlerim'),
+            title: Text('Geçmiş İşlemler'),
             onTap: () {
               Navigator.push(
                 context,

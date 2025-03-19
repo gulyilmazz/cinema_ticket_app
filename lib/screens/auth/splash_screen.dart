@@ -1,4 +1,4 @@
-import 'package:cinemaa/screens/login_screen.dart';
+import 'package:cinemaa/screens/auth/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
