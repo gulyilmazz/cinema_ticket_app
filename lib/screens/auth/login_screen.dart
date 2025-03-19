@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'register_screen.dart'; // Kayıt ekranını içe aktarır.
-import '../home_film_listesi.dart'; // Ana sayfa (film listesi) ekranını içe aktarır.
+import '../main/home_film_listesi.dart'; // Ana sayfa (film listesi) ekranını içe aktarır.
 import '../../utils/renkler.dart'; // Renkleri tanımlayan dosyayı içe aktarır.
 
 class LoginScreen extends StatefulWidget {
