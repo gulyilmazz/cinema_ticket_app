@@ -35,6 +35,8 @@ class _FilmTryState extends State<FilmTry> {
         title: Text('Vizyondaki Filmler'),
         backgroundColor: const Color.fromARGB(255, 31, 177, 187),
       ),
+
+      //
       drawer: AnaCekmece(),
       body: Column(
         children: <Widget>[
@@ -42,6 +44,7 @@ class _FilmTryState extends State<FilmTry> {
             height: 200,
             width: 385,
             child: PageView.builder(
+              //bu widget ile yatay kaydırma
               physics: NeverScrollableScrollPhysics(),
               controller: _pageController,
               itemCount: Film.filmler.length,

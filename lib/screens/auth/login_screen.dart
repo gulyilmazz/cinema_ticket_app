@@ -1,7 +1,11 @@
+import 'package:cinemaa/widgets/auth_widgets/login_button.dart';
+import 'package:cinemaa/widgets/auth_widgets/password_input.dart';
+import 'package:cinemaa/widgets/auth_widgets/register_button.dart';
+import 'package:cinemaa/widgets/auth_widgets/usarname_input.dart';
 import 'package:flutter/material.dart';
-import 'register_screen.dart'; // Kayıt ekranını içe aktarır.
-import '../main/home_film_listesi.dart'; // Ana sayfa (film listesi) ekranını içe aktarır.
-import '../../utils/renkler.dart'; // Renkleri tanımlayan dosyayı içe aktarır.
+import 'register_screen.dart';
+import '../main/home_film_listesi.dart';
+import '../../utils/renkler.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -11,18 +15,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  // Kullanıcıdan e-posta ve şifre almak için controller'lar
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
-  // Şifrenin görünürlüğünü kontrol eden değişken
-  bool _passwordVisible = false;
-
-  // Klavyeyi kontrol etmek için odak düğümleri
   final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
 
-  // Widget yok edildiğinde odakları temizleme işlemi
   @override
   void dispose() {
     _emailFocusNode.dispose();
@@ -33,19 +30,14 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      // Kullanıcı ekrana dokunduğunda klavyeyi kapatır
       onTap: () {
         WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
       },
       child: Scaffold(
-        resizeToAvoidBottomInset:
-            true, // Klavyenin içeriği kaydırmasını sağlar.
-        extendBodyBehindAppBar:
-            true, // İçeriğin üst çubuğun arkasına geçmesini sağlar.
-        extendBody: true, // İçeriği ekranın tamamına yayar.
-        backgroundColor:
-            Renkler
-                .arkaPlanRengi, // Arka plan rengi (renkler.dart'tan geliyor).
+        resizeToAvoidBottomInset: true,
+        extendBodyBehindAppBar: true,
+        extendBody: true,
+        backgroundColor: Renkler.arkaPlanRengi,
         body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
@@ -56,13 +48,9 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               child: ConstrainedBox(
                 constraints: BoxConstraints(
-                  minHeight:
-                      MediaQuery.of(
-                        context,
-                      ).size.height, // Ekran yüksekliği kadar genişlet.
+                  minHeight: MediaQuery.of(context).size.height,
                 ),
                 child: Container(
-                  // Arka plan tasarımı: Kenarlık ve renk geçişi (gradient)
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black, width: 2),
                     borderRadius: BorderRadius.circular(20),
@@ -80,13 +68,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        //  GIF Animasyonu (Video icon vb.)
-                        Image.asset(
-                          'lib/assets/images/video.gif', // GIF dosyanın yolu
-                          height: 80, // GIF'in yüksekliği
-                        ),
-                        SizedBox(height: 40), // Boşluk bırak
-                        // Uygulama adı
+                        Image.asset('lib/assets/images/video.gif', height: 80),
+                        SizedBox(height: 40),
+
                         Text(
                           'SAHNE',
                           style: TextStyle(
@@ -97,7 +81,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         SizedBox(height: 10),
 
-                        // Açıklama yazısı
                         Text(
                           'Film Dünyasına Giriş Yapın',
                           textAlign: TextAlign.center,
@@ -105,7 +88,41 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         SizedBox(height: 30),
 
-                        //  Kullanıcı Adı (Username) Giriş Alanı
+                        UsarnameInput(
+                          controller: _emailController,
+                          focusNode: _emailFocusNode,
+                        ),
+                        SizedBox(height: 20),
+
+                        PasswordInput(
+                          controller: _passwordController,
+                          focusNode: _passwordFocusNode,
+                        ),
+                        SizedBox(height: 30),
+
+                        LoginButton(
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => FilmTry(),
+                              ),
+                            );
+                          },
+                        ),
+                        SizedBox(height: 20),
+                        RegisterButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => RegisterScreen(),
+                              ),
+                            );
+                          },
+                        ),
+
+                        /*//  Kullanıcı Adı (Username) Giriş Alanı
                         TextField(
                           controller:
                               _emailController, // Kullanıcı adını kontrol eder.
@@ -130,9 +147,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             ), // Kullanıcı ikonu
                           ),
                         ),
-                        SizedBox(height: 20),
-
-                        //  Şifre Giriş Alanı
+                        SizedBox(height: 20),*/
+                        /*//  Şifre Giriş Alanı
                         TextField(
                           controller:
                               _passwordController, // Şifreyi kontrol eder.
@@ -173,9 +189,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 30),
+                        SizedBox(height: 30),*/
 
-                        //  Giriş Yap Butonu
+                        /*//  Giriş Yap Butonu
                         ElevatedButton(
                           onPressed: () {
                             // Kullanıcı giriş yaptıktan sonra film listesi ekranına gider.
@@ -211,9 +227,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 20),
+                        SizedBox(height: 20),*/
 
-                        //Kayıt ol butonu
+                        /*//Kayıt ol butonu
                         TextButton(
                           onPressed: () {
                             // Kullanıcı, kayıt ekranına yönlendirilir.
@@ -230,7 +246,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               color: const Color.fromARGB(255, 199, 195, 195),
                             ),
                           ),
-                        ),
+                        ),*/
                       ],
                     ),
                   ),
