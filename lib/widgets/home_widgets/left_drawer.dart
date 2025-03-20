@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../screens/main/filtreleme_secenekleri_sayfası.dart';
-import '../screens/ayarlar_sayfası.dart';
+import '../../screens/movie/filtreleme_secenekleri_sayfası.dart';
+import '../../screens/ayarlar_sayfası.dart';
 
 class AnaCekmece extends StatelessWidget {
   @override

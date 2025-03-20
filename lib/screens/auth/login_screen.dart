@@ -4,7 +4,7 @@ import 'package:cinemaa/widgets/auth_widgets/register_button.dart';
 import 'package:cinemaa/widgets/auth_widgets/usarname_input.dart';
 import 'package:flutter/material.dart';
 import 'register_screen.dart';
-import '../main/home_film_listesi.dart';
+import '../home/home.dart';
 import '../../utils/renkler.dart';
 
 class LoginScreen extends StatefulWidget {

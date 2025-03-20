@@ -28,7 +28,8 @@ class RegisterScreen extends StatelessWidget {
             // Şifre giriş alanı (gizli karakterlerle gösterilir)
             TextField(
               controller: _passwordController,
-              obscureText: true,
+              //_pcntrller, bir TextEditingController nesnesidir.
+              obscureText: true, //sifre gizler
               decoration: InputDecoration(labelText: 'Şifre'),
             ),
             // Şifre doğrulama giriş alanı (gizli karakterlerle gösterilir)

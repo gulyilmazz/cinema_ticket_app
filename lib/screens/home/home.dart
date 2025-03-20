@@ -1,7 +1,9 @@
-import 'package:cinemaa/screens/main/film_detail_screen.dart';
-import 'package:cinemaa/screens/main/filtreleme_secenekleri_sayfas%C4%B1.dart';
+//import 'package:cinemaa/screens/main/film_detail_screen.dart';
+import 'package:cinemaa/screens/movie/filtreleme_secenekleri_sayfas%C4%B1.dart';
+import 'package:cinemaa/widgets/home_widgets/film_karti.dart';
+import 'package:cinemaa/widgets/home_widgets/kaydirmali_film_karti.dart';
 import 'package:flutter/material.dart';
-import '../../widgets/drawer_screen.dart';
+import '../../widgets/home_widgets/left_drawer.dart';
 import '../../models/film_model.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 
@@ -36,7 +38,6 @@ class _FilmTryState extends State<FilmTry> {
         backgroundColor: const Color.fromARGB(255, 31, 177, 187),
       ),
 
-      //
       drawer: AnaCekmece(),
       body: Column(
         children: <Widget>[
@@ -49,7 +50,7 @@ class _FilmTryState extends State<FilmTry> {
               controller: _pageController,
               itemCount: Film.filmler.length,
               itemBuilder: (context, index) {
-                return _kaydirmaliFilmKarti(context, Film.filmler[index]);
+                return KaydirmaliFilmKarti(film: Film.filmler[index]);
               },
               onPageChanged: (int page) {
                 setState(() {
@@ -84,13 +85,14 @@ class _FilmTryState extends State<FilmTry> {
                 ),
                 itemCount: Film.filmler.length,
                 itemBuilder: (context, index) {
-                  return _filmKarti(context, Film.filmler[index]);
+                  return FilmKarti(film: Film.filmler[index]);
                 },
               ),
             ),
           ),
         ],
       ),
+
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -112,6 +114,7 @@ class _FilmTryState extends State<FilmTry> {
     );
   }
 
+  /*_kaydirmaliFilm
   Widget _kaydirmaliFilmKarti(BuildContext context, Film film1) {
     return Container(
       margin: EdgeInsets.all(8.0),
@@ -120,8 +123,9 @@ class _FilmTryState extends State<FilmTry> {
         child: Image.asset(film1.resimYolu, fit: BoxFit.cover),
       ),
     );
-  }
+  }*/
 
+  /*filmKarti
   Widget _filmKarti(BuildContext context, Film film) {
     return Card(
       margin: EdgeInsets.all(8.0),
@@ -163,5 +167,5 @@ class _FilmTryState extends State<FilmTry> {
         ),
       ),
     );
-  }
+  }*/
 }
