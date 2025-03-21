@@ -1,11 +1,11 @@
-//import 'package:cinemaa/screens/main/film_detail_screen.dart';
-import 'package:cinemaa/screens/movie/filtreleme_secenekleri_sayfas%C4%B1.dart';
+import 'package:cinemaa/screens/alt_buton/bilet_screen.dart';
+import 'package:cinemaa/screens/alt_buton/fav_screen.dart';
+import 'package:cinemaa/screens/alt_buton/filtreleme_secenekleri_sayfas%C4%B1.dart';
+import 'package:flutter/material.dart';
+import 'package:dots_indicator/dots_indicator.dart';
+import 'package:cinemaa/models/film_model.dart';
 import 'package:cinemaa/widgets/home_widgets/film_karti.dart';
 import 'package:cinemaa/widgets/home_widgets/kaydirmali_film_karti.dart';
-import 'package:flutter/material.dart';
-import '../../widgets/home_widgets/left_drawer.dart';
-import '../../models/film_model.dart';
-import 'package:dots_indicator/dots_indicator.dart';
 
 class FilmTry extends StatefulWidget {
   @override
@@ -22,10 +22,22 @@ class _FilmTryState extends State<FilmTry> {
       _selectedIndex = index;
     });
 
-    if (index == 2) {
+    if (index == 0) {
+      // Favoriler sayfasına yönlendirme
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => FavorilerSayfasi()),
+      );
+    } else if (index == 1) {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => FiltrelemeSecenekleriSayfasi()),
+      );
+    } else if (index == 2) {
+      // Biletler sayfasına yönlendirme
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => BiletlerSayfasi()),
       );
     }
   }
@@ -37,15 +49,12 @@ class _FilmTryState extends State<FilmTry> {
         title: Text('Vizyondaki Filmler'),
         backgroundColor: const Color.fromARGB(255, 31, 177, 187),
       ),
-
-      drawer: AnaCekmece(),
       body: Column(
         children: <Widget>[
           Container(
             height: 200,
-            width: 385,
+            width: double.infinity,
             child: PageView.builder(
-              //bu widget ile yatay kaydırma
               physics: NeverScrollableScrollPhysics(),
               controller: _pageController,
               itemCount: Film.filmler.length,
@@ -60,7 +69,6 @@ class _FilmTryState extends State<FilmTry> {
             ),
           ),
           DotsIndicator(
-            //bu widget ile sayfaları kaydırdım üsttekini
             dotsCount: Film.filmler.length,
             position: _currentPage.toInt(),
             decorator: DotsDecorator(
@@ -92,7 +100,6 @@ class _FilmTryState extends State<FilmTry> {
           ),
         ],
       ),
-
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -113,7 +120,7 @@ class _FilmTryState extends State<FilmTry> {
       ),
     );
   }
-
+}
   /*_kaydirmaliFilm
   Widget _kaydirmaliFilmKarti(BuildContext context, Film film1) {
     return Container(
@@ -168,4 +175,4 @@ class _FilmTryState extends State<FilmTry> {
       ),
     );
   }*/
-}
+
