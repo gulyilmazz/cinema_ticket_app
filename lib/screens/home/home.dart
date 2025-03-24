@@ -1,6 +1,6 @@
 import 'package:cinemaa/screens/alt_buton/bilet_screen.dart';
 import 'package:cinemaa/screens/alt_buton/fav_screen.dart';
-import 'package:cinemaa/screens/alt_buton/filtreleme_secenekleri_sayfas%C4%B1.dart';
+import 'package:cinemaa/screens/alt_buton/filtreleme_secenekleri_sayfası.dart';
 import 'package:flutter/material.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:cinemaa/models/film_model.dart';
@@ -23,7 +23,6 @@ class _FilmTryState extends State<FilmTry> {
     });
 
     if (index == 0) {
-      // Favoriler sayfasına yönlendirme
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => FavorilerSayfasi()),
@@ -34,7 +33,6 @@ class _FilmTryState extends State<FilmTry> {
         MaterialPageRoute(builder: (context) => FiltrelemeSecenekleriSayfasi()),
       );
     } else if (index == 2) {
-      // Biletler sayfasına yönlendirme
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => BiletlerSayfasi()),
@@ -48,6 +46,42 @@ class _FilmTryState extends State<FilmTry> {
       appBar: AppBar(
         title: Text('Vizyondaki Filmler'),
         backgroundColor: const Color.fromARGB(255, 31, 177, 187),
+      ),
+      drawer: Drawer(
+        // Drawer ekleme
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 31, 177, 187),
+              ),
+              child: Text(
+                'Menü',
+                style: TextStyle(color: Colors.white, fontSize: 24),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text('Ana Sayfa'),
+              onTap: () {
+                // Ana sayfaya yönlendirme veya başka bir işlem
+                Navigator.pop(context); // Drawer'ı kapat
+                // Navigator.push(context, MaterialPageRoute(builder: (context) => AnaSayfa()));
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Ayarlar'),
+              onTap: () {
+                // Ayarlar sayfasına yönlendirme veya başka bir işlem
+                Navigator.pop(context); // Drawer'ı kapat
+                // Navigator.push(context, MaterialPageRoute(builder: (context) => AyarlarSayfasi()));
+              },
+            ),
+            // İhtiyacınıza göre daha fazla ListTile ekleyebilirsiniz
+          ],
+        ),
       ),
       body: Column(
         children: <Widget>[
@@ -72,7 +106,7 @@ class _FilmTryState extends State<FilmTry> {
             dotsCount: Film.filmler.length,
             position: _currentPage.toInt(),
             decorator: DotsDecorator(
-              color: Colors.grey,
+              color: const Color.fromARGB(255, 111, 145, 148),
               activeColor: const Color.fromARGB(255, 31, 177, 187),
             ),
             onTap: (position) {
@@ -121,58 +155,3 @@ class _FilmTryState extends State<FilmTry> {
     );
   }
 }
-  /*_kaydirmaliFilm
-  Widget _kaydirmaliFilmKarti(BuildContext context, Film film1) {
-    return Container(
-      margin: EdgeInsets.all(8.0),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(10.0),
-        child: Image.asset(film1.resimYolu, fit: BoxFit.cover),
-      ),
-    );
-  }*/
-
-  /*filmKarti
-  Widget _filmKarti(BuildContext context, Film film) {
-    return Card(
-      margin: EdgeInsets.all(8.0),
-      clipBehavior: Clip.antiAlias,
-      child: InkWell(
-        onTap: () {
-          // Film detay sayfasına yönlendirme
-          Navigator.push(
-            // filmlere tıklayınca acıklama acılıyor
-            context,
-            MaterialPageRoute(
-              builder: (context) => FilmDetaySayfasi(film: film),
-            ),
-          );
-        },
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Expanded(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10.0),
-                child: Image.asset(film.resimYolu, fit: BoxFit.cover),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    film.baslik,
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  Text(film.aciklama, style: TextStyle(fontSize: 12)),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }*/
-
