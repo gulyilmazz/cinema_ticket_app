@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 import '../../screens/alt_buton/filtreleme_secenekleri_sayfası.dart';
 import '../../screens/ayarlar_sayfası.dart';
 
-class AnaCekmece extends StatelessWidget {
+class LeftDrawer extends StatefulWidget {
+  const LeftDrawer({super.key});
+
+  @override
+  State<LeftDrawer> createState() => _LeftDrawerState();
+}
+
+class _LeftDrawerState extends State<LeftDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -11,7 +18,7 @@ class AnaCekmece extends StatelessWidget {
         children: <Widget>[
           DrawerHeader(
             decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 30, 197, 197),
+              color: const Color.fromARGB(255, 126, 168, 11),
             ),
             child: Text(
               'Menü',

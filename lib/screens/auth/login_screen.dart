@@ -1,10 +1,10 @@
+import 'package:cinemaa/screens/alt_buton/films_home.dart';
 import 'package:cinemaa/widgets/auth_widgets/login_button.dart';
 import 'package:cinemaa/widgets/auth_widgets/password_input.dart';
 import 'package:cinemaa/widgets/auth_widgets/register_button.dart';
 import 'package:cinemaa/widgets/auth_widgets/usarname_input.dart';
 import 'package:flutter/material.dart';
 import 'register_screen.dart';
-import '../home/home.dart';
 import '../../utils/renkler.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -31,11 +31,13 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
+        WidgetsBinding.instance.focusManager.primaryFocus
+            ?.unfocus(); // Klavye kapanır
       },
       child: Scaffold(
-        resizeToAvoidBottomInset: true,
-        extendBodyBehindAppBar: true,
+        resizeToAvoidBottomInset:
+            true, // Klavye açıldığında ekranın boyutunu küçültür
+        extendBodyBehindAppBar: true, // Appbar'ın arka plana geçmesini sağlar
         extendBody: true,
         backgroundColor: Renkler.arkaPlanRengi,
         body: SafeArea(
@@ -105,7 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => FilmTry(),
+                                builder: (context) => FilmsHome(),
                               ),
                             );
                           },

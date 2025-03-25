@@ -14,7 +14,7 @@ class LoginButton extends StatelessWidget {
         // Kullanıcı giriş yaptıktan sonra film listesi ekranına gider.
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => FilmTry()),
+          MaterialPageRoute(builder: (context) => Home()),
         );
       },
       style: ElevatedButton.styleFrom(
