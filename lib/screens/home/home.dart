@@ -1,10 +1,8 @@
-import 'package:cinemaa/screens/alt_buton/bilet_screen.dart';
-import 'package:cinemaa/screens/alt_buton/fav_screen.dart';
-import 'package:cinemaa/screens/alt_buton/filtreleme_secenekleri_sayfası.dart';
-import 'package:cinemaa/screens/alt_buton/profil_screen.dart';
-import 'package:cinemaa/screens/alt_buton/films_home.dart';
-import 'package:cinemaa/widgets/home_widgets/bottom_nav_bar.dart';
-import 'package:cinemaa/widgets/home_widgets/left_drawer.dart';
+import 'package:cinemaa/screens/drawer/bilet_screen.dart';
+import 'package:cinemaa/screens/drawer/fav_screen.dart';
+import 'package:cinemaa/screens/drawer/filtreleme_secenekleri_sayfas%C4%B1.dart';
+import 'package:cinemaa/screens/drawer/profil_screen.dart';
+import 'package:cinemaa/widgets/buttons/left_drawer.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -16,34 +14,44 @@ class _HomeState extends State<Home> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [
-    FilmsHome(), // Ana Sayfa
-    FavorilerSayfasi(), // Filmler
+    AnaSayfaIcerigi(), FavScreen(), // Filmler
     FiltrelemeSecenekleriSayfasi(), // Sinemalar
     BiletlerSayfasi(), // Biletler
     ProfilScreen(), // Profil
   ];
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Ana Sayfa'), // Sayfa başlığı
-        backgroundColor: const Color.fromARGB(255, 126, 168, 11),
+        title: Text(''), // Sayfa başlığı
+        backgroundColor: const Color.fromARGB(255, 34, 206, 212),
       ),
       drawer: LeftDrawer(), // LeftDrawer widget'ını ekliyoruz
-      body:
-          _selectedIndex == 0
-              ? AnaSayfaIcerigi()
-              : _pages[_selectedIndex], // Doğru sayfayı göster
-      bottomNavigationBar: BottomNavBar(
-        onItemTapped: _onItemTapped,
-        selectedIndex: _selectedIndex,
+      body: _pages[_selectedIndex], // Doğru sayfayı göster
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Ana Sayfa'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: 'Favoriler',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.filter_list),
+            label: 'Filtrele',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.confirmation_number),
+            label: 'Biletler',
+          ),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profil'),
+        ],
       ),
     );
   }

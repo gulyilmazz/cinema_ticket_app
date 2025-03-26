@@ -1,12 +1,12 @@
-import 'package:cinemaa/widgets/home_widgets/left_drawer.dart';
+import 'package:cinemaa/widgets/buttons/left_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:cinemaa/models/film_model.dart';
-import 'package:cinemaa/widgets/home_widgets/film_karti.dart';
-import 'package:cinemaa/widgets/home_widgets/kaydirmali_film_karti.dart';
+import 'package:cinemaa/widgets/movies_widgets/film_karti.dart';
+import 'package:cinemaa/widgets/movies_widgets/kaydirmali_film_karti.dart';
 
-class FilmsHome extends StatelessWidget {
-  const FilmsHome({super.key});
+class FavScreen extends StatelessWidget {
+  const FavScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +17,8 @@ class FilmsHome extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Vizyona Girecek Filmler'),
-        backgroundColor: const Color.fromARGB(255, 126, 168, 11),
+        backgroundColor: const Color.fromARGB(255, 221, 202, 30),
       ),
-      drawer: const LeftDrawer(),
       body: Column(
         children: <Widget>[
           Container(

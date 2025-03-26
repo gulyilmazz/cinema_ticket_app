@@ -1,4 +1,4 @@
-import 'package:cinemaa/screens/alt_buton/films_home.dart';
+import 'package:cinemaa/screens/drawer/fav_screen.dart';
 import 'package:cinemaa/widgets/auth_widgets/login_button.dart';
 import 'package:cinemaa/widgets/auth_widgets/password_input.dart';
 import 'package:cinemaa/widgets/auth_widgets/register_button.dart';
@@ -57,6 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     border: Border.all(color: Colors.black, width: 2),
                     borderRadius: BorderRadius.circular(20),
                     gradient: LinearGradient(
+                      // Arka plan rengi
                       colors: [
                         const Color.fromARGB(255, 8, 12, 9),
                         const Color.fromARGB(255, 90, 85, 134),
@@ -107,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => FilmsHome(),
+                                builder: (context) => FavScreen(),
                               ),
                             );
                           },
