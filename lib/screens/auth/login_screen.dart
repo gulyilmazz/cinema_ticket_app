@@ -1,4 +1,4 @@
-import 'package:cinemaa/screens/drawer/fav_screen.dart';
+import 'package:cinemaa/screens/bottoms/fav_screen.dart';
 import 'package:cinemaa/widgets/auth_widgets/login_button.dart';
 import 'package:cinemaa/widgets/auth_widgets/password_input.dart';
 import 'package:cinemaa/widgets/auth_widgets/register_button.dart';

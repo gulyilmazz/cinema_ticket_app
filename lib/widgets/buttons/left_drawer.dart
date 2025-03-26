@@ -1,7 +1,7 @@
-import 'package:cinemaa/screens/bottom_nav/orders_screen.dart';
+import 'package:cinemaa/screens/drawers/account_screen.dart';
+import 'package:cinemaa/screens/drawers/orders_screen.dart';
+import 'package:cinemaa/screens/drawers/settings_sreen.dart';
 import 'package:flutter/material.dart';
-import '../../screens/drawer/filtreleme_secenekleri_sayfası.dart';
-import '../../screens/bottom_nav/settings_sreen.dart';
 
 class LeftDrawer extends StatefulWidget {
   const LeftDrawer({super.key});
@@ -82,9 +82,7 @@ class _LeftDrawerState extends State<LeftDrawer> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => FiltrelemeSecenekleriSayfasi(),
-                ),
+                MaterialPageRoute(builder: (context) => AccountScreen()),
               );
             },
           ),
@@ -121,9 +119,7 @@ class _LeftDrawerState extends State<LeftDrawer> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => FiltrelemeSecenekleriSayfasi(),
-                ),
+                MaterialPageRoute(builder: (context) => OrdersScreen()),
               );
             },
           ),
@@ -159,9 +155,7 @@ class _LeftDrawerState extends State<LeftDrawer> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => FiltrelemeSecenekleriSayfasi(),
-                ),
+                MaterialPageRoute(builder: (context) => SettingsSreen()),
               );
             },
           ),
