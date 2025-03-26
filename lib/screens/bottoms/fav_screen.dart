@@ -17,7 +17,7 @@ class FavScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Vizyona Girecek Filmler'),
-        backgroundColor: const Color.fromARGB(255, 221, 202, 30),
+        backgroundColor: const Color.fromARGB(255, 253, 251, 251),
       ),
       body: Column(
         children: <Widget>[

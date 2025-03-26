@@ -96,6 +96,7 @@ class _LeftDrawerState extends State<LeftDrawer> {
               padding: EdgeInsets.all(8),
               decoration: BoxDecoration(
                 border: Border.all(
+                  // Kenarlık rengi
                   color: const Color.fromARGB(255, 10, 222, 230),
                   width: 1.5,
                 ),
