@@ -1,4 +1,3 @@
-import 'package:cinemaa/widgets/buttons/left_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:cinemaa/models/film_model.dart';
