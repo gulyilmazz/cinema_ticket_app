@@ -48,7 +48,7 @@ class FavScreen extends StatelessWidget {
               pageController.animateToPage(
                 position,
                 duration: const Duration(milliseconds: 300),
-                curve: Curves.ease,
+                curve: Curves.ease, //
               );
             },
           ),

@@ -59,7 +59,9 @@ class _HomeState extends State<Home> {
       drawer: LeftDrawer(),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: const Color.fromARGB(255, 9, 14, 10),
-        type: BottomNavigationBarType.fixed,
+        type:
+            BottomNavigationBarType
+                .fixed, // 4'ten fazla eleman olduğunda kullanılmalı
         selectedItemColor: const Color.fromARGB(255, 118, 113, 167),
         unselectedItemColor: Colors.grey,
         onTap: (index) {
@@ -81,7 +83,6 @@ class _HomeState extends State<Home> {
             icon: Icon(Icons.confirmation_number),
             label: 'Tickets',
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
       ),
     );
