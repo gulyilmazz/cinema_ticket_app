@@ -1,10 +1,7 @@
-import 'package:cinemaa/screens/login_screen.dart';
 import 'package:cinemaa/utils/renkler.dart';
-import 'package:cinemaa/widgets/auth_widgets/login_button.dart';
 import 'package:cinemaa/widgets/auth_widgets/password_input.dart';
 import 'package:cinemaa/widgets/auth_widgets/usarname_input.dart';
 import 'package:flutter/material.dart';
-import '../utils/renkler.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
