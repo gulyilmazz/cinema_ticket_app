@@ -25,7 +25,7 @@ class _PasswordInputState extends State<PasswordInput> {
         labelText: 'Password',
         labelStyle: TextStyle(color: Colors.grey),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey),
+          borderSide: BorderSide(color: Color.fromARGB(255, 149, 223, 223)),
           borderRadius: BorderRadius.circular(10),
         ),
         focusedBorder: OutlineInputBorder(
