@@ -1,6 +1,6 @@
 //  Giriş Yap Butonu
 
-import 'package:cinemaa/screens/home/home.dart';
+import 'package:cinemaa/screens/bottoms/home.dart';
 import 'package:flutter/material.dart';
 
 class LoginButton extends StatelessWidget {

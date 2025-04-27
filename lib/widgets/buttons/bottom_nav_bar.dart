@@ -2,7 +2,7 @@ import 'package:cinemaa/screens/bottoms/bilet_screen.dart';
 import 'package:cinemaa/screens/bottoms/fav_screen.dart';
 import 'package:cinemaa/screens/bottoms/filtreleme_secenekleri_sayfas%C4%B1.dart';
 import 'package:cinemaa/screens/bottoms/profil_screen.dart';
-import 'package:cinemaa/screens/home/home.dart';
+import 'package:cinemaa/screens/bottoms/home.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavBar extends StatefulWidget {

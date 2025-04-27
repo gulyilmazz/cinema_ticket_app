@@ -37,4 +37,6 @@ class Film {
       resimYolu: 'lib/assets/images/film6.jpg',
     ),
   ];
+
+  get resimUrl => null;
 }

@@ -33,6 +33,7 @@ dependencies:
   avatar_glow: ^2.0.0
   cupertino_icons: ^1.0.8
   dots_indicator: ^3.0.0 #kaydrıma butonları için
+  intl: ^0.20.2
 
 dev_dependencies:
   flutter_test:
