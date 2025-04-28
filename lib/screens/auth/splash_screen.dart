@@ -2,6 +2,8 @@ import 'package:cinemaa/screens/auth/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:lottie/lottie.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -12,14 +14,14 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   // Arka plan gradient renkleri (açık ve koyu tonlar)
   static const Color gradientStart = Color.fromARGB(255, 15, 2, 10);
-  static const Color gradientEnd = Color.fromARGB(255, 11, 155, 165);
+  static const Color gradientEnd = const Color.fromARGB(255, 118, 113, 167);
 
   // Splash ekranında gösterilecek resmin boyutları
   static const double imageWidth = 200.0;
   static const double imageHeight = 300.0;
 
   // Splash ekranının kaç saniye görüneceği
-  static const int splashDuration = 5;
+  static const int splashDuration = 3;
 
   @override
   void initState() {
@@ -67,32 +69,10 @@ class _SplashScreenState extends State<SplashScreen> {
             colors: [gradientStart, gradientEnd], // Arka plan renk geçişi
           ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Column(
-              children: [
-                // Splash ekranında gösterilecek GIF
-                Image.asset(
-                  'assets/images/perde.gif',
-                  width: imageWidth,
-                  height: imageHeight,
-                ),
-                // Hoşgeldiniz mesajı
-                Text(
-                  "Hoşgeldiniz",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 50.0,
-                  ),
-                ),
-              ],
-            ),
-            // Yükleme animasyonu göstermek için progress indicator
-            CircularProgressIndicator(),
-          ],
+        child: Center(
+          child: Lottie.asset(
+            "assets/images/Animation1.json",
+          ), // Resmi dolduracak şekilde ayarlıyorum
         ),
       ),
     );

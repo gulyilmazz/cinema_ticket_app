@@ -6,7 +6,7 @@ class BiletlerSayfasi extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Biletler'),
-        backgroundColor: const Color.fromARGB(255, 221, 202, 30),
+        backgroundColor: const Color.fromARGB(255, 88, 138, 138),
       ),
       body: Center(child: Text('Biletleriniz Burada')),
     );

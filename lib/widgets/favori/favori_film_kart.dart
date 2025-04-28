@@ -82,7 +82,11 @@ class FavoriFilmKarti extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Icon(Icons.star, color: Colors.amber, size: 16),
+                      Icon(
+                        Icons.star,
+                        color: const Color.fromARGB(255, 14, 12, 9),
+                        size: 16,
+                      ),
                       SizedBox(width: 2),
                       Text(
                         film.puan.toString(),
