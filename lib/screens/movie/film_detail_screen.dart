@@ -1,6 +1,6 @@
 // Film detay sayfası
 import 'package:cinemaa/models/film_model.dart';
-import 'package:cinemaa/screens/tickets/bilet_al_sayfasi.dart';
+import 'package:cinemaa/screens/tickets/ticket_buy/bilet_al_sayfasi.dart';
 import 'package:flutter/material.dart';
 
 class FilmDetaySayfasi extends StatefulWidget {
@@ -37,7 +37,7 @@ class _FilmDetaySayfasiState extends State<FilmDetaySayfasi> {
                 background: Stack(
                   fit: StackFit.expand,
                   children: [
-                    Image.asset(widget.film.resimUrl, fit: BoxFit.cover),
+                    Image.asset(widget.film.resimUrl, fit: BoxFit.fill),
                     Container(
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
@@ -197,7 +197,7 @@ class _FilmDetaySayfasiState extends State<FilmDetaySayfasi> {
                           context,
                           MaterialPageRoute(
                             builder:
-                                (context) => BiletAlSayfasi(film: widget.film),
+                                (context) => TicketBuyScreen(film: widget.film),
                           ),
                         );
                       },

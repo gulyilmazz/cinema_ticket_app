@@ -135,8 +135,6 @@ class _PaymentPageState extends State<PaymentPage> {
   }
 
   void _processPayment() {
-    // Ödeme işlemini burada gerçekleştirin (örneğin, API çağrısı yapabilirsiniz)
-    // Ödeme başarılıysa, onay sayfasına yönlendirin
     Navigator.push(
       context,
       MaterialPageRoute(

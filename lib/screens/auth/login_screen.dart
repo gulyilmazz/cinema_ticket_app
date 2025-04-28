@@ -1,4 +1,4 @@
-import 'package:cinemaa/screens/bottoms/fav_screen.dart';
+import 'package:cinemaa/screens/favorites/fav_screen.dart';
 import 'package:cinemaa/widgets/auth_widgets/login_button.dart';
 import 'package:cinemaa/widgets/auth_widgets/password_input.dart';
 import 'package:cinemaa/widgets/auth_widgets/register_button.dart';
@@ -71,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Image.asset('lib/assets/images/video.gif', height: 80),
+                        Image.asset('assets/images/video.gif', height: 80),
                         SizedBox(height: 40),
 
                         Text(

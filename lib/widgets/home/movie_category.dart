@@ -40,7 +40,7 @@ class MovieCategory extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 180,
+          height: 185,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: filmler.length,

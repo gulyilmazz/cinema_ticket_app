@@ -74,7 +74,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Image.asset('lib/assets/images/video.gif', height: 80),
+                        Image.asset('assets/images/video.gif', height: 80),
                         SizedBox(height: 40),
 
                         Text(

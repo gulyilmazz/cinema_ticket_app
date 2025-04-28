@@ -75,7 +75,7 @@ class _SplashScreenState extends State<SplashScreen> {
               children: [
                 // Splash ekranında gösterilecek GIF
                 Image.asset(
-                  'lib/assets/images/perde.gif',
+                  'assets/images/perde.gif',
                   width: imageWidth,
                   height: imageHeight,
                 ),

@@ -31,7 +31,7 @@ class Film {
     Film(
       id: '1',
       baslik: 'The Brutalist',
-      resimUrl: 'assets/film1.jpg',
+      resimUrl: 'assets/images/film1.jpg',
       aciklama:
           'Savaş sonrası Amerika\'da yeni bir başlangıç arayan Macar göçmen bir mimar, vizyoner bir müşteri tarafından fark edildiğinde hayatı değişir. Ancak geçmişi ve kimliği ile yüzleşmek zorunda kalır.',
       puan: 8.5,
@@ -44,7 +44,7 @@ class Film {
     Film(
       id: '2',
       baslik: 'Maria',
-      resimUrl: 'assets/film2.jpg',
+      resimUrl: 'assets/images/film2.jpg',
       aciklama:
           'Ünlü opera sanatçısı Maria Callas\'ın hayatının son günlerini anlatan etkileyici bir biyografi filmi. Sanat, tutku ve kişisel mücadeleler arasında geçen bir yaşam hikayesi.',
       puan: 7.9,
@@ -58,7 +58,7 @@ class Film {
     Film(
       id: '3',
       baslik: 'Aile Komedisi',
-      resimUrl: 'assets/film3.jpg',
+      resimUrl: 'assets/images/film3.jpg',
       aciklama:
           'Büyük bir aile toplantısında beklenmedik olaylar sonucu ortaya çıkan sırlar ve komik durumlar. Türk sinemasının sevilen oyuncuları bir araya geliyor.',
       puan: 6.8,
@@ -71,7 +71,7 @@ class Film {
     Film(
       id: '4',
       baslik: 'Son Bir Nefes',
-      resimUrl: 'assets/film4.jpg',
+      resimUrl: 'assets/images/film4.jpg',
       aciklama:
           'Uluslararası bir uzay istasyonunda geçen, nefes kesen bir bilim kurgu gerilimi. Oksijen tükenmekte ve mürettebat arasındaki güven sarsılmaktadır.',
       puan: 9.0,

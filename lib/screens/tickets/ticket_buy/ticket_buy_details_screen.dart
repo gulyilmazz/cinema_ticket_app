@@ -3,23 +3,23 @@ import 'package:cinemaa/screens/tickets/select_showtime.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class BiletsScreen extends StatefulWidget {
+class TicketBuyDetailsScreen extends StatefulWidget {
   final String movieTitle;
   final String moviePoster;
   final Film film;
 
-  const BiletsScreen({
-    Key? key,
+  const TicketBuyDetailsScreen({
+    super.key,
     required this.movieTitle,
     required this.moviePoster,
     required this.film,
-  }) : super(key: key);
+  });
 
   @override
-  _BiletsScreenState createState() => _BiletsScreenState();
+  _TicketBuyDetailsScreenState createState() => _TicketBuyDetailsScreenState();
 }
 
-class _BiletsScreenState extends State<BiletsScreen> {
+class _TicketBuyDetailsScreenState extends State<TicketBuyDetailsScreen> {
   final List<DateTime> _availableDates = [];
   DateTime? _selectedDate;
 

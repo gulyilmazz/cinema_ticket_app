@@ -1,11 +1,11 @@
 import 'package:cinemaa/models/film_model.dart';
-import 'package:cinemaa/screens/tickets/bilets_screen.dart';
+import 'package:cinemaa/screens/tickets/ticket_buy/ticket_buy_details_screen.dart';
 import 'package:flutter/material.dart';
 
-class BiletAlSayfasi extends StatelessWidget {
+class TicketBuyScreen extends StatelessWidget {
   final Film film;
 
-  const BiletAlSayfasi({Key? key, required this.film}) : super(key: key);
+  const TicketBuyScreen({Key? key, required this.film}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class BiletAlSayfasi extends StatelessWidget {
             end: Alignment.bottomRight,
           ),
         ),
-        child: BiletsScreen(
+        child: TicketBuyDetailsScreen(
           film: film,
           movieTitle: film.baslik,
           moviePoster: film.resimUrl,

@@ -1,7 +1,7 @@
-import 'package:cinemaa/screens/bottoms/bilet_screen.dart';
-import 'package:cinemaa/screens/bottoms/fav_screen.dart';
-import 'package:cinemaa/screens/bottoms/filtreleme_secenekleri_sayfas%C4%B1.dart';
-import 'package:cinemaa/screens/bottoms/home.dart';
+import 'package:cinemaa/screens/profil/profil_screen.dart';
+import 'package:cinemaa/screens/tickets/bilet_screen.dart';
+import 'package:cinemaa/screens/favorites/fav_screen.dart';
+import 'package:cinemaa/screens/home/home.dart';
 import 'package:cinemaa/widgets/buttons/left_drawer.dart';
 import 'package:flutter/material.dart';
 
@@ -19,8 +19,8 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _pages = [
     HomeScreen(),
     FavScreen(),
-    FiltrelemeSecenekleriSayfasi(),
     BiletlerSayfasi(),
+    ProfilScreen(),
   ];
 
   @override
@@ -114,11 +114,11 @@ class _MainScreenState extends State<MainScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.filter_list),
-            label: 'Filtrele',
+            label: 'Biletler',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.confirmation_number),
-            label: 'Biletler',
+            label: 'Profil',
           ),
         ],
       ),

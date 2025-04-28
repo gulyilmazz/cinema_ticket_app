@@ -47,11 +47,7 @@ class ConfirmationPage extends StatelessWidget {
             ),
             const SizedBox(height: 24.0),
             Center(
-              child: Image.network(
-                moviePoster,
-                height: 150.0,
-                fit: BoxFit.cover,
-              ),
+              child: Image.asset(moviePoster, height: 150.0, fit: BoxFit.cover),
             ),
             const SizedBox(height: 16.0),
             Text(
