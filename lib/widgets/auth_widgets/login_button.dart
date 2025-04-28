@@ -1,6 +1,6 @@
 //  Giriş Yap Butonu
 
-import 'package:cinemaa/screens/bottoms/home.dart';
+import 'package:cinemaa/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 
 class LoginButton extends StatelessWidget {
@@ -15,7 +15,7 @@ class LoginButton extends StatelessWidget {
         // Kullanıcı giriş yaptıktan sonra basis sayfasına yönlendirilir
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => Home()),
+          MaterialPageRoute(builder: (context) => MainScreen()),
         );
       },
       style: ElevatedButton.styleFrom(

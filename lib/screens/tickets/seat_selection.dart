@@ -1,8 +1,7 @@
-import 'package:cinemaa/screens/bottoms/home.dart';
+import 'package:cinemaa/models/film_model.dart';
 import 'package:cinemaa/screens/tickets/payment_.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:cinemaa/screens/tickets/confirmation_page.dart';
 
 class SeatSelectionPage extends StatefulWidget {
   final String movieTitle;

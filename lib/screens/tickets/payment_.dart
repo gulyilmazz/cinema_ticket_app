@@ -1,7 +1,6 @@
-import 'package:cinemaa/screens/bottoms/home.dart';
+import 'package:cinemaa/models/film_model.dart';
 import 'package:cinemaa/screens/tickets/confirmation_page.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class PaymentPage extends StatefulWidget {
   final String movieTitle;
@@ -30,11 +29,6 @@ class PaymentPage extends StatefulWidget {
 }
 
 class _PaymentPageState extends State<PaymentPage> {
-  String _cardNumber = '';
-  String _expiryDate = '';
-  String _cvv = '';
-  String _cardHolderName = '';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,33 +81,25 @@ class _PaymentPageState extends State<PaymentPage> {
             _buildTextField(
               labelText: 'Kart Numarası',
               onChanged: (value) {
-                setState(() {
-                  _cardNumber = value;
-                });
+                setState(() {});
               },
             ),
             _buildTextField(
               labelText: 'Son Kullanma Tarihi (MM/YY)',
               onChanged: (value) {
-                setState(() {
-                  _expiryDate = value;
-                });
+                setState(() {});
               },
             ),
             _buildTextField(
               labelText: 'CVV',
               onChanged: (value) {
-                setState(() {
-                  _cvv = value;
-                });
+                setState(() {});
               },
             ),
             _buildTextField(
               labelText: 'Kart Üzerindeki İsim',
               onChanged: (value) {
-                setState(() {
-                  _cardHolderName = value;
-                });
+                setState(() {});
               },
             ),
             SizedBox(height: 20),

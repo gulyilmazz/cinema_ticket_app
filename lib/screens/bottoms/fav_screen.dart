@@ -1,57 +1,10 @@
+import 'package:cinemaa/models/film_model.dart';
 import 'package:flutter/material.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 
 // Film modeli (örnek veri)
-class Film {
-  final String baslik;
-  final String resimUrl;
-  final String aciklama;
-  final double puan;
-  bool isFavorite;
 
-  Film({
-    required this.baslik,
-    required this.resimUrl,
-    required this.aciklama,
-    required this.puan,
-    this.isFavorite = false,
-  });
-
-  // Örnek film verileri
-  static List<Film> filmler = [
-    Film(
-      baslik: 'The Brutalist',
-      resimUrl: 'assets/film1.jpg',
-      aciklama: 'Film 1 Açıklaması',
-      puan: 8.5,
-      isFavorite: true,
-    ),
-    Film(
-      baslik: 'Maria',
-      resimUrl: 'assets/film2.jpg',
-      aciklama: 'Film 2 Açıklaması',
-      puan: 7.9,
-      isFavorite: true,
-    ),
-    Film(
-      baslik: 'Aile Komedisi',
-      resimUrl: 'assets/film3.jpg',
-      aciklama: 'Film 3 Açıklaması',
-      puan: 6.8,
-    ),
-    Film(
-      baslik: 'Son Bir Nefes',
-      resimUrl: 'assets/film4.jpg',
-      aciklama: 'Film 4 Açıklaması',
-      puan: 9.0,
-    ),
-  ];
-
-  // Favori filmleri döndüren fonksiyon
-  static List<Film> getFavorites() {
-    return filmler.where((film) => film.isFavorite).toList();
-  }
-}
+// Favori filmleri döndüren fonksiyon
 
 class FavScreen extends StatefulWidget {
   const FavScreen({Key? key}) : super(key: key);

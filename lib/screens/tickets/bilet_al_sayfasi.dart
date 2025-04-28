@@ -1,4 +1,4 @@
-import 'package:cinemaa/screens/bottoms/home.dart'; // Use the Film class from home.dart
+import 'package:cinemaa/models/film_model.dart';
 import 'package:cinemaa/screens/tickets/bilets_screen.dart';
 import 'package:flutter/material.dart';
 
