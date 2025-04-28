@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Sinemalarda..',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: SplashScreen(), // Uygulama başlangıcında giriş ekranını göster
+      home: SplashScreen(),
     );
   }
 }

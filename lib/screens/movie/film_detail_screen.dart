@@ -1,6 +1,7 @@
 // Film detay sayfası
 import 'package:cinemaa/models/film_model.dart';
 import 'package:cinemaa/screens/tickets/ticket_buy/bilet_al_sayfasi.dart';
+import 'package:cinemaa/widgets/movie/build_info_row.dart';
 import 'package:flutter/material.dart';
 
 class FilmDetaySayfasi extends StatefulWidget {
@@ -160,13 +161,16 @@ class _FilmDetaySayfasiState extends State<FilmDetaySayfasi> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          _buildInfoRow('Yönetmen', widget.film.yonetmen),
-                          _buildInfoRow(
+                          movieBuildInfoRow('Yönetmen', widget.film.yonetmen),
+                          movieBuildInfoRow(
                             'Oyuncular',
                             widget.film.oyuncular.join(', '),
                           ),
-                          _buildInfoRow('Vizyon Tarihi', widget.film.vizyon),
-                          _buildInfoRow('Süre', widget.film.sure),
+                          movieBuildInfoRow(
+                            'Vizyon Tarihi',
+                            widget.film.vizyon,
+                          ),
+                          movieBuildInfoRow('Süre', widget.film.sure),
                         ],
                       ),
                     ),
@@ -235,31 +239,6 @@ class _FilmDetaySayfasiState extends State<FilmDetaySayfasi> {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildInfoRow(String label, String value) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            '$label: ',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 14,
-              color: Colors.black87,
-            ),
-          ),
-          Expanded(
-            child: Text(
-              value,
-              style: TextStyle(fontSize: 14, color: Colors.black54),
-            ),
-          ),
-        ],
       ),
     );
   }
