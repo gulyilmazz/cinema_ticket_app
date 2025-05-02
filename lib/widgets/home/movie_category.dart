@@ -35,7 +35,7 @@ class MovieCategory extends StatelessWidget {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: Colors.black87,
+              color: const Color.fromARGB(255, 255, 255, 255),
             ),
           ),
         ),
@@ -59,7 +59,7 @@ class MovieCategory extends StatelessWidget {
                         width: 120,
                         height: 140,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(5),
                           border: Border.all(
                             color: const Color.fromARGB(255, 10, 222, 230),
                             width: 1,

@@ -1,3 +1,5 @@
+import 'package:cinemaa/screens/main_screen.dart';
+import 'package:cinemaa/services/auth/auth_service.dart';
 import 'package:cinemaa/utils/renkler.dart';
 import 'package:cinemaa/widgets/auth_widgets/password_input.dart';
 import 'package:cinemaa/widgets/auth_widgets/usarname_input.dart';
@@ -11,12 +13,55 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  AuthService _authService = AuthService();
+
+  bool isLoading = false;
+
+  Future<void> register(BuildContext context) async {
+    setState(() {
+      isLoading =
+          true; // Kayıt işlemi başlatıldığında yükleniyor durumunu ayarla
+    });
+    try {
+      final response = await _authService.register(
+        name: _nameController.text.trim(),
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+        passwordConfirmation: _confirmPasswordController.text.trim(),
+      );
+
+      if (response.success!) {
+        // await AuthStorage.saveToken(response.data.token);
+        // final userId = response.data.user.id;
+
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => MainScreen()),
+        );
+      } else {
+        throw Exception(response.message);
+      }
+    } catch (e) {
+      // _errorMessage = e.toString();
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Kayıt başarısız: ")));
+    } finally {
+      isLoading =
+          false; // Kayıt işlemi başlatıldığında yükleniyor durumunu ayarla
+      // setButtonPressed(false);
+    }
+  }
+
+  final TextEditingController _nameController = TextEditingController();
+
   final TextEditingController _emailController = TextEditingController();
   // Kullanıcıdan şifre almak için kontrolcü
   final TextEditingController _passwordController = TextEditingController();
   // Kullanıcıdan şifre doğrulama bilgisi almak için kontrolcü
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+  final FocusNode _nameFocusNode = FocusNode();
   final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
   final FocusNode _confirmPasswordFocusNode = FocusNode();
@@ -98,6 +143,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         SizedBox(height: 30),
 
                         UsarnameInput(
+                          controller: _nameController,
+                          focusNode: _nameFocusNode,
+                        ),
+                        UsarnameInput(
                           controller: _emailController,
                           focusNode: _emailFocusNode,
                         ),
@@ -141,8 +190,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             // Şifrelerin eşleşip eşleşmediği kontrol edilebilir
                             if (_passwordController.text ==
                                 _confirmPasswordController.text) {
-                              // Başarılı kayıt sonrası giriş ekranına dönüş
-                              Navigator.pop(context);
+                              register(context);
                             } else {
                               // Şifreler eşleşmiyorsa uyarı göster
                               ScaffoldMessenger.of(context).showSnackBar(
@@ -169,10 +217,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                             minimumSize: Size(double.infinity, 0),
                           ),
-                          child: Text(
-                            'Kayıt Ol',
-                            style: TextStyle(color: Colors.white, fontSize: 18),
-                          ),
+                          child:
+                              isLoading
+                                  ? CircularProgressIndicator()
+                                  : Text(
+                                    'Kayıt Ol',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                    ),
+                                  ),
                         ),
                         SizedBox(height: 20),
 

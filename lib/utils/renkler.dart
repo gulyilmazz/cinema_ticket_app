@@ -7,6 +7,11 @@ class Renkler {
   static const Color butonRengi = Color(0xFF2196F3); // Mavi buton rengi
 
   // Film listesi sayfası renkleri
-  static const Color baslikArkaPlanRengi = Colors.blueGrey;
-  static const Color filmListesiArkaPlanRengi = Colors.grey;
+  static const Color baslikArkaPlanRengi = const Color.fromARGB(255, 9, 14, 10);
+  static const Color filmListesiArkaPlanRengi = const Color.fromARGB(
+    255,
+    118,
+    113,
+    167,
+  );
 }

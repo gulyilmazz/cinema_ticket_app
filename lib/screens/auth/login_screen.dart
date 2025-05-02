@@ -1,5 +1,6 @@
 import 'package:cinemaa/screens/favorites/fav_screen.dart';
-import 'package:cinemaa/widgets/auth_widgets/login_button.dart';
+import 'package:cinemaa/screens/main_screen.dart';
+import 'package:cinemaa/services/auth/auth_service.dart';
 import 'package:cinemaa/widgets/auth_widgets/password_input.dart';
 import 'package:cinemaa/widgets/auth_widgets/register_button.dart';
 import 'package:cinemaa/widgets/auth_widgets/usarname_input.dart';
@@ -15,10 +16,50 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  AuthService _authService = AuthService();
+
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
+
+  bool isLoading = false;
+  Future<void> login(BuildContext context) async {
+    setState(() {
+      isLoading = true; // Giriş işlemi başladığında yükleniyor durumunu ayarla
+    });
+    try {
+      final response = await _authService.login(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+
+      if (response.success!) {
+        // Giriş başarılıysa yapılacak işlemler
+        // Örneğin, token'ı kaydetme ve ana ekrana yönlendirme
+        // await AuthStorage.saveToken(response.data.token);
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MainScreen(),
+          ), // Giriş sonrası gidilecek ekran
+        );
+      } else {
+        // Giriş başarısızsa hatayı göster
+        throw Exception(response.message);
+      }
+    } catch (e) {
+      // Hata durumunda kullanıcıya bilgi ver
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Giriş başarısız: ${e.toString()}")),
+      );
+    } finally {
+      setState(() {
+        isLoading =
+            false; // Giriş işlemi tamamlandığında yükleniyor durumunu sıfırla
+      });
+    }
+  }
 
   @override
   void dispose() {
@@ -102,17 +143,37 @@ class _LoginScreenState extends State<LoginScreen> {
                           focusNode: _passwordFocusNode,
                         ),
                         SizedBox(height: 30),
-
-                        LoginButton(
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color.fromARGB(
+                              255,
+                              42,
+                              43,
+                              38,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                          ),
                           onPressed: () {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => FavScreen(),
-                              ),
-                            );
+                            login(context); // Giriş yapma işlemi
                           },
+                          child:
+                              isLoading
+                                  ? CircularProgressIndicator()
+                                  : Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      "Giriş Yap",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
                         ),
+                        // LoginButton(
+                        //   onPressed: () {
+                        //     login(context); // Giriş yapma işlemi
+                        //   },
+                        // ),
                         SizedBox(height: 20),
                         RegisterButton(
                           onPressed: () {

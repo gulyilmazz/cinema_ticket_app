@@ -41,17 +41,17 @@ class _MainScreenState extends State<MainScreen> {
       ),
       appBar: AppBar(
         title: const Text(
-          'Cinemaa',
+          '',
           style: TextStyle(
             color: Color.fromARGB(255, 10, 223, 230),
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w300,
           ),
         ),
         centerTitle: true,
         actions: [
           // Şehir seçim butonu
           Padding(
-            padding: const EdgeInsets.only(right: 16.0),
+            padding: const EdgeInsets.only(right: 10.0),
             child: GestureDetector(
               onTap: () {
                 _showSehirSecimDialog(context);
@@ -62,7 +62,7 @@ class _MainScreenState extends State<MainScreen> {
                     Icons.location_on,
                     color: const Color.fromARGB(255, 10, 223, 230),
                   ),
-                  SizedBox(width: 4),
+                  SizedBox(width: 2.5),
                   Text(
                     'İstanbul',
                     style: TextStyle(
@@ -78,7 +78,7 @@ class _MainScreenState extends State<MainScreen> {
           decoration: BoxDecoration(
             border: Border.all(
               color: const Color.fromARGB(255, 10, 222, 230),
-              width: 1.5,
+              width: 0.50,
             ),
             gradient: LinearGradient(
               colors: [
