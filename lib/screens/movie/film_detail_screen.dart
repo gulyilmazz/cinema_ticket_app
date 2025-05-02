@@ -46,7 +46,7 @@ class _FilmDetaySayfasiState extends State<FilmDetaySayfasi> {
                           end: Alignment.bottomCenter,
                           colors: [
                             Colors.transparent,
-                            Colors.black.withOpacity(0.7),
+                            Colors.black.withValues(alpha: 0.7),
                           ],
                         ),
                       ),
@@ -152,7 +152,7 @@ class _FilmDetaySayfasiState extends State<FilmDetaySayfasi> {
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
+                            color: Colors.black.withValues(alpha: 0.1),
                             blurRadius: 4,
                             offset: Offset(0, 2),
                           ),

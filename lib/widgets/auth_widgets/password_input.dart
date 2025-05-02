@@ -5,7 +5,11 @@ class PasswordInput extends StatefulWidget {
   final TextEditingController controller;
   final FocusNode focusNode;
 
-  PasswordInput({required this.controller, required this.focusNode});
+  const PasswordInput({
+    super.key,
+    required this.controller,
+    required this.focusNode,
+  });
 
   @override
   _PasswordInputState createState() => _PasswordInputState();

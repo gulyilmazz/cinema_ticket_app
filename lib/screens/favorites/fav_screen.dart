@@ -9,7 +9,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 // Favori filmleri döndüren fonksiyon
 
 class FavScreen extends StatefulWidget {
-  const FavScreen({Key? key}) : super(key: key);
+  const FavScreen({super.key});
 
   @override
   _FavScreenState createState() => _FavScreenState();
@@ -86,7 +86,7 @@ class _FavScreenState extends State<FavScreen> {
                 child: Column(
                   children: [
                     // Kaydırmalı üst kısım
-                    Container(
+                    SizedBox(
                       height: 200,
                       width: double.infinity,
                       child: PageView.builder(

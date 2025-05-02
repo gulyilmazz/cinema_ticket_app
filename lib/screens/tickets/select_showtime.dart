@@ -10,12 +10,12 @@ class SelectShowtimePage extends StatefulWidget {
   final Film film;
 
   const SelectShowtimePage({
-    Key? key,
+    super.key,
     required this.movieTitle,
     required this.moviePoster,
     required this.selectedDate,
     required this.film,
-  }) : super(key: key);
+  });
 
   @override
   _SelectShowtimePageState createState() => _SelectShowtimePageState();

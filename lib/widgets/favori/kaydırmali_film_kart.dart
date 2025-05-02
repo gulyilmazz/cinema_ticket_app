@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class KaydirmaliFilmKarti extends StatelessWidget {
   final Film film;
 
-  const KaydirmaliFilmKarti({Key? key, required this.film}) : super(key: key);
+  const KaydirmaliFilmKarti({super.key, required this.film});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,10 @@ class KaydirmaliFilmKarti extends StatelessWidget {
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [Colors.transparent, Colors.black.withOpacity(0.7)],
+                  colors: [
+                    Colors.transparent,
+                    Colors.black.withValues(alpha: 0.7),
+                  ],
                 ),
               ),
             ),

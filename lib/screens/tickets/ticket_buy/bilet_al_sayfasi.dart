@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class TicketBuyScreen extends StatelessWidget {
   final Film film;
 
-  const TicketBuyScreen({Key? key, required this.film}) : super(key: key);
+  const TicketBuyScreen({super.key, required this.film});
 
   @override
   Widget build(BuildContext context) {

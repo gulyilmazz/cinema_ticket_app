@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ProfilScreen extends StatelessWidget {
-  final Color cyanAccent = const Color(0xFF00E5E5); // Bright cyan color
+  final Color cyanAccent = const Color(0xFF00E5E5);
+
+  const ProfilScreen({super.key}); // Bright cyan color
 
   @override
   Widget build(BuildContext context) {
@@ -187,11 +189,11 @@ class ProfilScreen extends StatelessWidget {
             Colors.black,
             Color(
               0xFF7B68EE,
-            ).withOpacity(0.7), // Purple-blue shade matching menu
+            ).withValues(alpha: 0.7), // Purple-blue shade matching menu
           ],
         ),
         borderRadius: BorderRadius.circular(30),
-        border: Border.all(color: cyanAccent.withOpacity(0.5), width: 1),
+        border: Border.all(color: cyanAccent.withValues(alpha: 0.5), width: 1),
       ),
       child: Material(
         color: Colors.transparent,
@@ -217,29 +219,6 @@ class ProfilScreen extends StatelessWidget {
               ],
             ),
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildNavBarItem(IconData icon, String label, bool isActive) {
-    return InkWell(
-      onTap: () {},
-      child: Container(
-        width: 80,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(icon, color: isActive ? cyanAccent : Colors.grey, size: 24),
-            SizedBox(height: 4),
-            Text(
-              label,
-              style: TextStyle(
-                color: isActive ? cyanAccent : Colors.grey,
-                fontSize: 12,
-              ),
-            ),
-          ],
         ),
       ),
     );

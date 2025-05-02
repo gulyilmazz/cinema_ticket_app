@@ -13,7 +13,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  AuthService _authService = AuthService();
+  final AuthService _authService = AuthService();
 
   bool isLoading = false;
 

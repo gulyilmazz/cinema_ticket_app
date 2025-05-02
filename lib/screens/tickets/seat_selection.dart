@@ -151,7 +151,7 @@ class _SeatSelectionPageState extends State<SeatSelectionPage> {
                     118,
                     113,
                     167,
-                  ).withOpacity(0.3),
+                  ).withValues(alpha: 0.3),
                   borderRadius: BorderRadius.circular(5),
                   border: Border.all(
                     color: const Color.fromARGB(255, 10, 222, 230),

@@ -4,7 +4,11 @@ class UsarnameInput extends StatelessWidget {
   final TextEditingController controller;
   final FocusNode focusNode;
 
-  UsarnameInput({required this.controller, required this.focusNode});
+  const UsarnameInput({
+    super.key,
+    required this.controller,
+    required this.focusNode,
+  });
 
   @override
   Widget build(BuildContext context) {

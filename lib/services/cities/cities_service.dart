@@ -1,4 +1,4 @@
-import 'package:cinemaa/models/sehir_model.dart';
+import 'package:cinemaa/models/cities_response.dart';
 import 'package:cinemaa/services/client_service.dart';
 
 class CitiesService {

@@ -1,7 +1,6 @@
-import 'dart:ui';
 import 'package:cinemaa/core/storage.dart';
-import 'package:cinemaa/models/sehir_model.dart';
-import 'package:cinemaa/screens/main_screen.dart';
+import 'package:cinemaa/models/cities_response.dart';
+import 'package:cinemaa/screens/hall/hall_screen.dart';
 import 'package:cinemaa/services/cities/cities_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,7 +20,7 @@ class _CitiesScreenState extends State<CitiesScreen>
   List<City> _cities = [];
   String? _error;
   late AnimationController _animationController;
-  TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
   List<City> _filteredCities = [];
   bool _isSearching = false;
 
@@ -37,7 +36,7 @@ class _CitiesScreenState extends State<CitiesScreen>
     _animationController.forward().then((_) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => MainScreen()),
+        MaterialPageRoute(builder: (context) => CinemaHallScreen()),
       );
     });
   }
@@ -170,7 +169,7 @@ class _CitiesScreenState extends State<CitiesScreen>
                 child: Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
+                    color: Colors.white.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: const Icon(
@@ -194,7 +193,7 @@ class _CitiesScreenState extends State<CitiesScreen>
           const SizedBox(height: 24),
           Container(
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.15),
+              color: Colors.white.withValues(alpha: 0.15),
               borderRadius: BorderRadius.circular(16),
             ),
             child: TextField(
@@ -203,7 +202,9 @@ class _CitiesScreenState extends State<CitiesScreen>
               style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 hintText: 'Şehir ara...',
-                hintStyle: TextStyle(color: Colors.white.withOpacity(0.7)),
+                hintStyle: TextStyle(
+                  color: Colors.white.withValues(alpha: 0.7),
+                ),
                 prefixIcon: const Icon(Icons.search, color: Colors.white),
                 border: InputBorder.none,
                 contentPadding: const EdgeInsets.symmetric(vertical: 16),
@@ -236,7 +237,7 @@ class _CitiesScreenState extends State<CitiesScreen>
               height: 70,
               child: CircularProgressIndicator(
                 valueColor: AlwaysStoppedAnimation<Color>(
-                  Colors.white.withOpacity(0.9),
+                  Colors.white.withValues(alpha: 0.9),
                 ),
                 strokeWidth: 6,
               ),
@@ -245,7 +246,7 @@ class _CitiesScreenState extends State<CitiesScreen>
             Text(
               'Şehirler yükleniyor...',
               style: TextStyle(
-                color: Colors.white.withOpacity(0.9),
+                color: Colors.white.withValues(alpha: 0.9),
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
               ),
@@ -312,13 +313,13 @@ class _CitiesScreenState extends State<CitiesScreen>
             Icon(
               Icons.location_city,
               size: 80,
-              color: Colors.white.withOpacity(0.5),
+              color: Colors.white.withValues(alpha: 0.5),
             ),
             const SizedBox(height: 16),
             Text(
               'Gösterilecek şehir bulunamadı',
               style: TextStyle(
-                color: Colors.white.withOpacity(0.9),
+                color: Colors.white.withValues(alpha: 0.9),
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
               ),
@@ -327,7 +328,7 @@ class _CitiesScreenState extends State<CitiesScreen>
             Text(
               'Lütfen daha sonra tekrar deneyin',
               style: TextStyle(
-                color: Colors.white.withOpacity(0.7),
+                color: Colors.white.withValues(alpha: 0.7),
                 fontSize: 14,
               ),
             ),
@@ -346,13 +347,13 @@ class _CitiesScreenState extends State<CitiesScreen>
             Icon(
               Icons.search_off_rounded,
               size: 70,
-              color: Colors.white.withOpacity(0.6),
+              color: Colors.white.withValues(alpha: 0.6),
             ),
             const SizedBox(height: 16),
             Text(
               '"${_searchController.text}" için sonuç bulunamadı',
               style: TextStyle(
-                color: Colors.white.withOpacity(0.9),
+                color: Colors.white.withValues(alpha: 0.9),
                 fontSize: 17,
                 fontWeight: FontWeight.w500,
               ),
@@ -369,7 +370,7 @@ class _CitiesScreenState extends State<CitiesScreen>
       child: Container(
         margin: const EdgeInsets.only(top: 8),
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.05),
+          color: Colors.white.withValues(alpha: 0.05),
           borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(32),
             topRight: Radius.circular(32),
@@ -405,11 +406,11 @@ class _CitiesScreenState extends State<CitiesScreen>
                             vertical: 8,
                           ),
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.1),
+                            color: Colors.white.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(16),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
+                                color: Colors.black.withValues(alpha: 0.1),
                                 blurRadius: 8,
                                 offset: const Offset(0, 4),
                               ),
@@ -420,8 +421,10 @@ class _CitiesScreenState extends State<CitiesScreen>
                             child: InkWell(
                               onTap: () => _onCitySelected(city),
                               borderRadius: BorderRadius.circular(16),
-                              splashColor: Colors.white.withOpacity(0.1),
-                              highlightColor: Colors.white.withOpacity(0.1),
+                              splashColor: Colors.white.withValues(alpha: 0.1),
+                              highlightColor: Colors.white.withValues(
+                                alpha: 0.1,
+                              ),
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 20.0,
@@ -431,7 +434,9 @@ class _CitiesScreenState extends State<CitiesScreen>
                                   children: [
                                     Icon(
                                       Icons.location_on_rounded,
-                                      color: Colors.white.withOpacity(0.9),
+                                      color: Colors.white.withValues(
+                                        alpha: 0.9,
+                                      ),
                                       size: 24,
                                     ),
                                     const SizedBox(width: 16),
@@ -447,7 +452,9 @@ class _CitiesScreenState extends State<CitiesScreen>
                                     ),
                                     Icon(
                                       Icons.arrow_forward_ios_rounded,
-                                      color: Colors.white.withOpacity(0.6),
+                                      color: Colors.white.withValues(
+                                        alpha: 0.6,
+                                      ),
                                       size: 16,
                                     ),
                                   ],

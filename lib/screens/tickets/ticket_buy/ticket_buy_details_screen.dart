@@ -76,7 +76,7 @@ class _TicketBuyDetailsScreenState extends State<TicketBuyDetailsScreen> {
         ),
         SizedBox(height: 10),
         // Tarih seçimi
-        Container(
+        SizedBox(
           height: 100,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,

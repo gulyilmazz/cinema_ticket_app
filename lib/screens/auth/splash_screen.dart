@@ -7,7 +7,7 @@ import 'dart:async';
 import 'package:lottie/lottie.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({super.key});
 
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -16,11 +16,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   // Arka plan gradient renkleri (açık ve koyu tonlar)
   static const Color gradientStart = Color.fromARGB(255, 15, 2, 10);
-  static const Color gradientEnd = const Color.fromARGB(255, 118, 113, 167);
-
-  // Splash ekranında gösterilecek resmin boyutları
-  static const double imageWidth = 200.0;
-  static const double imageHeight = 300.0;
+  static const Color gradientEnd = Color.fromARGB(255, 118, 113, 167);
 
   // Splash ekranının kaç saniye görüneceği
   static const int splashDuration = 3;

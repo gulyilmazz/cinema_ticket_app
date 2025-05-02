@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class MovieCategory extends StatelessWidget {
   final String kategori;
 
-  MovieCategory({required this.kategori});
+  const MovieCategory({super.key, required this.kategori});
 
   @override
   Widget build(BuildContext context) {

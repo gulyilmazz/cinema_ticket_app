@@ -33,4 +33,6 @@ class AuthStorage {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(_citiesIdKey);
   }
+
+  static saveSalonId(String string) {}
 }
