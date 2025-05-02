@@ -1,4 +1,6 @@
+import 'package:cinemaa/core/storage.dart';
 import 'package:cinemaa/screens/auth/login_screen.dart';
+import 'package:cinemaa/screens/cities/cities.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -22,20 +24,29 @@ class _SplashScreenState extends State<SplashScreen> {
 
   // Splash ekranının kaç saniye görüneceği
   static const int splashDuration = 3;
+  late String token;
+
+  void initToken() async {
+    // Tokeni alıyorum
+    token = await AuthStorage.getToken() ?? '';
+  }
 
   @override
   void initState() {
     super.initState();
-    // 5 saniye bekleyip giriş ekranına yönlendirme yapıyorum
+    initToken(); // Tokeni başlatıyorum
+
     Timer(
       //fonksiyonum
       Duration(seconds: splashDuration),
+
       () => Navigator.pushReplacement(
         context,
         PageRouteBuilder(
           transitionDuration: Duration(milliseconds: 1000), // Animasyon süresi
           pageBuilder:
-              (context, animation, secondaryAnimation) => LoginScreen(),
+              (context, animation, secondaryAnimation) =>
+                  token == "" ? LoginScreen() : CitiesScreen(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             var begin = Offset(1.0, 0.0); // Sağdan sola kayan animasyon
             var end = Offset.zero;

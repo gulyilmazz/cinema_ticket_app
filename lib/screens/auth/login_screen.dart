@@ -1,5 +1,5 @@
-import 'package:cinemaa/screens/favorites/fav_screen.dart';
-import 'package:cinemaa/screens/main_screen.dart';
+import 'package:cinemaa/core/storage.dart';
+import 'package:cinemaa/screens/cities/cities.dart';
 import 'package:cinemaa/services/auth/auth_service.dart';
 import 'package:cinemaa/widgets/auth_widgets/password_input.dart';
 import 'package:cinemaa/widgets/auth_widgets/register_button.dart';
@@ -26,7 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
   bool isLoading = false;
   Future<void> login(BuildContext context) async {
     setState(() {
-      isLoading = true; // Giriş işlemi başladığında yükleniyor durumunu ayarla
+      isLoading = true;
     });
     try {
       final response = await _authService.login(
@@ -35,13 +35,11 @@ class _LoginScreenState extends State<LoginScreen> {
       );
 
       if (response.success!) {
-        // Giriş başarılıysa yapılacak işlemler
-        // Örneğin, token'ı kaydetme ve ana ekrana yönlendirme
-        // await AuthStorage.saveToken(response.data.token);
+        await AuthStorage.saveToken(response.data!.token!);
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => MainScreen(),
+            builder: (context) => CitiesScreen(),
           ), // Giriş sonrası gidilecek ekran
         );
       } else {
@@ -55,8 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
       );
     } finally {
       setState(() {
-        isLoading =
-            false; // Giriş işlemi tamamlandığında yükleniyor durumunu sıfırla
+        isLoading = false;
       });
     }
   }
