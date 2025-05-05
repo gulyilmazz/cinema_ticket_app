@@ -30,6 +30,7 @@ class _CitiesScreenState extends State<CitiesScreen>
     HapticFeedback.mediumImpact();
 
     await AuthStorage.saveCitiesId(city.id.toString());
+    // ignore: avoid_print
     print('Seçilen şehir ID: ${city.id}');
 
     // Bir sonraki sayfaya geçmeden önce seçim animasyonu
@@ -108,6 +109,7 @@ class _CitiesScreenState extends State<CitiesScreen>
         });
       }
     } catch (e) {
+      // ignore: avoid_print
       print('Şehirleri çekerken hata oluştu: $e');
       if (mounted) {
         setState(() {

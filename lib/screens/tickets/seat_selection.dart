@@ -12,14 +12,14 @@ class SeatSelectionPage extends StatefulWidget {
   final Film film;
 
   const SeatSelectionPage({
-    Key? key,
+    super.key,
     required this.movieTitle,
     required this.moviePoster,
     required this.selectedDate,
     required this.theaterName,
     required this.showtime,
     required this.film,
-  }) : super(key: key);
+  });
 
   @override
   _SeatSelectionPageState createState() => _SeatSelectionPageState();

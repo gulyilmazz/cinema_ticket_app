@@ -125,6 +125,7 @@ class _HomeScreenState extends State<HomeScreen>
               children:
                   _kategoriler.map((kategori) {
                     return MovieCategoryWrapper(
+                      // ignore: sort_child_properties_last
                       child: MovieCategory(kategori: kategori),
                       turkuazRenk: turkuazRenk,
                       appGradient: appGradient,
@@ -145,6 +146,7 @@ class MovieCategoryWrapper extends StatelessWidget {
   final LinearGradient appGradient;
 
   const MovieCategoryWrapper({
+    super.key,
     required this.child,
     required this.turkuazRenk,
     required this.appGradient,

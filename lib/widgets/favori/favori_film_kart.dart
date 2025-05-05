@@ -7,10 +7,10 @@ class FavoriFilmKarti extends StatelessWidget {
   final VoidCallback onFavoriteToggle;
 
   const FavoriFilmKarti({
-    Key? key,
+    super.key,
     required this.film,
     required this.onFavoriteToggle,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

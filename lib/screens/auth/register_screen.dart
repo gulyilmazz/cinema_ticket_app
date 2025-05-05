@@ -35,6 +35,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         // final userId = response.data.user.id;
 
         Navigator.pushReplacement(
+          // ignore: use_build_context_synchronously
           context,
           MaterialPageRoute(builder: (context) => MainScreen()),
         );
@@ -44,6 +45,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     } catch (e) {
       // _errorMessage = e.toString();
       ScaffoldMessenger.of(
+        // ignore: use_build_context_synchronously
         context,
       ).showSnackBar(SnackBar(content: Text("Kayıt başarısız: ")));
     } finally {

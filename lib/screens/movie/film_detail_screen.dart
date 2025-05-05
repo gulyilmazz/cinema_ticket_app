@@ -7,9 +7,10 @@ import 'package:flutter/material.dart';
 class FilmDetaySayfasi extends StatefulWidget {
   final Film film;
 
-  const FilmDetaySayfasi({Key? key, required this.film}) : super(key: key);
+  const FilmDetaySayfasi({super.key, required this.film});
 
   @override
+  // ignore: library_private_types_in_public_api
   _FilmDetaySayfasiState createState() => _FilmDetaySayfasiState();
 }
 

@@ -2,6 +2,9 @@ import 'package:cinemaa/core/storage.dart';
 import 'package:cinemaa/models/hall_response.dart';
 import 'package:cinemaa/screens/main_screen.dart';
 import 'package:cinemaa/services/hall/hall_service.dart';
+import 'package:cinemaa/widgets/hall_widgets/hall_appbar.dart';
+import 'package:cinemaa/widgets/hall_widgets/hall_list.dart';
+import 'package:cinemaa/widgets/hall_widgets/hall_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -115,6 +118,7 @@ class _CinemaHallScreenState extends State<CinemaHallScreen>
         });
       }
     } catch (e) {
+      // ignore: avoid_print
       print('Sinema salonlarını çekerken hata oluştu: $e');
       if (mounted) {
         setState(() {
@@ -159,368 +163,41 @@ class _CinemaHallScreenState extends State<CinemaHallScreen>
 
   @override
   Widget build(BuildContext context) {
-    final Size screenSize = MediaQuery.of(context).size;
     final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
       backgroundColor:
           isDarkMode ? const Color(0xFF121212) : const Color(0xFFF5F5F7),
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
-        title: Text(
-          'Sinema Salonları',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: isDarkMode ? Colors.white : const Color(0xFF333333),
-          ),
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Row(
-              children: [
-                Icon(
-                  Icons.location_on,
-                  color: Theme.of(context).colorScheme.secondary,
-                  size: 18,
-                ),
-                const SizedBox(width: 4),
-                Text(
-                  _cityName,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.secondary,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 14,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-      body: RefreshIndicator(
-        onRefresh: _refreshData,
-        child: _buildBody(screenSize, isDarkMode),
-      ),
+      appBar: HallAppBar(cityName: _cityName),
+      body: RefreshIndicator(onRefresh: _refreshData, child: _buildBody()),
     );
   }
 
-  Widget _buildBody(Size screenSize, bool isDarkMode) {
+  Widget _buildBody() {
     if (_isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
 
     if (_error != null) {
-      return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.error_outline, size: 60, color: Colors.red.shade300),
-            const SizedBox(height: 16),
-            Text(
-              _error!,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 24),
-            ElevatedButton.icon(
-              onPressed: _refreshData,
-              icon: const Icon(Icons.refresh),
-              label: const Text("Yeniden Dene"),
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 12,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-            ),
-          ],
-        ),
-      );
+      return ErrorView(errorMessage: _error!, onRetry: _refreshData);
     }
 
     if (_cinemaHalls.isEmpty) {
-      return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.movie_filter_outlined,
-              size: 80,
-              color: Colors.grey.shade400,
-            ),
-            const SizedBox(height: 16),
-            Text(
-              'Bu şehirde henüz sinema salonu bulunamadı',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
-      );
+      return const EmptyCinemaView();
     }
 
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Container(
-            decoration: BoxDecoration(
-              color: isDarkMode ? const Color(0xFF2A2A2A) : Colors.white,
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.05),
-                  blurRadius: 10,
-                  offset: const Offset(0, 4),
-                ),
-              ],
-            ),
-            child: TextField(
-              controller: _searchController,
-              onChanged: _filterCinemas,
-              style: TextStyle(fontSize: 16),
-              decoration: InputDecoration(
-                hintText: 'Sinema salonu ara...',
-                hintStyle: TextStyle(color: Colors.grey.shade400),
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: Theme.of(context).colorScheme.secondary,
-                ),
-                suffixIcon:
-                    _searchController.text.isNotEmpty
-                        ? IconButton(
-                          icon: const Icon(Icons.clear),
-                          onPressed: () {
-                            _searchController.clear();
-                            _filterCinemas('');
-                          },
-                        )
-                        : null,
-                border: InputBorder.none,
-                contentPadding: const EdgeInsets.symmetric(vertical: 16),
-              ),
-            ),
-          ),
-        ),
+        HallSearchBar(controller: _searchController, onChanged: _filterCinemas),
         Expanded(
-          child:
-              _isSearching && _filteredCinemaHalls.isEmpty
-                  ? Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.search_off,
-                          size: 70,
-                          color: Colors.grey.shade400,
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          'Aradığınız kriterlere uygun\nsinema salonu bulunamadı',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
-                  )
-                  : ListView.builder(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    itemCount:
-                        _isSearching
-                            ? _filteredCinemaHalls.length
-                            : _cinemaHalls.length,
-                    itemBuilder: (context, index) {
-                      final cinemaHall =
-                          _isSearching
-                              ? _filteredCinemaHalls[index]
-                              : _cinemaHalls[index];
-                      return _buildCinemaCard(cinemaHall, index, isDarkMode);
-                    },
-                  ),
+          child: HallList(
+            cinemaHalls: _cinemaHalls,
+            isSearching: _isSearching,
+            filteredCinemaHalls: _filteredCinemaHalls,
+            onCinemaSelected: _onCinemaSelected,
+          ),
         ),
       ],
-    );
-  }
-
-  Widget _buildCinemaCard(CinemaHall cinema, int index, bool isDarkMode) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: InkWell(
-        onTap: () => _onCinemaSelected(cinema),
-        borderRadius: BorderRadius.circular(16),
-        child: Container(
-          decoration: BoxDecoration(
-            color: isDarkMode ? const Color(0xFF252525) : Colors.white,
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.05),
-                blurRadius: 8,
-                offset: const Offset(0, 2),
-              ),
-            ],
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            cinema.name ?? 'İsimsiz Sinema',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color:
-                                  isDarkMode
-                                      ? Colors.white
-                                      : const Color(0xFF333333),
-                            ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 4,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Theme.of(
-                              context,
-                            ).colorScheme.primary.withValues(alpha: 0.1),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.event_seat,
-                                size: 16,
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
-                              const SizedBox(width: 4),
-                              Text(
-                                '${cinema.totalCapacity ?? 0} koltuk',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                  color: Theme.of(context).colorScheme.primary,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 8),
-                    if (cinema.address != null && cinema.address!.isNotEmpty)
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Icon(
-                            Icons.location_on,
-                            size: 16,
-                            color: Colors.grey.shade500,
-                          ),
-                          const SizedBox(width: 4),
-                          Expanded(
-                            child: Text(
-                              cinema.address!,
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.grey.shade500,
-                              ),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
-                      ),
-                    const SizedBox(height: 8),
-                    if (cinema.phone != null && cinema.phone!.isNotEmpty)
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.phone,
-                            size: 16,
-                            color: Colors.grey.shade500,
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            cinema.phone!,
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.grey.shade500,
-                            ),
-                          ),
-                        ],
-                      ),
-                    const SizedBox(height: 16),
-                    if (cinema.description != null &&
-                        cinema.description!.isNotEmpty)
-                      Text(
-                        cinema.description!,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color:
-                              isDarkMode
-                                  ? Colors.grey.shade300
-                                  : Colors.grey.shade700,
-                        ),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    const SizedBox(height: 16),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        ElevatedButton(
-                          onPressed: () => _onCinemaSelected(cinema),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                Theme.of(context).colorScheme.primary,
-                            foregroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            elevation: 0,
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 10,
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              const Text('Filmleri Gör'),
-                              const SizedBox(width: 4),
-                              const Icon(Icons.arrow_forward, size: 16),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }

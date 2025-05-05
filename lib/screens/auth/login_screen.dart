@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:cinemaa/core/storage.dart';
 import 'package:cinemaa/screens/cities/cities.dart';
 import 'package:cinemaa/services/auth/auth_service.dart';
@@ -48,6 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
       }
     } catch (e) {
       // Hata durumunda kullanıcıya bilgi ver
+      // ignore:
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Giriş başarısız: ${e.toString()}")),
       );

@@ -13,7 +13,7 @@ class ConfirmationPage extends StatelessWidget {
   final Film? film;
 
   const ConfirmationPage({
-    Key? key,
+    super.key,
     required this.movieTitle,
     required this.moviePoster,
     required this.selectedSeats,
@@ -22,7 +22,7 @@ class ConfirmationPage extends StatelessWidget {
     required this.showtime,
     required this.theaterName,
     this.film,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

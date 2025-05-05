@@ -13,7 +13,7 @@ class PaymentPage extends StatefulWidget {
   final Film film;
 
   const PaymentPage({
-    Key? key,
+    super.key,
     required this.movieTitle,
     required this.moviePoster,
     required this.totalAmount,
@@ -22,7 +22,7 @@ class PaymentPage extends StatefulWidget {
     required this.showtime,
     required this.theaterName,
     required this.film,
-  }) : super(key: key);
+  });
 
   @override
   _PaymentPageState createState() => _PaymentPageState();
@@ -105,6 +105,7 @@ class _PaymentPageState extends State<PaymentPage> {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: _processPayment,
+              // ignore: sort_child_properties_last
               child: Text('Ödeme Yap'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 10, 223, 230),
