@@ -1,5 +1,5 @@
 // Favori film kartı widget'ı
-import 'package:cinemaa/models/film_model.dart';
+import 'package:cinemaa/models/movies_response.dart';
 import 'package:flutter/material.dart';
 
 class FavoriFilmKarti extends StatelessWidget {

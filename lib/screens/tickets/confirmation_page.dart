@@ -1,4 +1,4 @@
-import 'package:cinemaa/models/film_model.dart';
+import 'package:cinemaa/models/movies_response.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

@@ -1,4 +1,4 @@
-import 'package:cinemaa/models/film_model.dart';
+import 'package:cinemaa/models/movies_response.dart';
 import 'package:cinemaa/screens/tickets/ticket_buy/ticket_buy_details_screen.dart';
 import 'package:flutter/material.dart';
 

@@ -1,4 +1,4 @@
-import 'package:cinemaa/models/film_model.dart';
+import 'package:cinemaa/models/movies_response.dart';
 import 'package:cinemaa/widgets/favori/favori_film_kart.dart';
 import 'package:cinemaa/widgets/favori/kayd%C4%B1rmali_film_kart.dart';
 import 'package:flutter/material.dart';

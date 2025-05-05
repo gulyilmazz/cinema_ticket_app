@@ -1,5 +1,5 @@
 // Film detay sayfası
-import 'package:cinemaa/models/film_model.dart';
+import 'package:cinemaa/models/movies_response.dart';
 import 'package:cinemaa/screens/tickets/ticket_buy/bilet_al_sayfasi.dart';
 import 'package:cinemaa/widgets/movie/build_info_row.dart';
 import 'package:flutter/material.dart';

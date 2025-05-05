@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
-import 'package:cinemaa/models/film_model.dart';
+
+import 'package:cinemaa/models/movies_response.dart';
 import 'package:flutter/material.dart';
 
 class KaydirmaliFilmKarti extends StatelessWidget {

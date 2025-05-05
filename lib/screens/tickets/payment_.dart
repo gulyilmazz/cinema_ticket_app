@@ -1,4 +1,4 @@
-import 'package:cinemaa/models/film_model.dart';
+import 'package:cinemaa/models/movies_response.dart';
 import 'package:cinemaa/screens/tickets/confirmation_page.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +25,7 @@ class PaymentPage extends StatefulWidget {
   });
 
   @override
-  _PaymentPageState createState() => _PaymentPageState();
+  createState() => _PaymentPageState();
 }
 
 class _PaymentPageState extends State<PaymentPage> {
