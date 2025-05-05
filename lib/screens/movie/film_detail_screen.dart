@@ -2,7 +2,6 @@ import 'package:cinemaa/core/storage.dart';
 import 'package:cinemaa/services/movies/movie_service.dart';
 import 'package:flutter/material.dart';
 import 'package:cinemaa/models/movie_response1.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:intl/intl.dart';
 
 class MovieDetailPage extends StatefulWidget {

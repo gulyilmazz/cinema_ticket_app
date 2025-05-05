@@ -320,6 +320,7 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   Widget _buildCategoryTabs() {
+    // ignore: unnecessary_null_comparison
     return _tabController != null
         ? Container(
           height: 50,
