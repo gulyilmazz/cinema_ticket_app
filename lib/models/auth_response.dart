@@ -1,13 +1,13 @@
 class AuthResponse {
   bool? success;
-  Data? data;
+  User? data;
   String? message;
 
   AuthResponse({this.success, this.data, this.message});
 
   AuthResponse.fromJson(Map<String, dynamic> json) {
     success = json['success'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? User.fromJson(json['data']) : null;
     message = json['message'];
   }
 
@@ -22,16 +22,16 @@ class AuthResponse {
   }
 }
 
-class Data {
+class User {
   int? id;
   String? name;
   String? email;
   int? roleId;
   String? token;
 
-  Data({this.id, this.name, this.email, this.roleId, this.token});
+  User({this.id, this.name, this.email, this.roleId, this.token});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     email = json['email'];
