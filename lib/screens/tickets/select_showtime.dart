@@ -15,6 +15,7 @@ class SelectShowtimePage extends StatefulWidget {
     required this.moviePoster,
     required this.selectedDate,
     required this.film,
+    required int movieId,
   });
 
   @override

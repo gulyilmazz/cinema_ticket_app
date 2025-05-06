@@ -152,19 +152,22 @@ class _TicketBuyDetailsScreenState extends State<TicketBuyDetailsScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: InkWell(
             onTap: () {
-              // Seans seçim sayfasına git
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder:
-                      (context) => SelectShowtimePage(
-                        movieTitle: widget.movieTitle,
-                        moviePoster: widget.moviePoster,
-                        selectedDate: _selectedDate!,
-                        film: widget.film,
-                      ),
-                ),
-              );
+              if (_selectedDate != null) {
+                // Seans seçim sayfasına git
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder:
+                        (context) => SelectShowtimePage(
+                          movieTitle: widget.movieTitle,
+                          moviePoster: widget.moviePoster,
+                          selectedDate: _selectedDate!,
+                          film: widget.film,
+                          movieId: int.parse(widget.film.id),
+                        ),
+                  ),
+                );
+              }
             },
             child: Container(
               width: double.infinity,
