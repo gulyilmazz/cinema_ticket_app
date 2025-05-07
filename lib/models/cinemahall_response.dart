@@ -1,0 +1,74 @@
+class cinemahallResponse {
+  bool? success;
+  List<CinemaResponse>? data;
+  String? message;
+
+  cinemahallResponse({this.success, this.data, this.message});
+
+  cinemahallResponse.fromJson(Map<String, dynamic> json) {
+    success = json['success'];
+    if (json['data'] != null) {
+      data = <CinemaResponse>[];
+      json['data'].forEach((v) {
+        data!.add(new CinemaResponse.fromJson(v));
+      });
+    }
+    message = json['message'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['success'] = this.success;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    data['message'] = this.message;
+    return data;
+  }
+}
+
+class CinemaResponse {
+  int? id;
+  int? cinemaId;
+  String? name;
+  int? capacity;
+  String? type;
+  String? createdAt;
+  String? updatedAt;
+  Null deletedAt;
+
+  CinemaResponse({
+    this.id,
+    this.cinemaId,
+    this.name,
+    this.capacity,
+    this.type,
+    this.createdAt,
+    this.updatedAt,
+    this.deletedAt,
+  });
+
+  CinemaResponse.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    cinemaId = json['cinema_id'];
+    name = json['name'];
+    capacity = json['capacity'];
+    type = json['type'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+    deletedAt = json['deleted_at'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['cinema_id'] = this.cinemaId;
+    data['name'] = this.name;
+    data['capacity'] = this.capacity;
+    data['type'] = this.type;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
+    data['deleted_at'] = this.deletedAt;
+    return data;
+  }
+}

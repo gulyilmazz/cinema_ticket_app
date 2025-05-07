@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AuthStorage {
   static const String _tokenKey = 'auth_token';
   static const String _citiesIdKey = 'cities_id';
+  static const String _cinemaIdKey = 'cinema"_id';
 
   static Future<void> saveToken(String token) async {
     final prefs = await SharedPreferences.getInstance();
@@ -34,5 +35,18 @@ class AuthStorage {
     await prefs.remove(_citiesIdKey);
   }
 
-  static saveSalonId(String string) {}
+  static Future<void> saveCinemaId(String cinemaId) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_cinemaIdKey, cinemaId);
+  }
+
+  static Future<String?> getCinemaId() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_cinemaIdKey);
+  }
+
+  static Future<void> clearCinemaId() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(_cinemaIdKey);
+  }
 }
