@@ -10,19 +10,19 @@ class cinemahallResponse {
     if (json['data'] != null) {
       data = <CinemaResponse>[];
       json['data'].forEach((v) {
-        data!.add(new CinemaResponse.fromJson(v));
+        data!.add(CinemaResponse.fromJson(v));
       });
     }
     message = json['message'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['success'] = this.success;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['success'] = success;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
-    data['message'] = this.message;
+    data['message'] = message;
     return data;
   }
 }

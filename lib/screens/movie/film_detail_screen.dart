@@ -1,4 +1,5 @@
 import 'package:cinemaa/core/storage.dart';
+import 'package:cinemaa/screens/cinema_hall/cinema_hall_screen.dart';
 import 'package:cinemaa/services/movies/movie_service.dart';
 import 'package:flutter/material.dart';
 import 'package:cinemaa/models/movie_response1.dart';
@@ -212,6 +213,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                       end: Alignment.bottomCenter,
                       colors: [
                         Colors.transparent,
+                        // ignore: deprecated_member_use
                         Colors.black.withOpacity(0.7),
                       ],
                     ),
@@ -312,6 +314,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
+                        // ignore: deprecated_member_use
                         color: Colors.black.withOpacity(0.1),
                         blurRadius: 4,
                         offset: Offset(0, 2),
@@ -354,10 +357,14 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
 
                 SizedBox(height: 24),
 
-                // Book Tickets Button
                 InkWell(
                   onTap: () {
-                    // Add functionality to book tickets
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CinemaHallsPage(),
+                      ),
+                    );
                   },
                   child: Container(
                     width: double.infinity,

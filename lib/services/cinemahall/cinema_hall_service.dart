@@ -7,9 +7,12 @@ class CinemaHallService {
   CinemaHallService({ApiClient? apiClient})
     : _apiClient = apiClient ?? ApiClient();
 
-  Future<cinemahallResponse> getHallsByCity({required String token}) async {
+  Future<cinemahallResponse> getCinemaHall({
+    required String token,
+    required int sinemaId,
+  }) async {
     final response = await _apiClient.get(
-      'cinema-halls/hall-by-cinema/',
+      'cinema-halls/hall-by-cinema/$sinemaId',
       token: token,
     );
     return cinemahallResponse.fromJson(response);
