@@ -401,12 +401,15 @@ class _HomeScreenState extends State<HomeScreen>
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
+            // ignore: deprecated_member_use
             Colors.black.withOpacity(0.8),
+            // ignore: deprecated_member_use
             const Color(0xFF333355).withOpacity(0.7),
           ],
         ),
         boxShadow: [
           BoxShadow(
+            // ignore: deprecated_member_use
             color: Colors.black.withOpacity(0.3),
             blurRadius: 10,
             offset: const Offset(0, 5),
@@ -531,6 +534,7 @@ class _HomeScreenState extends State<HomeScreen>
                             vertical: 4,
                           ),
                           decoration: BoxDecoration(
+                            // ignore: deprecated_member_use
                             color: Colors.green.withOpacity(0.2),
                             borderRadius: BorderRadius.circular(12),
                             border: Border.all(color: Colors.green, width: 1),

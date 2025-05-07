@@ -10,7 +10,7 @@ class seansResponse {
     if (json['data'] != null) {
       data = <SeansResponse>[];
       json['data'].forEach((v) {
-        data!.add(new SeansResponse.fromJson(v));
+        data!.add(SeansResponse.fromJson(v));
       });
     }
     message = json['message'];
@@ -18,11 +18,11 @@ class seansResponse {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['success'] = this.success;
+    data['success'] = success;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
-    data['message'] = this.message;
+    data['message'] = message;
     return data;
   }
 }
@@ -42,18 +42,18 @@ class SeansResponse {
   Movie? movie;
 
   SeansResponse({
-    this.id,
-    this.movieId,
-    this.cinemaHallId,
-    this.startTime,
-    this.endTime,
-    this.price,
-    this.availableSeats,
-    this.seatStatus,
-    this.createdAt,
-    this.updatedAt,
-    this.deletedAt,
-    this.movie,
+    id,
+    movieId,
+    cinemaHallId,
+    startTime,
+    endTime,
+    price,
+    availableSeats,
+    seatStatus,
+    createdAt,
+    updatedAt,
+    deletedAt,
+    movie,
   });
 
   SeansResponse.fromJson(Map<String, dynamic> json) {
@@ -68,24 +68,24 @@ class SeansResponse {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     deletedAt = json['deleted_at'];
-    movie = json['movie'] != null ? new Movie.fromJson(json['movie']) : null;
+    movie = json['movie'] != null ? Movie.fromJson(json['movie']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['movie_id'] = this.movieId;
-    data['cinema_hall_id'] = this.cinemaHallId;
-    data['start_time'] = this.startTime;
-    data['end_time'] = this.endTime;
-    data['price'] = this.price;
-    data['available_seats'] = this.availableSeats;
-    data['seat_status'] = this.seatStatus;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['deleted_at'] = this.deletedAt;
-    if (this.movie != null) {
-      data['movie'] = this.movie!.toJson();
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['id'] = id;
+    data['movie_id'] = movieId;
+    data['cinema_hall_id'] = cinemaHallId;
+    data['start_time'] = startTime;
+    data['end_time'] = endTime;
+    data['price'] = price;
+    data['available_seats'] = availableSeats;
+    data['seat_status'] = seatStatus;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['deleted_at'] = deletedAt;
+    if (movie != null) {
+      data['movie'] = movie!.toJson();
     }
     return data;
   }
@@ -142,21 +142,21 @@ class Movie {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['title'] = this.title;
-    data['description'] = this.description;
-    data['genre'] = this.genre;
-    data['duration'] = this.duration;
-    data['poster_url'] = this.posterUrl;
-    data['language'] = this.language;
-    data['release_date'] = this.releaseDate;
-    data['is_in_theaters'] = this.isInTheaters;
-    data['imdb_id'] = this.imdbId;
-    data['imdb_rating'] = this.imdbRating;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['deleted_at'] = this.deletedAt;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['id'] = id;
+    data['title'] = title;
+    data['description'] = description;
+    data['genre'] = genre;
+    data['duration'] = duration;
+    data['poster_url'] = posterUrl;
+    data['language'] = language;
+    data['release_date'] = releaseDate;
+    data['is_in_theaters'] = isInTheaters;
+    data['imdb_id'] = imdbId;
+    data['imdb_rating'] = imdbRating;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['deleted_at'] = deletedAt;
     return data;
   }
 }

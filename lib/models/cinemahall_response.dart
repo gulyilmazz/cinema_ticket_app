@@ -61,14 +61,14 @@ class CinemaResponse {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['cinema_id'] = this.cinemaId;
-    data['name'] = this.name;
-    data['capacity'] = this.capacity;
-    data['type'] = this.type;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['deleted_at'] = this.deletedAt;
+    data['id'] = id;
+    data['cinema_id'] = cinemaId;
+    data['name'] = name;
+    data['capacity'] = capacity;
+    data['type'] = type;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['deleted_at'] = deletedAt;
     return data;
   }
 }

@@ -7,17 +7,17 @@ class MoviesResponse {
 
   MoviesResponse.fromJson(Map<String, dynamic> json) {
     success = json['success'];
-    data = json['data'] != null ? new Movie.fromJson(json['data']) : null;
+    data = json['data'] != null ? Movie.fromJson(json['data']) : null;
     message = json['message'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['success'] = this.success;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['success'] = success;
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
-    data['message'] = this.message;
+    data['message'] = message;
     return data;
   }
 }
@@ -80,24 +80,24 @@ class Movie {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['current_page'] = this.currentPage;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['current_page'] = currentPage;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
-    data['first_page_url'] = this.firstPageUrl;
-    data['from'] = this.from;
-    data['last_page'] = this.lastPage;
-    data['last_page_url'] = this.lastPageUrl;
+    data['first_page_url'] = firstPageUrl;
+    data['from'] = from;
+    data['last_page'] = lastPage;
+    data['last_page_url'] = lastPageUrl;
     if (this.links != null) {
-      data['links'] = this.links!.map((v) => v.toJson()).toList();
+      data['links'] = links!.map((v) => v.toJson()).toList();
     }
-    data['next_page_url'] = this.nextPageUrl;
-    data['path'] = this.path;
-    data['per_page'] = this.perPage;
-    data['prev_page_url'] = this.prevPageUrl;
-    data['to'] = this.to;
-    data['total'] = this.total;
+    data['next_page_url'] = nextPageUrl;
+    data['path'] = path;
+    data['per_page'] = perPage;
+    data['prev_page_url'] = prevPageUrl;
+    data['to'] = to;
+    data['total'] = total;
     return data;
   }
 }
@@ -119,20 +119,20 @@ class Data {
   Null deletedAt;
 
   Data({
-    this.id,
-    this.title,
-    this.description,
-    this.genre,
-    this.duration,
-    this.posterUrl,
-    this.language,
-    this.releaseDate,
-    this.isInTheaters,
-    this.imdbId,
-    this.imdbRating,
-    this.createdAt,
-    this.updatedAt,
-    this.deletedAt,
+    id,
+    title,
+    description,
+    genre,
+    duration,
+    posterUrl,
+    language,
+    releaseDate,
+    isInTheaters,
+    imdbId,
+    imdbRating,
+    createdAt,
+    updatedAt,
+    deletedAt,
   });
 
   Data.fromJson(Map<String, dynamic> json) {
@@ -153,21 +153,21 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['title'] = this.title;
-    data['description'] = this.description;
-    data['genre'] = this.genre;
-    data['duration'] = this.duration;
-    data['poster_url'] = this.posterUrl;
-    data['language'] = this.language;
-    data['release_date'] = this.releaseDate;
-    data['is_in_theaters'] = this.isInTheaters;
-    data['imdb_id'] = this.imdbId;
-    data['imdb_rating'] = this.imdbRating;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['deleted_at'] = this.deletedAt;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['id'] = id;
+    data['title'] = title;
+    data['description'] = description;
+    data['genre'] = genre;
+    data['duration'] = duration;
+    data['poster_url'] = posterUrl;
+    data['language'] = language;
+    data['release_date'] = releaseDate;
+    data['is_in_theaters'] = isInTheaters;
+    data['imdb_id'] = imdbId;
+    data['imdb_rating'] = imdbRating;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['deleted_at'] = deletedAt;
     return data;
   }
 }
@@ -186,10 +186,10 @@ class Links {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['url'] = this.url;
-    data['label'] = this.label;
-    data['active'] = this.active;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['url'] = url;
+    data['label'] = label;
+    data['active'] = active;
     return data;
   }
 }
