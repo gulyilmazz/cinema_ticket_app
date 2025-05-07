@@ -8,14 +8,14 @@ import 'package:cinemaa/widgets/hall_widgets/hall_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class CinemaHallScreen extends StatefulWidget {
-  const CinemaHallScreen({super.key});
+class CinemaScreen extends StatefulWidget {
+  const CinemaScreen({super.key});
 
   @override
-  State<CinemaHallScreen> createState() => _CinemaHallScreenState();
+  State<CinemaScreen> createState() => _CinemaHallScreenState();
 }
 
-class _CinemaHallScreenState extends State<CinemaHallScreen>
+class _CinemaHallScreenState extends State<CinemaScreen>
     with TickerProviderStateMixin {
   final HallService _hallService = HallService();
   final TextEditingController _searchController = TextEditingController();
