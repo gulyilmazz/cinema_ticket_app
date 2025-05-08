@@ -1,6 +1,6 @@
 import 'package:cinemaa/core/storage.dart';
 import 'package:cinemaa/models/cities_response.dart';
-import 'package:cinemaa/screens/hall/cinema_screen.dart';
+import 'package:cinemaa/screens/hall/hall_screen.dart';
 import 'package:cinemaa/services/cities/cities_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
