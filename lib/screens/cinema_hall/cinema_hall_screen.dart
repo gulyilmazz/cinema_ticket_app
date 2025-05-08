@@ -1,4 +1,5 @@
 import 'package:cinemaa/core/storage.dart';
+import 'package:cinemaa/screens/seans/seans.screen.dart';
 import 'package:cinemaa/services/cinemahall/cinema_hall_service.dart';
 import 'package:flutter/material.dart';
 import 'package:cinemaa/models/cinemahall_response.dart';
@@ -30,6 +31,7 @@ class _CinemaHallsPageState extends State<CinemaHallsPage> {
 
     try {
       final token = await AuthStorage.getToken();
+      final cinemaId = await AuthStorage.getCinemaId();
 
       if (token == null) {
         if (mounted) {
@@ -42,7 +44,7 @@ class _CinemaHallsPageState extends State<CinemaHallsPage> {
 
       final response = await _cinemaHallService.getCinemaHall(
         token: token,
-        sinemaId: 3,
+        sinemaId: int.tryParse(cinemaId!)!,
       );
 
       if (response.success == true) {
@@ -121,10 +123,16 @@ class _CinemaHallsPageState extends State<CinemaHallsPage> {
             elevation: 3,
             child: InkWell(
               onTap: () {
-                // Navigate to hall details or seats page
-                // Navigator.of(context).push(MaterialPageRoute(
-                //   builder: (context) => HallDetailPage(hallId: hall.id!),
-                // ));
+                // Navigate to sessions page for this hall
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder:
+                        (context) => SeansPage(
+                          hallId: hall.id ?? 0,
+                          // Pass the hall ID to the SeansPage
+                        ),
+                  ),
+                );
               },
               child: Padding(
                 padding: const EdgeInsets.all(16),

@@ -144,9 +144,9 @@ class _CinemaHallScreenState extends State<CinemaScreen>
     _refreshAnimationController.reset();
   }
 
-  void _onCinemaSelected(CinemaHall cinema) {
+  void _onCinemaSelected(CinemaHall cinema) async {
     HapticFeedback.selectionClick();
-
+    await AuthStorage.saveCinemaId(cinema.id.toString());
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => MainScreen()),

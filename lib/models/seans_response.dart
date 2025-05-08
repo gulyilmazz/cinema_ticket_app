@@ -1,11 +1,11 @@
-class seansResponse {
+class SeansListResponse {
   bool? success;
   List<SeansResponse>? data;
   String? message;
 
-  seansResponse({this.success, this.data, this.message});
+  SeansListResponse({this.success, this.data, this.message});
 
-  seansResponse.fromJson(Map<String, dynamic> json) {
+  SeansListResponse.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     if (json['data'] != null) {
       data = <SeansResponse>[];
@@ -17,7 +17,7 @@ class seansResponse {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['success'] = success;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
@@ -102,7 +102,7 @@ class Movie {
   String? releaseDate;
   bool? isInTheaters;
   String? imdbId;
-  int? imdbRating;
+  double? imdbRating;
   String? createdAt;
   String? updatedAt;
   Null deletedAt;
