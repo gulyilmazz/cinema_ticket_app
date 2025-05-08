@@ -51,25 +51,15 @@ class _SessionsPageState extends State<SeansPage> {
         hallId: widget.hallId,
       );
 
-      // Fix: Handle the response properly without assuming 'success' property
-      if (response != null) {
-        setState(() {
-          // Assuming response itself is a list or contains a data field
-          // Adjust based on your actual API response structure
-          if (response.success == true) {
-            _sessions = response.data ?? [];
-            print(_sessions);
-          } else {
-            _sessions = [];
-          }
-          _isLoading = false;
-        });
-      } else {
-        setState(() {
-          _isLoading = false;
-          _errorMessage = '';
-        });
-      }
+      setState(() {
+        if (response.success == true) {
+          _sessions = response.data ?? [];
+          print(_sessions);
+        } else {
+          _sessions = [];
+        }
+        _isLoading = false;
+      });
     } catch (e) {
       if (mounted) {
         setState(() {
