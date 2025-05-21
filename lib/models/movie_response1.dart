@@ -24,7 +24,7 @@ class MoviesResponse {
 
 class Movie {
   int? currentPage;
-  List<Data>? data;
+  List<MovieResponse2>? data;
   String? firstPageUrl;
   int? from;
   int? lastPage;
@@ -56,9 +56,9 @@ class Movie {
   Movie.fromJson(Map<String, dynamic> json) {
     currentPage = json['current_page'];
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <MovieResponse2>[];
       json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
+        data!.add(new MovieResponse2.fromJson(v));
       });
     }
     firstPageUrl = json['first_page_url'];
@@ -102,7 +102,7 @@ class Movie {
   }
 }
 
-class Data {
+class MovieResponse2 {
   int? id;
   String? title;
   String? description;
@@ -118,7 +118,7 @@ class Data {
   String? updatedAt;
   Null deletedAt;
 
-  Data({
+  MovieResponse2({
     id,
     title,
     description,
@@ -135,7 +135,7 @@ class Data {
     deletedAt,
   });
 
-  Data.fromJson(Map<String, dynamic> json) {
+  MovieResponse2.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
     description = json['description'];
@@ -146,7 +146,10 @@ class Data {
     releaseDate = json['release_date'];
     isInTheaters = json['is_in_theaters'];
     imdbId = json['imdb_id'];
-    imdbRating = json['imdb_rating'];
+    imdbRating =
+        (json['imdb_rating'] is int)
+            ? (json['imdb_rating'] as int).toDouble()
+            : json['imdb_rating'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     deletedAt = json['deleted_at'];

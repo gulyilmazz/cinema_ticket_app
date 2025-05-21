@@ -1,5 +1,6 @@
 import 'package:cinemaa/core/storage.dart';
 import 'package:cinemaa/models/seans_response.dart';
+import 'package:cinemaa/screens/seats/seats_screen.dart';
 import 'package:cinemaa/services/seans/seans_service.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -204,17 +205,22 @@ class _SessionsPageState extends State<SeansPage> {
           final session = _sessions[index];
           return SessionCard(
             session: session,
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder:
-                      (context) => SeatSelectionPage(
-                        sessionId: session.id!,
-                        movieTitle: session.movie?.title ?? 'Unknown Movie',
-                        startTime: session.startTime ?? '',
-                      ),
-                ),
-              );
+            onTap: () async {
+              // Get token for SeatSelectionScreen
+              final token = await AuthStorage.getToken();
+              if (token != null) {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder:
+                        (context) => SeatSelectionScreen(hallId: widget.hallId),
+                  ),
+                );
+              } else {
+                // Handle case when token is not available
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Authentication required')),
+                );
+              }
             },
           );
         },
@@ -354,28 +360,6 @@ class SessionCard extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-// This is a placeholder for the seat selection page
-class SeatSelectionPage extends StatelessWidget {
-  final int sessionId;
-  final String movieTitle;
-  final String startTime;
-
-  const SeatSelectionPage({
-    Key? key,
-    required this.sessionId,
-    required this.movieTitle,
-    required this.startTime,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Koltuk Seç')),
-      body: Center(child: Text('Koltuk seçim sayfası burada olacak')),
     );
   }
 }

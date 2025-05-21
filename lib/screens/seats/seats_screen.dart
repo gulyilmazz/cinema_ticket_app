@@ -1,18 +1,12 @@
+import 'package:cinemaa/core/storage.dart';
 import 'package:cinemaa/models/seats_response.dart';
 import 'package:cinemaa/services/seat/seat_service.dart';
 import 'package:flutter/material.dart';
-// import 'package:cinemaa/services/seats_service.dart'; // Güncellenmiş servisi import edin
-// import 'package:cinemaa/models/seat_response.dart'; // Modelleri import edin
 
 class SeatSelectionScreen extends StatefulWidget {
   final int hallId;
-  final String token; // Token'ı dışarıdan alacağınızı varsayıyorum
 
-  const SeatSelectionScreen({
-    super.key,
-    required this.hallId,
-    required this.token,
-  });
+  const SeatSelectionScreen({super.key, required this.hallId});
 
   @override
   State<SeatSelectionScreen> createState() => _SeatSelectionScreenState();
@@ -20,7 +14,7 @@ class SeatSelectionScreen extends StatefulWidget {
 
 class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
   late Future<SeatResponse> _seatResponseFuture;
-  final SeatsService _seatsService = SeatsService(); // Servisi başlat
+  final SeatsService seatsService = SeatsService(); // Servisi başlat
 
   // Seçili koltukların ID'lerini tutmak için bir Set kullanalım
   final Set<String> _selectedSeatIds = {};
@@ -30,29 +24,19 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
   @override
   void initState() {
     super.initState();
-    _fetchSeats();
+    _seatResponseFuture = _loadSeats();
   }
 
-  void _fetchSeats() {
-    _seatResponseFuture =
-        _seatsService.getSeast(token: widget.token, hallId: widget.hallId)
-            as Future<SeatResponse>;
-    // Future tamamlandığında tüm koltukları almak için
-    _seatResponseFuture
-        .then((response) {
-          if (response.success) {
-            setState(() {
-              _allSeats =
-                  response.data.seatData.seats.values
-                      .expand((list) => list)
-                      .toList();
-            });
-          }
-        })
-        .catchError((error) {
-          // Hata durumunda _allSeats boş kalır, UI'da kontrol edilir.
-          debugPrint("Koltuklar alınırken hata: $error");
-        });
+  Future<SeatResponse> _loadSeats() async {
+    final token = await AuthStorage.getToken();
+    if (token == null) {
+      // Token yoksa boş başarılı bir response dönebilirsin
+      print("object");
+    }
+    return seatsService.getSeast(
+      hallId: widget.hallId,
+      token: token.toString(),
+    );
   }
 
   void _toggleSeatSelection(Seat seat) {

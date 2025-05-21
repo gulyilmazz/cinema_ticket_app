@@ -18,7 +18,7 @@ class _MainScreenState extends State<MainScreen> {
   // Sayfaları düzgün sırayla listeliyoruz
   final List<Widget> _pages = [
     HomeScreen(),
-    FavScreen(),
+    // FavScreen(),
     BiletlerSayfasi(),
     ProfilScreen(),
   ];

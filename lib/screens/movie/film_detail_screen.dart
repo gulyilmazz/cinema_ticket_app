@@ -17,7 +17,7 @@ class MovieDetailPage extends StatefulWidget {
 class _MovieDetailPageState extends State<MovieDetailPage> {
   final MovieService _movieService = MovieService();
   bool _isLoading = true;
-  Data? _movie;
+  MovieResponse2? _movie;
   String? _errorMessage;
   bool _isFavorite = false;
 
@@ -55,7 +55,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
         // Find movie by ID in the list
         final movieData = response.data!.data!.firstWhere(
           (movie) => movie.id == widget.movieId,
-          orElse: () => Data(),
+          orElse: () => MovieResponse2(),
         );
 
         if (movieData.id != null) {

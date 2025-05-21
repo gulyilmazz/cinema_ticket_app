@@ -135,7 +135,10 @@ class Movie {
     releaseDate = json['release_date'];
     isInTheaters = json['is_in_theaters'];
     imdbId = json['imdb_id'];
-    imdbRating = json['imdb_rating'];
+    imdbRating =
+        (json['imdb_rating'] is int)
+            ? (json['imdb_rating'] as int).toDouble()
+            : json['imdb_rating'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     deletedAt = json['deleted_at'];

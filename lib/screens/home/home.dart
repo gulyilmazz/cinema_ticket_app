@@ -15,8 +15,8 @@ class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   final MovieService _movieService = MovieService();
   bool _isLoading = true;
-  List<Data> _allMovies = [];
-  List<Data> _filteredMovies = [];
+  List<MovieResponse2> _allMovies = [];
+  List<MovieResponse2> _filteredMovies = [];
   String? _errorMessage;
   int _currentPage = 1;
   int _totalPages = 1;
@@ -392,7 +392,7 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
-  Widget _buildMovieCard(Data movie) {
+  Widget _buildMovieCard(MovieResponse2 movie) {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
