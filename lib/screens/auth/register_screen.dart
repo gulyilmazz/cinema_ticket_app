@@ -8,7 +8,7 @@ class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 
   @override
-  _RegisterScreenState createState() => _RegisterScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
@@ -134,7 +134,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         Container(
                           padding: const EdgeInsets.all(16),
                           decoration: BoxDecoration(
-                            color: Appcolor.buttonColor.withOpacity(0.1),
+                            color: Appcolor.buttonColor.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Image.asset(
@@ -163,7 +163,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 16,
-                            color: Appcolor.white.withOpacity(0.7),
+                            color: Appcolor.white.withValues(alpha: 0.7),
                           ),
                         ),
                         const SizedBox(height: 32),
@@ -266,16 +266,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
       decoration: InputDecoration(
         labelText: 'Ad Soyad',
         labelStyle: TextStyle(
-          color: Appcolor.white.withOpacity(0.7),
+          color: Appcolor.white.withValues(alpha: 0.7),
           fontSize: 16,
         ),
         hintText: 'Adınızı ve soyadınızı girin',
         hintStyle: TextStyle(
-          color: Appcolor.white.withOpacity(0.5),
+          color: Appcolor.white.withValues(alpha: 0.5),
           fontSize: 14,
         ),
         filled: true,
-        fillColor: Appcolor.grey.withOpacity(0.3),
+        fillColor: Appcolor.grey.withValues(alpha: 0.3),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Appcolor.grey, width: 1),
           borderRadius: BorderRadius.circular(12),
@@ -286,7 +286,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
         prefixIcon: Icon(
           Icons.person_outline,
-          color: Appcolor.white.withOpacity(0.7),
+          color: Appcolor.white.withValues(alpha: 0.7),
           size: 22,
         ),
         contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -303,16 +303,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
       decoration: InputDecoration(
         labelText: 'E-posta',
         labelStyle: TextStyle(
-          color: Appcolor.white.withOpacity(0.7),
+          color: Appcolor.white.withValues(alpha: 0.7),
           fontSize: 16,
         ),
         hintText: 'ornek@email.com',
         hintStyle: TextStyle(
-          color: Appcolor.white.withOpacity(0.5),
+          color: Appcolor.white.withValues(alpha: 0.5),
           fontSize: 14,
         ),
         filled: true,
-        fillColor: Appcolor.grey.withOpacity(0.3),
+        fillColor: Appcolor.grey.withValues(alpha: 0.3),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Appcolor.grey, width: 1),
           borderRadius: BorderRadius.circular(12),
@@ -323,7 +323,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
         prefixIcon: Icon(
           Icons.email_outlined,
-          color: Appcolor.white.withOpacity(0.7),
+          color: Appcolor.white.withValues(alpha: 0.7),
           size: 22,
         ),
         contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -340,16 +340,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
       decoration: InputDecoration(
         labelText: 'Şifre Tekrar',
         labelStyle: TextStyle(
-          color: Appcolor.white.withOpacity(0.7),
+          color: Appcolor.white.withValues(alpha: 0.7),
           fontSize: 16,
         ),
         hintText: 'Şifrenizi tekrar girin',
         hintStyle: TextStyle(
-          color: Appcolor.white.withOpacity(0.5),
+          color: Appcolor.white.withValues(alpha: 0.5),
           fontSize: 14,
         ),
         filled: true,
-        fillColor: Appcolor.grey.withOpacity(0.3),
+        fillColor: Appcolor.grey.withValues(alpha: 0.3),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Appcolor.grey, width: 1),
           borderRadius: BorderRadius.circular(12),
@@ -360,13 +360,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
         prefixIcon: Icon(
           Icons.lock_outline,
-          color: Appcolor.white.withOpacity(0.7),
+          color: Appcolor.white.withValues(alpha: 0.7),
           size: 22,
         ),
         suffixIcon: IconButton(
           icon: Icon(
             _confirmPasswordVisible ? Icons.visibility : Icons.visibility_off,
-            color: Appcolor.white.withOpacity(0.7),
+            color: Appcolor.white.withValues(alpha: 0.7),
             size: 22,
           ),
           onPressed: () {

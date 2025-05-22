@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cinemaa/core/storage.dart';
 import 'package:cinemaa/models/hall_response.dart';
 import 'package:cinemaa/screens/main_screen.dart';
@@ -117,7 +119,7 @@ class _CinemaHallScreenState extends State<CinemaScreen>
         });
       }
     } catch (e) {
-      print('Sinema salonlarını çekerken hata oluştu: $e');
+      log('Sinema salonlarını çekerken hata oluştu: $e');
       if (mounted) {
         setState(() {
           if (e.toString().contains('SocketException') ||
@@ -268,7 +270,7 @@ class HallSearchBar extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.3),
+              color: Colors.black.withValues(alpha: 0.3),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
@@ -280,7 +282,7 @@ class HallSearchBar extends StatelessWidget {
           style: const TextStyle(fontSize: 16, color: Appcolor.white),
           decoration: InputDecoration(
             hintText: 'Sinema salonu ara...',
-            hintStyle: TextStyle(color: Appcolor.white.withOpacity(0.6)),
+            hintStyle: TextStyle(color: Appcolor.white.withValues(alpha: 0.6)),
             prefixIcon: const Icon(Icons.search, color: Appcolor.buttonColor),
             suffixIcon:
                 controller.text.isNotEmpty
@@ -325,7 +327,7 @@ class HallList extends StatelessWidget {
             Icon(
               Icons.search_off,
               size: 70,
-              color: Appcolor.white.withOpacity(0.4),
+              color: Appcolor.white.withValues(alpha: 0.4),
             ),
             const SizedBox(height: 16),
             Text(
@@ -333,7 +335,7 @@ class HallList extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
-                color: Appcolor.white.withOpacity(0.7),
+                color: Appcolor.white.withValues(alpha: 0.7),
               ),
               textAlign: TextAlign.center,
             ),
@@ -377,7 +379,7 @@ class HallCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.2),
+                color: Colors.black.withValues(alpha: 0.2),
                 blurRadius: 8,
                 offset: const Offset(0, 2),
               ),
@@ -412,7 +414,7 @@ class HallCard extends StatelessWidget {
                             vertical: 4,
                           ),
                           decoration: BoxDecoration(
-                            color: Appcolor.buttonColor.withOpacity(0.2),
+                            color: Appcolor.buttonColor.withValues(alpha: 0.2),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Row(
@@ -444,7 +446,7 @@ class HallCard extends StatelessWidget {
                           Icon(
                             Icons.location_on,
                             size: 16,
-                            color: Appcolor.white.withOpacity(0.6),
+                            color: Appcolor.white.withValues(alpha: 0.6),
                           ),
                           const SizedBox(width: 4),
                           Expanded(
@@ -452,7 +454,7 @@ class HallCard extends StatelessWidget {
                               cinema.address!,
                               style: TextStyle(
                                 fontSize: 14,
-                                color: Appcolor.white.withOpacity(0.6),
+                                color: Appcolor.white.withValues(alpha: 0.6),
                               ),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
@@ -467,14 +469,14 @@ class HallCard extends StatelessWidget {
                           Icon(
                             Icons.phone,
                             size: 16,
-                            color: Appcolor.white.withOpacity(0.6),
+                            color: Appcolor.white.withValues(alpha: 0.6),
                           ),
                           const SizedBox(width: 4),
                           Text(
                             cinema.phone!,
                             style: TextStyle(
                               fontSize: 14,
-                              color: Appcolor.white.withOpacity(0.6),
+                              color: Appcolor.white.withValues(alpha: 0.6),
                             ),
                           ),
                         ],
@@ -486,7 +488,7 @@ class HallCard extends StatelessWidget {
                         cinema.description!,
                         style: TextStyle(
                           fontSize: 14,
-                          color: Appcolor.white.withOpacity(0.8),
+                          color: Appcolor.white.withValues(alpha: 0.8),
                         ),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
@@ -546,7 +548,7 @@ class EmptyCinemaView extends StatelessWidget {
           Icon(
             Icons.movie_filter_outlined,
             size: 80,
-            color: Appcolor.white.withOpacity(0.4),
+            color: Appcolor.white.withValues(alpha: 0.4),
           ),
           const SizedBox(height: 16),
           Text(
@@ -554,7 +556,7 @@ class EmptyCinemaView extends StatelessWidget {
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,
-              color: Appcolor.white.withOpacity(0.7),
+              color: Appcolor.white.withValues(alpha: 0.7),
             ),
             textAlign: TextAlign.center,
           ),
@@ -587,7 +589,7 @@ class ErrorView extends StatelessWidget {
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,
-              color: Appcolor.white.withOpacity(0.8),
+              color: Appcolor.white.withValues(alpha: 0.8),
             ),
             textAlign: TextAlign.center,
           ),

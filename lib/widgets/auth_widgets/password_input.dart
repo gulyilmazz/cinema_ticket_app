@@ -12,7 +12,7 @@ class PasswordInput extends StatefulWidget {
   });
 
   @override
-  _PasswordInputState createState() => _PasswordInputState();
+  State<PasswordInput> createState() => _PasswordInputState();
 }
 
 class _PasswordInputState extends State<PasswordInput> {
@@ -28,16 +28,16 @@ class _PasswordInputState extends State<PasswordInput> {
       decoration: InputDecoration(
         labelText: 'Şifre',
         labelStyle: TextStyle(
-          color: Appcolor.white.withOpacity(0.7),
+          color: Appcolor.white.withValues(alpha: 0.7),
           fontSize: 16,
         ),
         hintText: 'Şifrenizi girin',
         hintStyle: TextStyle(
-          color: Appcolor.white.withOpacity(0.5),
+          color: Appcolor.white.withValues(alpha: 0.5),
           fontSize: 14,
         ),
         filled: true,
-        fillColor: Appcolor.grey.withOpacity(0.3),
+        fillColor: Appcolor.grey.withValues(alpha: 0.3),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Appcolor.grey, width: 1),
           borderRadius: BorderRadius.circular(12),
@@ -56,13 +56,13 @@ class _PasswordInputState extends State<PasswordInput> {
         ),
         prefixIcon: Icon(
           Icons.lock_outline,
-          color: Appcolor.white.withOpacity(0.7),
+          color: Appcolor.white.withValues(alpha: 0.7),
           size: 22,
         ),
         suffixIcon: IconButton(
           icon: Icon(
             _passwordVisible ? Icons.visibility : Icons.visibility_off,
-            color: Appcolor.white.withOpacity(0.7),
+            color: Appcolor.white.withValues(alpha: 0.7),
             size: 22,
           ),
           onPressed: () {

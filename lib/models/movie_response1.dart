@@ -12,7 +12,7 @@ class MoviesResponse {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['success'] = success;
     if (this.data != null) {
       data['data'] = this.data!.toJson();
@@ -58,7 +58,7 @@ class Movie {
     if (json['data'] != null) {
       data = <MovieResponse2>[];
       json['data'].forEach((v) {
-        data!.add(new MovieResponse2.fromJson(v));
+        data!.add(MovieResponse2.fromJson(v));
       });
     }
     firstPageUrl = json['first_page_url'];
@@ -68,7 +68,7 @@ class Movie {
     if (json['links'] != null) {
       links = <Links>[];
       json['links'].forEach((v) {
-        links!.add(new Links.fromJson(v));
+        links!.add(Links.fromJson(v));
       });
     }
     nextPageUrl = json['next_page_url'];
@@ -80,7 +80,7 @@ class Movie {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['current_page'] = currentPage;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
@@ -89,7 +89,7 @@ class Movie {
     data['from'] = from;
     data['last_page'] = lastPage;
     data['last_page_url'] = lastPageUrl;
-    if (this.links != null) {
+    if (links != null) {
       data['links'] = links!.map((v) => v.toJson()).toList();
     }
     data['next_page_url'] = nextPageUrl;
@@ -156,7 +156,7 @@ class MovieResponse2 {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['title'] = title;
     data['description'] = description;
@@ -189,7 +189,7 @@ class Links {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['url'] = url;
     data['label'] = label;
     data['active'] = active;

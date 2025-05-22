@@ -9,7 +9,7 @@ class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
   @override
-  _MainScreenState createState() => _MainScreenState();
+  State<MainScreen> createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
@@ -31,7 +31,7 @@ class _MainScreenState extends State<MainScreen> {
           color: Appcolor.darkGrey,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.3),
+              color: Colors.black.withValues(alpha: 0.3),
               blurRadius: 10,
               offset: const Offset(0, -2),
             ),
@@ -42,7 +42,7 @@ class _MainScreenState extends State<MainScreen> {
           type: BottomNavigationBarType.fixed,
           currentIndex: _selectedIndex,
           selectedItemColor: Appcolor.buttonColor,
-          unselectedItemColor: Appcolor.white.withOpacity(0.6),
+          unselectedItemColor: Appcolor.white.withValues(alpha: 0.6),
           selectedLabelStyle: const TextStyle(
             fontWeight: FontWeight.w600,
             fontSize: 12,

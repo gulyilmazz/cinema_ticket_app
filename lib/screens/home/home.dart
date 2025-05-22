@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:cinemaa/models/movie_response1.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -247,7 +247,7 @@ class _HomeScreenState extends State<HomeScreen>
         color: Appcolor.darkGrey,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.2),
+            color: Colors.black.withValues(alpha: 0.2),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -266,7 +266,7 @@ class _HomeScreenState extends State<HomeScreen>
           ),
           Container(
             decoration: BoxDecoration(
-              color: Appcolor.buttonColor.withOpacity(0.1),
+              color: Appcolor.buttonColor.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(8),
             ),
             child: IconButton(
@@ -295,7 +295,7 @@ class _HomeScreenState extends State<HomeScreen>
             border: Border.all(color: Appcolor.buttonColor, width: 1),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.2),
+                color: Colors.black.withValues(alpha: 0.2),
                 blurRadius: 8,
                 offset: const Offset(0, 2),
               ),
@@ -327,7 +327,7 @@ class _HomeScreenState extends State<HomeScreen>
                   : Text(
                     'Film ara...',
                     style: TextStyle(
-                      color: Appcolor.white.withOpacity(0.7),
+                      color: Appcolor.white.withValues(alpha: 0.7),
                       fontSize: 16,
                     ),
                   ),
@@ -339,33 +339,28 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   Widget _buildCategoryTabs() {
-    return _tabController != null
-        ? Container(
-          height: 50,
-          margin: const EdgeInsets.symmetric(horizontal: 16),
-          decoration: BoxDecoration(
-            color: Appcolor.darkGrey,
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: TabBar(
-            controller: _tabController,
-            isScrollable: true,
-            indicatorColor: Appcolor.buttonColor,
-            indicatorWeight: 3,
-            labelColor: Appcolor.buttonColor,
-            unselectedLabelColor: Appcolor.white.withOpacity(0.7),
-            labelStyle: const TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 14,
-            ),
-            unselectedLabelStyle: const TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 14,
-            ),
-            tabs: _categories.map((category) => Tab(text: category)).toList(),
-          ),
-        )
-        : const SizedBox.shrink();
+    return Container(
+      height: 50,
+      margin: const EdgeInsets.symmetric(horizontal: 16),
+      decoration: BoxDecoration(
+        color: Appcolor.darkGrey,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: TabBar(
+        controller: _tabController,
+        isScrollable: true,
+        indicatorColor: Appcolor.buttonColor,
+        indicatorWeight: 3,
+        labelColor: Appcolor.buttonColor,
+        unselectedLabelColor: Appcolor.white.withValues(alpha: 0.7),
+        labelStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
+        unselectedLabelStyle: const TextStyle(
+          fontWeight: FontWeight.normal,
+          fontSize: 14,
+        ),
+        tabs: _categories.map((category) => Tab(text: category)).toList(),
+      ),
+    );
   }
 
   Widget _buildErrorView() {
@@ -378,7 +373,7 @@ class _HomeScreenState extends State<HomeScreen>
           Text(
             _errorMessage!,
             style: TextStyle(
-              color: Appcolor.white.withOpacity(0.8),
+              color: Appcolor.white.withValues(alpha: 0.8),
               fontSize: 16,
             ),
             textAlign: TextAlign.center,
@@ -418,13 +413,13 @@ class _HomeScreenState extends State<HomeScreen>
                     Icon(
                       Icons.movie_filter_outlined,
                       size: 80,
-                      color: Appcolor.white.withOpacity(0.4),
+                      color: Appcolor.white.withValues(alpha: 0.4),
                     ),
                     const SizedBox(height: 16),
                     Text(
                       'Henüz film bulunamadı',
                       style: TextStyle(
-                        color: Appcolor.white.withOpacity(0.7),
+                        color: Appcolor.white.withValues(alpha: 0.7),
                         fontSize: 16,
                       ),
                     ),
@@ -462,7 +457,7 @@ class _HomeScreenState extends State<HomeScreen>
         color: Appcolor.darkGrey,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.3),
+            color: Colors.black.withValues(alpha: 0.3),
             blurRadius: 10,
             offset: const Offset(0, 5),
           ),
@@ -499,7 +494,7 @@ class _HomeScreenState extends State<HomeScreen>
                                 child: Icon(
                                   Icons.movie,
                                   size: 50,
-                                  color: Appcolor.white.withOpacity(0.3),
+                                  color: Appcolor.white.withValues(alpha: 0.3),
                                 ),
                               );
                             },
@@ -510,7 +505,7 @@ class _HomeScreenState extends State<HomeScreen>
                           child: Icon(
                             Icons.movie,
                             size: 50,
-                            color: Appcolor.white.withOpacity(0.3),
+                            color: Appcolor.white.withValues(alpha: 0.3),
                           ),
                         ),
               ),
@@ -556,7 +551,7 @@ class _HomeScreenState extends State<HomeScreen>
                           if (movie.duration != null) ...[
                             Icon(
                               Icons.access_time,
-                              color: Appcolor.white.withOpacity(0.7),
+                              color: Appcolor.white.withValues(alpha: 0.7),
                               size: 16,
                             ),
                             const SizedBox(width: 4),
@@ -564,7 +559,7 @@ class _HomeScreenState extends State<HomeScreen>
                               '${movie.duration} dk',
                               style: TextStyle(
                                 fontSize: 14,
-                                color: Appcolor.white.withOpacity(0.7),
+                                color: Appcolor.white.withValues(alpha: 0.7),
                               ),
                             ),
                           ],
@@ -575,7 +570,7 @@ class _HomeScreenState extends State<HomeScreen>
                         Text(
                           movie.language!,
                           style: TextStyle(
-                            color: Appcolor.white.withOpacity(0.7),
+                            color: Appcolor.white.withValues(alpha: 0.7),
                             fontSize: 14,
                           ),
                         ),
@@ -587,7 +582,7 @@ class _HomeScreenState extends State<HomeScreen>
                             vertical: 6,
                           ),
                           decoration: BoxDecoration(
-                            color: Colors.green.withOpacity(0.2),
+                            color: Colors.green.withValues(alpha: 0.2),
                             borderRadius: BorderRadius.circular(12),
                             border: Border.all(color: Colors.green, width: 1),
                           ),
@@ -623,7 +618,7 @@ class _HomeScreenState extends State<HomeScreen>
             return Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
               decoration: BoxDecoration(
-                color: Appcolor.buttonColor.withOpacity(0.2),
+                color: Appcolor.buttonColor.withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(color: Appcolor.buttonColor, width: 1),
               ),

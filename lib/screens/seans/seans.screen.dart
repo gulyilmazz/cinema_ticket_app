@@ -9,7 +9,7 @@ import 'package:intl/intl.dart';
 class SeansPage extends StatefulWidget {
   final int hallId;
 
-  const SeansPage({Key? key, required this.hallId}) : super(key: key);
+  const SeansPage({super.key, required this.hallId});
 
   @override
   State<SeansPage> createState() => _SessionsPageState();
@@ -25,7 +25,6 @@ class _SessionsPageState extends State<SeansPage> {
   @override
   void initState() {
     super.initState();
-    print(widget.hallId);
     _fetchSessions();
   }
 
@@ -56,7 +55,6 @@ class _SessionsPageState extends State<SeansPage> {
       setState(() {
         if (response.success == true) {
           _sessions = response.data ?? [];
-          print(_sessions);
         } else {
           _sessions = [];
         }
@@ -108,8 +106,8 @@ class _SessionsPageState extends State<SeansPage> {
                   BoxShadow(
                     color:
                         isSelected
-                            ? Appcolor.buttonColor.withOpacity(0.3)
-                            : Colors.black.withOpacity(0.2),
+                            ? Appcolor.buttonColor.withValues(alpha: 0.3)
+                            : Colors.black.withValues(alpha: 0.2),
                     blurRadius: 6,
                     offset: const Offset(0, 3),
                   ),
@@ -148,8 +146,10 @@ class _SessionsPageState extends State<SeansPage> {
                       fontSize: 12,
                       color:
                           isSelected
-                              ? Appcolor.appBackgroundColor.withOpacity(0.8)
-                              : Appcolor.white.withOpacity(0.7),
+                              ? Appcolor.appBackgroundColor.withValues(
+                                alpha: 0.8,
+                              )
+                              : Appcolor.white.withValues(alpha: 0.7),
                     ),
                   ),
                 ],
@@ -267,8 +267,7 @@ class SessionCard extends StatelessWidget {
   final SeansResponse session;
   final VoidCallback onTap;
 
-  const SessionCard({Key? key, required this.session, required this.onTap})
-    : super(key: key);
+  const SessionCard({super.key, required this.session, required this.onTap});
 
   String _formatTime(String? timeString) {
     if (timeString == null || timeString.isEmpty) return 'N/A';
@@ -298,7 +297,7 @@ class SessionCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 16),
       elevation: 6,
       color: Appcolor.darkGrey,
-      shadowColor: Colors.black.withOpacity(0.3),
+      shadowColor: Colors.black.withValues(alpha: 0.3),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: InkWell(
         onTap: onTap,
@@ -352,7 +351,9 @@ class SessionCard extends StatelessWidget {
                   const SizedBox(width: 8),
                   Text(
                     'Süre: ${session.movie?.duration ?? 'N/A'} dk',
-                    style: TextStyle(color: Appcolor.white.withOpacity(0.8)),
+                    style: TextStyle(
+                      color: Appcolor.white.withValues(alpha: 0.8),
+                    ),
                   ),
                   const SizedBox(width: 16),
                   const Icon(
@@ -363,7 +364,9 @@ class SessionCard extends StatelessWidget {
                   const SizedBox(width: 8),
                   Text(
                     'Fiyat: ${_parsePrice(session.price).toStringAsFixed(2)} TL',
-                    style: TextStyle(color: Appcolor.white.withOpacity(0.8)),
+                    style: TextStyle(
+                      color: Appcolor.white.withValues(alpha: 0.8),
+                    ),
                   ),
                 ],
               ),
@@ -378,7 +381,9 @@ class SessionCard extends StatelessWidget {
                   const SizedBox(width: 8),
                   Text(
                     'Boş Koltuk: ${session.availableSeats ?? 'N/A'}',
-                    style: TextStyle(color: Appcolor.white.withOpacity(0.8)),
+                    style: TextStyle(
+                      color: Appcolor.white.withValues(alpha: 0.8),
+                    ),
                   ),
                 ],
               ),
@@ -394,7 +399,9 @@ class SessionCard extends StatelessWidget {
                     const SizedBox(width: 8),
                     Text(
                       'Tür: ${session.movie!.genre}',
-                      style: TextStyle(color: Appcolor.white.withOpacity(0.8)),
+                      style: TextStyle(
+                        color: Appcolor.white.withValues(alpha: 0.8),
+                      ),
                     ),
                   ],
                 ),
@@ -411,7 +418,9 @@ class SessionCard extends StatelessWidget {
                     const SizedBox(width: 8),
                     Text(
                       'Dil: ${session.movie!.language}',
-                      style: TextStyle(color: Appcolor.white.withOpacity(0.8)),
+                      style: TextStyle(
+                        color: Appcolor.white.withValues(alpha: 0.8),
+                      ),
                     ),
                   ],
                 ),

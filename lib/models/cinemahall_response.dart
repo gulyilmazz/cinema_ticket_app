@@ -1,11 +1,11 @@
-class cinemahallResponse {
+class CinemahallResponse {
   bool? success;
   List<CinemaResponse>? data;
   String? message;
 
-  cinemahallResponse({this.success, this.data, this.message});
+  CinemahallResponse({this.success, this.data, this.message});
 
-  cinemahallResponse.fromJson(Map<String, dynamic> json) {
+  CinemahallResponse.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     if (json['data'] != null) {
       data = <CinemaResponse>[];
@@ -17,7 +17,7 @@ class cinemahallResponse {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['success'] = success;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
@@ -60,7 +60,7 @@ class CinemaResponse {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['cinema_id'] = cinemaId;
     data['name'] = name;

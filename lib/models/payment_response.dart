@@ -7,17 +7,17 @@ class PaymentResponse {
 
   PaymentResponse.fromJson(Map<String, dynamic> json) {
     success = json['success'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
     message = json['message'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['success'] = this.success;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['success'] = success;
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
-    data['message'] = this.message;
+    data['message'] = message;
     return data;
   }
 }
@@ -52,14 +52,14 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['ticket_id'] = this.ticketId;
-    data['payment_method'] = this.paymentMethod;
-    data['amount'] = this.amount;
-    data['user_id'] = this.userId;
-    data['updated_at'] = this.updatedAt;
-    data['created_at'] = this.createdAt;
-    data['id'] = this.id;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['ticket_id'] = ticketId;
+    data['payment_method'] = paymentMethod;
+    data['amount'] = amount;
+    data['user_id'] = userId;
+    data['updated_at'] = updatedAt;
+    data['created_at'] = createdAt;
+    data['id'] = id;
     return data;
   }
 }

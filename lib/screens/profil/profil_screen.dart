@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 
-class ProfilScreen extends StatelessWidget {
+class ProfilScreen extends StatefulWidget {
+  const ProfilScreen({super.key});
+  @override
+  State<ProfilScreen> createState() => _ProfilScreenState();
+}
+
+class _ProfilScreenState extends State<ProfilScreen> {
   final Color cyanAccent = const Color(0xFF00E5E5);
 
-  const ProfilScreen({super.key}); // Bright cyan color
-
+  // Bright cyan color
   @override
   Widget build(BuildContext context) {
     return Scaffold(

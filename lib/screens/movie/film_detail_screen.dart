@@ -9,7 +9,7 @@ import 'package:intl/intl.dart';
 class MovieDetailPage extends StatefulWidget {
   final int movieId;
 
-  const MovieDetailPage({Key? key, required this.movieId}) : super(key: key);
+  const MovieDetailPage({super.key, required this.movieId});
 
   @override
   State<MovieDetailPage> createState() => _MovieDetailPageState();
@@ -212,7 +212,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                       end: Alignment.bottomCenter,
                       colors: [
                         Colors.transparent,
-                        Appcolor.appBackgroundColor.withOpacity(0.8),
+                        Appcolor.appBackgroundColor.withValues(alpha: 0.8),
                       ],
                     ),
                   ),
@@ -260,7 +260,9 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                   Text(
                                     _movie!.genre!,
                                     style: TextStyle(
-                                      color: Appcolor.white.withOpacity(0.7),
+                                      color: Appcolor.white.withValues(
+                                        alpha: 0.7,
+                                      ),
                                       fontSize: 14,
                                     ),
                                   ),
@@ -313,7 +315,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.3),
+                        color: Colors.black.withValues(alpha: 0.3),
                         blurRadius: 8,
                         offset: const Offset(0, 4),
                       ),
@@ -363,7 +365,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                     style: TextStyle(
                       fontSize: 16,
                       height: 1.5,
-                      color: Appcolor.white.withOpacity(0.9),
+                      color: Appcolor.white.withValues(alpha: 0.9),
                     ),
                   ),
                 ),
@@ -388,7 +390,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                       borderRadius: BorderRadius.circular(30),
                       boxShadow: [
                         BoxShadow(
-                          color: Appcolor.buttonColor.withOpacity(0.3),
+                          color: Appcolor.buttonColor.withValues(alpha: 0.3),
                           blurRadius: 8,
                           offset: const Offset(0, 4),
                         ),

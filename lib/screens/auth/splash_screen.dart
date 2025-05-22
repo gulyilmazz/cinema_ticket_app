@@ -1,23 +1,18 @@
 import 'package:cinemaa/core/storage.dart';
+import 'package:cinemaa/core/theme/theme.dart';
 import 'package:cinemaa/screens/auth/login_screen.dart';
-import 'package:cinemaa/screens/cities/cities.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
-
 import 'package:lottie/lottie.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  // Arka plan gradient renkleri (açık ve koyu tonlar)
-  static const Color gradientStart = Color.fromARGB(255, 15, 2, 10);
-  static const Color gradientEnd = Color.fromARGB(255, 118, 113, 167);
-
   // Splash ekranının kaç saniye görüneceği
   static const int splashDuration = 3;
   late String token;
@@ -35,7 +30,6 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
       //fonksiyonum
       Duration(seconds: splashDuration),
-
       () => Navigator.pushReplacement(
         context,
         PageRouteBuilder(
@@ -71,9 +65,12 @@ class _SplashScreenState extends State<SplashScreen> {
         height: screenSize.height, // Tam yükseklik
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomRight,
-            colors: [gradientStart, gradientEnd], // Arka plan renk geçişi
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Appcolor.appBackgroundColor,
+              Appcolor.darkGrey,
+            ], // AppColor temasına göre arka plan renk geçişi
           ),
         ),
         child: Center(

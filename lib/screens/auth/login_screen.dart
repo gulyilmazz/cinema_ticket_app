@@ -14,7 +14,7 @@ class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
@@ -109,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Container(
                           padding: const EdgeInsets.all(16),
                           decoration: BoxDecoration(
-                            color: Appcolor.buttonColor.withOpacity(0.1),
+                            color: Appcolor.buttonColor.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Image.asset(
@@ -138,7 +138,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 16,
-                            color: Appcolor.white.withOpacity(0.7),
+                            color: Appcolor.white.withValues(alpha: 0.7),
                           ),
                         ),
                         const SizedBox(height: 40),

@@ -82,22 +82,23 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
     switch (seat.status.toLowerCase()) {
       case 'available':
         if (seat.type.toLowerCase() == 'premium' ||
-            seat.type.toLowerCase() == 'vip')
-          return const Color(0xFF8B4513); // Brown for VIP
+            seat.type.toLowerCase() == 'vip') {
+          return const Color(0xFF8B4513);
+        }
         if (seat.type.toLowerCase() == 'disabled') return Appcolor.grey;
         return Appcolor.darkGrey;
       case 'booked':
       case 'sold':
         return Appcolor.grey;
       default:
-        return Appcolor.grey.withOpacity(0.3);
+        return Appcolor.grey.withValues(alpha: 0.3);
     }
   }
 
   Widget _buildSeatWidget(Seat seat, bool isSelected) {
     final seatColor = _getSeatColor(seat, isSelected);
     final borderColor =
-        isSelected ? Appcolor.white : seatColor.withOpacity(0.7);
+        isSelected ? Appcolor.white : seatColor.withValues(alpha: 0.7);
 
     // Determine seat status for visualization
     final bool isSold =
@@ -119,7 +120,7 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
             isSelected
                 ? [
                   BoxShadow(
-                    color: Appcolor.buttonColor.withOpacity(0.4),
+                    color: Appcolor.buttonColor.withValues(alpha: 0.4),
                     blurRadius: 6,
                     spreadRadius: 1,
                   ),
@@ -151,7 +152,7 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
               child: Text(
                 seat.id,
                 style: TextStyle(
-                  color: Appcolor.white.withOpacity(0.9),
+                  color: Appcolor.white.withValues(alpha: 0.9),
                   fontSize: 9,
                   fontWeight: FontWeight.bold,
                 ),
@@ -174,7 +175,7 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
       return Icon(
         Icons.accessible,
         size: 18,
-        color: Appcolor.white.withOpacity(0.7),
+        color: Appcolor.white.withValues(alpha: 0.7),
       );
     }
 
@@ -184,7 +185,7 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
         width: 18,
         height: 2,
         decoration: BoxDecoration(
-          color: Appcolor.white.withOpacity(0.7),
+          color: Appcolor.white.withValues(alpha: 0.7),
           borderRadius: BorderRadius.circular(1),
         ),
       );
@@ -197,7 +198,7 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
         height: 18,
         decoration: BoxDecoration(
           border: Border.all(
-            color: Appcolor.white.withOpacity(0.85),
+            color: Appcolor.white.withValues(alpha: 0.85),
             width: 1.5,
           ),
           borderRadius: BorderRadius.circular(9),
@@ -207,7 +208,7 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
             width: 6,
             height: 6,
             decoration: BoxDecoration(
-              color: Appcolor.white.withOpacity(0.9),
+              color: Appcolor.white.withValues(alpha: 0.9),
               borderRadius: BorderRadius.circular(3),
             ),
           ),
@@ -225,7 +226,10 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
       width: 22,
       height: 14,
       decoration: BoxDecoration(
-        border: Border.all(color: Appcolor.white.withOpacity(0.7), width: 1.2),
+        border: Border.all(
+          color: Appcolor.white.withValues(alpha: 0.7),
+          width: 1.2,
+        ),
         borderRadius: BorderRadius.circular(3),
       ),
     );
@@ -287,7 +291,9 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
                   const SizedBox(height: 8),
                   Text(
                     '${snapshot.error}',
-                    style: TextStyle(color: Appcolor.white.withOpacity(0.7)),
+                    style: TextStyle(
+                      color: Appcolor.white.withValues(alpha: 0.7),
+                    ),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 24),
@@ -326,7 +332,9 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
                   const SizedBox(height: 16),
                   Text(
                     snapshot.data?.message ?? 'Koltuk verisi alınamadı',
-                    style: TextStyle(color: Appcolor.white.withOpacity(0.7)),
+                    style: TextStyle(
+                      color: Appcolor.white.withValues(alpha: 0.7),
+                    ),
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -390,8 +398,8 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Appcolor.buttonColor.withOpacity(0.7),
-                  Appcolor.buttonColor.withOpacity(0.1),
+                  Appcolor.buttonColor.withValues(alpha: 0.7),
+                  Appcolor.buttonColor.withValues(alpha: 0.1),
                 ],
               ),
               borderRadius: const BorderRadius.only(
@@ -407,7 +415,7 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
             decoration: BoxDecoration(
               border: Border(
                 bottom: BorderSide(
-                  color: Appcolor.white.withOpacity(0.3),
+                  color: Appcolor.white.withValues(alpha: 0.3),
                   width: 1,
                 ),
               ),
@@ -417,14 +425,14 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
               children: [
                 Icon(
                   Icons.movie,
-                  color: Appcolor.buttonColor.withOpacity(0.7),
+                  color: Appcolor.buttonColor.withValues(alpha: 0.7),
                   size: 18,
                 ),
                 const SizedBox(width: 8),
                 Text(
                   'PERDE',
                   style: TextStyle(
-                    color: Appcolor.white.withOpacity(0.7),
+                    color: Appcolor.white.withValues(alpha: 0.7),
                     fontWeight: FontWeight.bold,
                     letterSpacing: 2,
                   ),
@@ -432,7 +440,7 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
                 const SizedBox(width: 8),
                 Icon(
                   Icons.movie,
-                  color: Appcolor.buttonColor.withOpacity(0.7),
+                  color: Appcolor.buttonColor.withValues(alpha: 0.7),
                   size: 18,
                 ),
               ],
@@ -452,14 +460,14 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
                   children: [
                     Icon(
                       Icons.arrow_upward,
-                      color: Appcolor.buttonColor.withOpacity(0.7),
+                      color: Appcolor.buttonColor.withValues(alpha: 0.7),
                       size: 14,
                     ),
                     const SizedBox(width: 4),
                     Text(
                       'SAHNE TARAFI',
                       style: TextStyle(
-                        color: Appcolor.buttonColor.withOpacity(0.7),
+                        color: Appcolor.buttonColor.withValues(alpha: 0.7),
                         fontSize: 11,
                         fontWeight: FontWeight.w500,
                       ),
@@ -475,13 +483,13 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
                     color: Appcolor.darkGrey,
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
-                      color: Appcolor.buttonColor.withOpacity(0.3),
+                      color: Appcolor.buttonColor.withValues(alpha: 0.3),
                     ),
                   ),
                   child: Text(
                     'SALON 3',
                     style: TextStyle(
-                      color: Appcolor.white.withOpacity(0.9),
+                      color: Appcolor.white.withValues(alpha: 0.9),
                       fontWeight: FontWeight.bold,
                       fontSize: 12,
                     ),
@@ -492,7 +500,7 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
                     Text(
                       'İZLEYİCİ',
                       style: TextStyle(
-                        color: Appcolor.buttonColor.withOpacity(0.7),
+                        color: Appcolor.buttonColor.withValues(alpha: 0.7),
                         fontSize: 11,
                         fontWeight: FontWeight.w500,
                       ),
@@ -500,7 +508,7 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
                     const SizedBox(width: 4),
                     Icon(
                       Icons.arrow_downward,
-                      color: Appcolor.buttonColor.withOpacity(0.7),
+                      color: Appcolor.buttonColor.withValues(alpha: 0.7),
                       size: 14,
                     ),
                   ],
@@ -544,7 +552,7 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
             color: color,
             borderRadius: BorderRadius.circular(3),
             border: Border.all(
-              color: Appcolor.white.withOpacity(0.3),
+              color: Appcolor.white.withValues(alpha: 0.3),
               width: 1,
             ),
           ),
@@ -554,7 +562,7 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
           label,
           style: TextStyle(
             fontSize: 11,
-            color: Appcolor.white.withOpacity(0.7),
+            color: Appcolor.white.withValues(alpha: 0.7),
           ),
         ),
       ],
@@ -572,14 +580,16 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
             height: 28,
             margin: const EdgeInsets.symmetric(horizontal: 8),
             decoration: BoxDecoration(
-              border: Border.all(color: Appcolor.buttonColor.withOpacity(0.5)),
+              border: Border.all(
+                color: Appcolor.buttonColor.withValues(alpha: 0.5),
+              ),
               borderRadius: BorderRadius.circular(14),
             ),
             child: Center(
               child: Text(
                 rowKey,
                 style: TextStyle(
-                  color: Appcolor.white.withOpacity(0.9),
+                  color: Appcolor.white.withValues(alpha: 0.9),
                   fontWeight: FontWeight.bold,
                   fontSize: 12,
                 ),
@@ -610,14 +620,16 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
             height: 28,
             margin: const EdgeInsets.symmetric(horizontal: 8),
             decoration: BoxDecoration(
-              border: Border.all(color: Appcolor.buttonColor.withOpacity(0.5)),
+              border: Border.all(
+                color: Appcolor.buttonColor.withValues(alpha: 0.5),
+              ),
               borderRadius: BorderRadius.circular(14),
             ),
             child: Center(
               child: Text(
                 rowKey,
                 style: TextStyle(
-                  color: Appcolor.white.withOpacity(0.9),
+                  color: Appcolor.white.withValues(alpha: 0.9),
                   fontWeight: FontWeight.bold,
                   fontSize: 12,
                 ),
@@ -630,10 +642,6 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
   }
 
   Widget _buildSeatItem(Seat seat, bool isSelected) {
-    final bool isAvailable =
-        seat.status.toLowerCase() == 'available' &&
-        seat.type.toLowerCase() != 'disabled';
-
     return GestureDetector(
       onTap: () => _toggleSeatSelection(seat),
       child: Padding(
@@ -657,7 +665,7 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.3),
+            color: Colors.black.withValues(alpha: 0.3),
             blurRadius: 10,
             offset: const Offset(0, -2),
           ),
@@ -675,7 +683,7 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
                   Text(
                     'Seçilen Koltuklar (${_selectedSeatIds.length})',
                     style: TextStyle(
-                      color: Appcolor.white.withOpacity(0.7),
+                      color: Appcolor.white.withValues(alpha: 0.7),
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -701,7 +709,7 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
                     Icon(
                       Icons.info_outline,
                       size: 16,
-                      color: Appcolor.buttonColor.withOpacity(0.8),
+                      color: Appcolor.buttonColor.withValues(alpha: 0.8),
                     ),
                     const SizedBox(width: 6),
                     Expanded(
@@ -709,7 +717,7 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
                         _getSelectedSeatsSummary(),
                         style: TextStyle(
                           fontSize: 12,
-                          color: Appcolor.white.withOpacity(0.6),
+                          color: Appcolor.white.withValues(alpha: 0.6),
                         ),
                       ),
                     ),
@@ -730,7 +738,7 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
                       Text(
                         'Toplam Tutar',
                         style: TextStyle(
-                          color: Appcolor.white.withOpacity(0.7),
+                          color: Appcolor.white.withValues(alpha: 0.7),
                           fontSize: 14,
                         ),
                       ),

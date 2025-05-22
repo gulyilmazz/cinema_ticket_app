@@ -20,16 +20,16 @@ class UsarnameInput extends StatelessWidget {
       decoration: InputDecoration(
         labelText: 'Kullanıcı Adı',
         labelStyle: TextStyle(
-          color: Appcolor.white.withOpacity(0.7),
+          color: Appcolor.white.withValues(alpha: 0.7),
           fontSize: 16,
         ),
         hintText: 'Kullanıcı adınızı girin',
         hintStyle: TextStyle(
-          color: Appcolor.white.withOpacity(0.5),
+          color: Appcolor.white.withValues(alpha: 0.5),
           fontSize: 14,
         ),
         filled: true,
-        fillColor: Appcolor.grey.withOpacity(0.3),
+        fillColor: Appcolor.grey.withValues(alpha: 0.3),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Appcolor.grey, width: 1),
           borderRadius: BorderRadius.circular(12),
@@ -48,7 +48,7 @@ class UsarnameInput extends StatelessWidget {
         ),
         prefixIcon: Icon(
           Icons.person_outline,
-          color: Appcolor.white.withOpacity(0.7),
+          color: Appcolor.white.withValues(alpha: 0.7),
           size: 22,
         ),
         contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),

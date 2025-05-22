@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:cinemaa/models/cinemahall_response.dart';
 
 class CinemaHallsPage extends StatefulWidget {
-  const CinemaHallsPage({Key? key}) : super(key: key);
+  const CinemaHallsPage({super.key});
 
   @override
   State<CinemaHallsPage> createState() => _CinemaHallsPageState();
@@ -155,7 +155,7 @@ class _CinemaHallsPageState extends State<CinemaHallsPage> {
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.2),
+              color: Colors.black.withValues(alpha: 0.2),
               blurRadius: 8,
               offset: const Offset(0, 4),
             ),
@@ -166,7 +166,7 @@ class _CinemaHallsPageState extends State<CinemaHallsPage> {
           style: const TextStyle(color: Appcolor.white, fontSize: 16),
           decoration: InputDecoration(
             hintText: 'Salon ara...',
-            hintStyle: TextStyle(color: Appcolor.white.withOpacity(0.6)),
+            hintStyle: TextStyle(color: Appcolor.white.withValues(alpha: 0.6)),
             prefixIcon: const Icon(
               Icons.search,
               color: Appcolor.buttonColor,
@@ -251,12 +251,15 @@ class _CinemaHallsPageState extends State<CinemaHallsPage> {
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [Appcolor.darkGrey, Appcolor.grey.withOpacity(0.8)],
+                colors: [
+                  Appcolor.darkGrey,
+                  Appcolor.grey.withValues(alpha: 0.8),
+                ],
               ),
               borderRadius: BorderRadius.circular(20),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.3),
+                  color: Colors.black.withValues(alpha: 0.3),
                   blurRadius: 12,
                   offset: const Offset(0, 6),
                 ),
@@ -286,7 +289,7 @@ class _CinemaHallsPageState extends State<CinemaHallsPage> {
                           vertical: 6,
                         ),
                         decoration: BoxDecoration(
-                          color: Appcolor.buttonColor.withOpacity(0.2),
+                          color: Appcolor.buttonColor.withValues(alpha: 0.2),
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all(
                             color: Appcolor.buttonColor,
@@ -326,7 +329,9 @@ class _CinemaHallsPageState extends State<CinemaHallsPage> {
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             BoxShadow(
-                              color: Appcolor.buttonColor.withOpacity(0.4),
+                              color: Appcolor.buttonColor.withValues(
+                                alpha: 0.4,
+                              ),
                               blurRadius: 8,
                               offset: const Offset(0, 4),
                             ),
@@ -393,7 +398,7 @@ class _CinemaHallsPageState extends State<CinemaHallsPage> {
         Text(
           text,
           style: TextStyle(
-            color: Appcolor.white.withOpacity(0.8),
+            color: Appcolor.white.withValues(alpha: 0.8),
             fontSize: 14,
           ),
         ),
@@ -411,7 +416,7 @@ class _CinemaHallsPageState extends State<CinemaHallsPage> {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: Colors.red.withOpacity(0.1),
+                color: Colors.red.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: const Icon(

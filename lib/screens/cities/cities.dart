@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cinemaa/core/storage.dart';
 import 'package:cinemaa/core/theme/theme.dart';
 import 'package:cinemaa/models/cities_response.dart';
@@ -29,7 +31,7 @@ class _CitiesScreenState extends State<CitiesScreen>
     HapticFeedback.mediumImpact();
 
     await AuthStorage.saveCitiesId(city.id.toString());
-    print('Seçilen şehir ID: ${city.id}');
+    log('Seçilen şehir ID: ${city.id}');
 
     _animationController.forward().then((_) {
       Navigator.push(
@@ -106,7 +108,7 @@ class _CitiesScreenState extends State<CitiesScreen>
         });
       }
     } catch (e) {
-      print('Şehirleri çekerken hata oluştu: $e');
+      log('Şehirleri çekerken hata oluştu: $e');
       if (mounted) {
         setState(() {
           _error =
@@ -159,7 +161,7 @@ class _CitiesScreenState extends State<CitiesScreen>
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -178,7 +180,7 @@ class _CitiesScreenState extends State<CitiesScreen>
                     color: Appcolor.grey,
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
-                      color: Appcolor.buttonColor.withOpacity(0.3),
+                      color: Appcolor.buttonColor.withValues(alpha: 0.3),
                       width: 1,
                     ),
                   ),
@@ -203,7 +205,7 @@ class _CitiesScreenState extends State<CitiesScreen>
               Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: Appcolor.buttonColor.withOpacity(0.1),
+                  color: Appcolor.buttonColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Icon(
@@ -217,10 +219,10 @@ class _CitiesScreenState extends State<CitiesScreen>
           const SizedBox(height: 20),
           Container(
             decoration: BoxDecoration(
-              color: Appcolor.grey.withOpacity(0.7),
+              color: Appcolor.grey.withValues(alpha: 0.7),
               borderRadius: BorderRadius.circular(16),
               border: Border.all(
-                color: Appcolor.buttonColor.withOpacity(0.2),
+                color: Appcolor.buttonColor.withValues(alpha: 0.2),
                 width: 1,
               ),
             ),
@@ -231,7 +233,7 @@ class _CitiesScreenState extends State<CitiesScreen>
               decoration: InputDecoration(
                 hintText: 'Şehir ara...',
                 hintStyle: TextStyle(
-                  color: Appcolor.white.withOpacity(0.6),
+                  color: Appcolor.white.withValues(alpha: 0.6),
                   fontSize: 16,
                 ),
                 prefixIcon: Icon(
@@ -249,7 +251,7 @@ class _CitiesScreenState extends State<CitiesScreen>
                         ? IconButton(
                           icon: Icon(
                             Icons.clear_rounded,
-                            color: Appcolor.white.withOpacity(0.7),
+                            color: Appcolor.white.withValues(alpha: 0.7),
                           ),
                           onPressed: () {
                             _searchController.clear();
@@ -292,7 +294,7 @@ class _CitiesScreenState extends State<CitiesScreen>
             Text(
               'Şehirler yükleniyor...',
               style: TextStyle(
-                color: Appcolor.white.withOpacity(0.8),
+                color: Appcolor.white.withValues(alpha: 0.8),
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
               ),
@@ -313,7 +315,10 @@ class _CitiesScreenState extends State<CitiesScreen>
             decoration: BoxDecoration(
               color: Appcolor.darkGrey,
               borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: Colors.red.withOpacity(0.3), width: 1),
+              border: Border.all(
+                color: Colors.red.withValues(alpha: 0.3),
+                width: 1,
+              ),
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -321,7 +326,7 @@ class _CitiesScreenState extends State<CitiesScreen>
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: Colors.red.withOpacity(0.1),
+                    color: Colors.red.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(50),
                   ),
                   child: Icon(
@@ -381,7 +386,7 @@ class _CitiesScreenState extends State<CitiesScreen>
               Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: Appcolor.buttonColor.withOpacity(0.1),
+                  color: Appcolor.buttonColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(50),
                 ),
                 child: Icon(
@@ -404,7 +409,7 @@ class _CitiesScreenState extends State<CitiesScreen>
               Text(
                 'Lütfen daha sonra tekrar deneyin',
                 style: TextStyle(
-                  color: Appcolor.white.withOpacity(0.7),
+                  color: Appcolor.white.withValues(alpha: 0.7),
                   fontSize: 14,
                 ),
                 textAlign: TextAlign.center,
@@ -432,13 +437,13 @@ class _CitiesScreenState extends State<CitiesScreen>
               Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: Appcolor.grey.withOpacity(0.5),
+                  color: Appcolor.grey.withValues(alpha: 0.5),
                   borderRadius: BorderRadius.circular(50),
                 ),
                 child: Icon(
                   Icons.search_off_rounded,
                   size: 60,
-                  color: Appcolor.white.withOpacity(0.7),
+                  color: Appcolor.white.withValues(alpha: 0.7),
                 ),
               ),
               const SizedBox(height: 20),
@@ -492,12 +497,12 @@ class _CitiesScreenState extends State<CitiesScreen>
                           color: Appcolor.darkGrey,
                           borderRadius: BorderRadius.circular(16),
                           border: Border.all(
-                            color: Appcolor.grey.withOpacity(0.5),
+                            color: Appcolor.grey.withValues(alpha: 0.5),
                             width: 1,
                           ),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
+                              color: Colors.black.withValues(alpha: 0.1),
                               blurRadius: 8,
                               offset: const Offset(0, 2),
                             ),
@@ -508,9 +513,11 @@ class _CitiesScreenState extends State<CitiesScreen>
                           child: InkWell(
                             onTap: () => _onCitySelected(city),
                             borderRadius: BorderRadius.circular(16),
-                            splashColor: Appcolor.buttonColor.withOpacity(0.1),
-                            highlightColor: Appcolor.buttonColor.withOpacity(
-                              0.05,
+                            splashColor: Appcolor.buttonColor.withValues(
+                              alpha: 0.1,
+                            ),
+                            highlightColor: Appcolor.buttonColor.withValues(
+                              alpha: 0.05,
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(20.0),
@@ -519,8 +526,8 @@ class _CitiesScreenState extends State<CitiesScreen>
                                   Container(
                                     padding: const EdgeInsets.all(10),
                                     decoration: BoxDecoration(
-                                      color: Appcolor.buttonColor.withOpacity(
-                                        0.1,
+                                      color: Appcolor.buttonColor.withValues(
+                                        alpha: 0.1,
                                       ),
                                       borderRadius: BorderRadius.circular(12),
                                     ),
