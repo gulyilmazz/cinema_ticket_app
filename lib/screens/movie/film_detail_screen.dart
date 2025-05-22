@@ -1,4 +1,5 @@
 import 'package:cinemaa/core/storage.dart';
+import 'package:cinemaa/core/theme/theme.dart';
 import 'package:cinemaa/screens/cinema_hall/cinema_hall_screen.dart';
 import 'package:cinemaa/services/movies/movie_service.dart';
 import 'package:flutter/material.dart';
@@ -115,11 +116,11 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
               '$label:',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: Colors.grey.shade700,
+                color: Appcolor.buttonColor,
               ),
             ),
           ),
-          Expanded(child: Text(value, style: TextStyle(color: Colors.black87))),
+          Expanded(child: Text(value, style: TextStyle(color: Appcolor.white))),
         ],
       ),
     );
@@ -128,46 +129,46 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              const Color.fromARGB(255, 152, 147, 196),
-              const Color.fromARGB(255, 211, 208, 218),
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ),
-        child:
-            _isLoading
-                ? const Center(child: CircularProgressIndicator())
-                : _errorMessage != null
-                ? Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        _errorMessage!,
-                        style: const TextStyle(color: Colors.red),
-                        textAlign: TextAlign.center,
+      backgroundColor: Appcolor.appBackgroundColor,
+      body:
+          _isLoading
+              ? const Center(
+                child: CircularProgressIndicator(color: Appcolor.buttonColor),
+              )
+              : _errorMessage != null
+              ? Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      _errorMessage!,
+                      style: const TextStyle(color: Colors.red),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 16),
+                    ElevatedButton(
+                      onPressed: _fetchMovieDetails,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Appcolor.buttonColor,
+                        foregroundColor: Appcolor.appBackgroundColor,
                       ),
-                      const SizedBox(height: 16),
-                      ElevatedButton(
-                        onPressed: _fetchMovieDetails,
-                        child: const Text('Retry'),
-                      ),
-                    ],
-                  ),
-                )
-                : _buildMovieDetails(),
-      ),
+                      child: const Text('Retry'),
+                    ),
+                  ],
+                ),
+              )
+              : _buildMovieDetails(),
     );
   }
 
   Widget _buildMovieDetails() {
     if (_movie == null) {
-      return const Center(child: Text('Movie data is not available'));
+      return const Center(
+        child: Text(
+          'Movie data is not available',
+          style: TextStyle(color: Appcolor.white),
+        ),
+      );
     }
 
     return CustomScrollView(
@@ -175,10 +176,8 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
         SliverAppBar(
           expandedHeight: 300,
           pinned: true,
-          backgroundColor: const Color.fromARGB(255, 9, 14, 10),
-          iconTheme: IconThemeData(
-            color: const Color.fromARGB(255, 10, 223, 230),
-          ),
+          backgroundColor: Appcolor.darkGrey,
+          iconTheme: const IconThemeData(color: Appcolor.buttonColor),
           flexibleSpace: FlexibleSpaceBar(
             background: Stack(
               fit: StackFit.expand,
@@ -189,21 +188,21 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) {
                         return Container(
-                          color: Colors.grey.shade300,
-                          child: Icon(
+                          color: Appcolor.grey,
+                          child: const Icon(
                             Icons.movie,
                             size: 100,
-                            color: Colors.grey.shade700,
+                            color: Appcolor.white,
                           ),
                         );
                       },
                     )
                     : Container(
-                      color: Colors.grey.shade300,
-                      child: Icon(
+                      color: Appcolor.grey,
+                      child: const Icon(
                         Icons.movie,
                         size: 100,
-                        color: Colors.grey.shade700,
+                        color: Appcolor.white,
                       ),
                     ),
                 Container(
@@ -213,8 +212,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                       end: Alignment.bottomCenter,
                       colors: [
                         Colors.transparent,
-                        // ignore: deprecated_member_use
-                        Colors.black.withOpacity(0.7),
+                        Appcolor.appBackgroundColor.withOpacity(0.8),
                       ],
                     ),
                   ),
@@ -233,36 +231,36 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                           children: [
                             Text(
                               _movie!.title ?? 'Unknown Title',
-                              style: TextStyle(
-                                color: Colors.white,
+                              style: const TextStyle(
+                                color: Appcolor.white,
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(height: 4),
+                            const SizedBox(height: 4),
                             Row(
                               children: [
                                 if (_movie!.imdbRating != null) ...[
-                                  Icon(
+                                  const Icon(
                                     Icons.star,
-                                    color: Colors.amber,
+                                    color: Appcolor.buttonColor,
                                     size: 18,
                                   ),
-                                  SizedBox(width: 4),
+                                  const SizedBox(width: 4),
                                   Text(
                                     '${_movie!.imdbRating}/10',
-                                    style: TextStyle(
-                                      color: Colors.white,
+                                    style: const TextStyle(
+                                      color: Appcolor.white,
                                       fontSize: 16,
                                     ),
                                   ),
                                 ],
-                                SizedBox(width: 8),
+                                const SizedBox(width: 8),
                                 if (_movie!.genre != null)
                                   Text(
                                     _movie!.genre!,
                                     style: TextStyle(
-                                      color: Colors.white70,
+                                      color: Appcolor.white.withOpacity(0.7),
                                       fontSize: 14,
                                     ),
                                   ),
@@ -271,7 +269,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                           ],
                         ),
                       ),
-                      // Favori butonu
+                      // Favorite button
                       IconButton(
                         icon: Icon(
                           _isFavorite ? Icons.favorite : Icons.favorite_border,
@@ -288,7 +286,8 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                     ? '${_movie!.title} favorilere eklendi'
                                     : '${_movie!.title} favorilerden çıkarıldı',
                               ),
-                              duration: Duration(seconds: 1),
+                              backgroundColor: Appcolor.darkGrey,
+                              duration: const Duration(seconds: 1),
                             ),
                           );
                         },
@@ -308,16 +307,15 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
               children: [
                 // Movie Info Container
                 Container(
-                  padding: EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Appcolor.darkGrey,
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
-                        // ignore: deprecated_member_use
-                        color: Colors.black.withOpacity(0.1),
-                        blurRadius: 4,
-                        offset: Offset(0, 2),
+                        color: Colors.black.withOpacity(0.3),
+                        blurRadius: 8,
+                        offset: const Offset(0, 4),
                       ),
                     ],
                   ),
@@ -342,21 +340,37 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                   ),
                 ),
 
-                SizedBox(height: 16),
+                const SizedBox(height: 24),
 
                 // Synopsis
-                Text(
+                const Text(
                   'Film Açıklaması',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Appcolor.white,
+                  ),
                 ),
-                SizedBox(height: 8),
-                Text(
-                  _movie!.description ?? 'No description available',
-                  style: TextStyle(fontSize: 16, height: 1.5),
+                const SizedBox(height: 8),
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Appcolor.grey,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Text(
+                    _movie!.description ?? 'No description available',
+                    style: TextStyle(
+                      fontSize: 16,
+                      height: 1.5,
+                      color: Appcolor.white.withOpacity(0.9),
+                    ),
+                  ),
                 ),
 
-                SizedBox(height: 24),
+                const SizedBox(height: 24),
 
+                // Book Tickets Button
                 InkWell(
                   onTap: () {
                     Navigator.push(
@@ -368,25 +382,23 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                   },
                   child: Container(
                     width: double.infinity,
-                    padding: EdgeInsets.symmetric(vertical: 16),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          const Color.fromARGB(255, 9, 14, 10),
-                          const Color.fromARGB(255, 118, 113, 167),
-                        ],
-                      ),
+                      color: Appcolor.buttonColor,
                       borderRadius: BorderRadius.circular(30),
-                      border: Border.all(
-                        color: const Color.fromARGB(255, 10, 222, 230),
-                        width: 1.5,
-                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Appcolor.buttonColor.withOpacity(0.3),
+                          blurRadius: 8,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
                     ),
-                    child: Center(
+                    child: const Center(
                       child: Text(
-                        'Book Tickets',
+                        'Bilet Al',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Appcolor.appBackgroundColor,
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
                         ),
@@ -396,21 +408,22 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                 ),
 
                 if (_movie!.isInTheaters == true) ...[
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   Container(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 5,
+                      horizontal: 16,
+                      vertical: 8,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.circular(16),
+                      color: Appcolor.buttonColor,
+                      borderRadius: BorderRadius.circular(20),
                     ),
                     child: const Text(
                       'Currently In Theaters',
                       style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
+                        color: Appcolor.appBackgroundColor,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 14,
                       ),
                     ),
                   ),

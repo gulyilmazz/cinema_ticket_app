@@ -1,4 +1,5 @@
 import 'package:cinemaa/core/storage.dart';
+import 'package:cinemaa/core/theme/theme.dart';
 import 'package:cinemaa/models/seans_response.dart';
 import 'package:cinemaa/screens/seats/seats_screen.dart';
 import 'package:cinemaa/services/seans/seans_service.dart';
@@ -101,14 +102,16 @@ class _SessionsPageState extends State<SeansPage> {
               width: 70,
               margin: const EdgeInsets.symmetric(horizontal: 4),
               decoration: BoxDecoration(
-                color:
-                    isSelected ? Theme.of(context).primaryColor : Colors.white,
+                color: isSelected ? Appcolor.buttonColor : Appcolor.darkGrey,
                 borderRadius: BorderRadius.circular(10),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    blurRadius: 4,
-                    offset: const Offset(0, 2),
+                    color:
+                        isSelected
+                            ? Appcolor.buttonColor.withOpacity(0.3)
+                            : Colors.black.withOpacity(0.2),
+                    blurRadius: 6,
+                    offset: const Offset(0, 3),
                   ),
                 ],
               ),
@@ -120,7 +123,10 @@ class _SessionsPageState extends State<SeansPage> {
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
-                      color: isSelected ? Colors.white : Colors.black87,
+                      color:
+                          isSelected
+                              ? Appcolor.appBackgroundColor
+                              : Appcolor.white,
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -129,7 +135,10 @@ class _SessionsPageState extends State<SeansPage> {
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: isSelected ? Colors.white : Colors.black87,
+                      color:
+                          isSelected
+                              ? Appcolor.appBackgroundColor
+                              : Appcolor.white,
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -137,7 +146,10 @@ class _SessionsPageState extends State<SeansPage> {
                     DateFormat('MMM').format(date),
                     style: TextStyle(
                       fontSize: 12,
-                      color: isSelected ? Colors.white70 : Colors.black54,
+                      color:
+                          isSelected
+                              ? Appcolor.appBackgroundColor.withOpacity(0.8)
+                              : Appcolor.white.withOpacity(0.7),
                     ),
                   ),
                 ],
@@ -152,11 +164,14 @@ class _SessionsPageState extends State<SeansPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Appcolor.appBackgroundColor,
       appBar: AppBar(
-        title: const Text('Seanslar'), // Fixed empty title
+        backgroundColor: Appcolor.darkGrey,
+        title: const Text('Seanslar', style: TextStyle(color: Appcolor.white)),
+        iconTheme: const IconThemeData(color: Appcolor.buttonColor),
         actions: [
           IconButton(
-            icon: const Icon(Icons.refresh),
+            icon: const Icon(Icons.refresh, color: Appcolor.buttonColor),
             onPressed: _fetchSessions,
           ),
         ],
@@ -169,7 +184,9 @@ class _SessionsPageState extends State<SeansPage> {
 
   Widget _buildSessionsList() {
     if (_isLoading) {
-      return const Center(child: CircularProgressIndicator());
+      return const Center(
+        child: CircularProgressIndicator(color: Appcolor.buttonColor),
+      );
     }
 
     if (_errorMessage != null) {
@@ -185,6 +202,10 @@ class _SessionsPageState extends State<SeansPage> {
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: _fetchSessions,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Appcolor.buttonColor,
+                foregroundColor: Appcolor.appBackgroundColor,
+              ),
               child: const Text('Try Again'),
             ),
           ],
@@ -193,11 +214,18 @@ class _SessionsPageState extends State<SeansPage> {
     }
 
     if (_sessions.isEmpty) {
-      return const Center(child: Text('Bu tarih için seans bulunamadı'));
+      return const Center(
+        child: Text(
+          'Bu tarih için seans bulunamadı',
+          style: TextStyle(color: Appcolor.white),
+        ),
+      );
     }
 
     return RefreshIndicator(
       onRefresh: _fetchSessions,
+      color: Appcolor.buttonColor,
+      backgroundColor: Appcolor.darkGrey,
       child: ListView.builder(
         padding: const EdgeInsets.all(16),
         itemCount: _sessions.length,
@@ -221,7 +249,10 @@ class _SessionsPageState extends State<SeansPage> {
               } else {
                 // Handle case when token is not available
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Authentication required')),
+                  const SnackBar(
+                    content: Text('Authentication required'),
+                    backgroundColor: Appcolor.darkGrey,
+                  ),
                 );
               }
             },
@@ -265,9 +296,13 @@ class SessionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
-      elevation: 3,
+      elevation: 6,
+      color: Appcolor.darkGrey,
+      shadowColor: Colors.black.withOpacity(0.3),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: InkWell(
         onTap: onTap,
+        borderRadius: BorderRadius.circular(12),
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
@@ -282,23 +317,25 @@ class SessionCard extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
+                        color: Appcolor.white,
                       ),
                     ),
                   ),
                   Container(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 4,
+                      horizontal: 12,
+                      vertical: 6,
                     ),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor.withOpacity(0.2),
+                      color: Appcolor.buttonColor,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
                       _formatTime(session.startTime),
-                      style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontWeight: FontWeight.w500,
+                      style: const TextStyle(
+                        color: Appcolor.appBackgroundColor,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 14,
                       ),
                     ),
                   ),
@@ -307,29 +344,41 @@ class SessionCard extends StatelessWidget {
               const SizedBox(height: 12),
               Row(
                 children: [
-                  const Icon(Icons.movie, size: 16, color: Colors.grey),
+                  const Icon(
+                    Icons.movie,
+                    size: 16,
+                    color: Appcolor.buttonColor,
+                  ),
                   const SizedBox(width: 8),
                   Text(
                     'Süre: ${session.movie?.duration ?? 'N/A'} dk',
-                    style: const TextStyle(color: Colors.grey),
+                    style: TextStyle(color: Appcolor.white.withOpacity(0.8)),
                   ),
                   const SizedBox(width: 16),
-                  const Icon(Icons.attach_money, size: 16, color: Colors.grey),
+                  const Icon(
+                    Icons.attach_money,
+                    size: 16,
+                    color: Appcolor.buttonColor,
+                  ),
                   const SizedBox(width: 8),
                   Text(
                     'Fiyat: ${_parsePrice(session.price).toStringAsFixed(2)} TL',
-                    style: const TextStyle(color: Colors.grey),
+                    style: TextStyle(color: Appcolor.white.withOpacity(0.8)),
                   ),
                 ],
               ),
               const SizedBox(height: 8),
               Row(
                 children: [
-                  const Icon(Icons.event_seat, size: 16, color: Colors.grey),
+                  const Icon(
+                    Icons.event_seat,
+                    size: 16,
+                    color: Appcolor.buttonColor,
+                  ),
                   const SizedBox(width: 8),
                   Text(
                     'Boş Koltuk: ${session.availableSeats ?? 'N/A'}',
-                    style: const TextStyle(color: Colors.grey),
+                    style: TextStyle(color: Appcolor.white.withOpacity(0.8)),
                   ),
                 ],
               ),
@@ -337,11 +386,15 @@ class SessionCard extends StatelessWidget {
                 const SizedBox(height: 8),
                 Row(
                   children: [
-                    const Icon(Icons.category, size: 16, color: Colors.grey),
+                    const Icon(
+                      Icons.category,
+                      size: 16,
+                      color: Appcolor.buttonColor,
+                    ),
                     const SizedBox(width: 8),
                     Text(
                       'Tür: ${session.movie!.genre}',
-                      style: const TextStyle(color: Colors.grey),
+                      style: TextStyle(color: Appcolor.white.withOpacity(0.8)),
                     ),
                   ],
                 ),
@@ -350,11 +403,15 @@ class SessionCard extends StatelessWidget {
                 const SizedBox(height: 8),
                 Row(
                   children: [
-                    const Icon(Icons.language, size: 16, color: Colors.grey),
+                    const Icon(
+                      Icons.language,
+                      size: 16,
+                      color: Appcolor.buttonColor,
+                    ),
                     const SizedBox(width: 8),
                     Text(
                       'Dil: ${session.movie!.language}',
-                      style: const TextStyle(color: Colors.grey),
+                      style: TextStyle(color: Appcolor.white.withOpacity(0.8)),
                     ),
                   ],
                 ),

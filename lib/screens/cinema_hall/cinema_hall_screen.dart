@@ -1,17 +1,9 @@
 import 'package:cinemaa/core/storage.dart';
+import 'package:cinemaa/core/theme/theme.dart';
 import 'package:cinemaa/screens/seans/seans.screen.dart';
 import 'package:cinemaa/services/cinemahall/cinema_hall_service.dart';
 import 'package:flutter/material.dart';
 import 'package:cinemaa/models/cinemahall_response.dart';
-
-// AppColor theme
-class Appcolor {
-  static const appBackgroundColor = Color(0xFF1c1c27);
-  static const grey = Color(0xFF373741);
-  static const buttonColor = Color(0xFFffb43b);
-  static const white = Colors.white;
-  static const darkGrey = Color(0xFF252532);
-}
 
 class CinemaHallsPage extends StatefulWidget {
   const CinemaHallsPage({Key? key}) : super(key: key);
