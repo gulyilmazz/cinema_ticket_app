@@ -1,8 +1,7 @@
+import 'package:cinemaa/core/theme/theme.dart';
 import 'package:cinemaa/screens/main_screen.dart';
 import 'package:cinemaa/services/auth/auth_service.dart';
-import 'package:cinemaa/utils/renkler.dart';
 import 'package:cinemaa/widgets/auth_widgets/password_input.dart';
-import 'package:cinemaa/widgets/auth_widgets/usarname_input.dart';
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -15,12 +14,23 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   final AuthService _authService = AuthService();
 
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
+
+  final FocusNode _nameFocusNode = FocusNode();
+  final FocusNode _emailFocusNode = FocusNode();
+  final FocusNode _passwordFocusNode = FocusNode();
+  final FocusNode _confirmPasswordFocusNode = FocusNode();
+
   bool isLoading = false;
+  bool _confirmPasswordVisible = false;
 
   Future<void> register(BuildContext context) async {
     setState(() {
-      isLoading =
-          true; // Kayıt işlemi başlatıldığında yükleniyor durumunu ayarla
+      isLoading = true;
     });
     try {
       final response = await _authService.register(
@@ -31,11 +41,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       );
 
       if (response.success!) {
-        // await AuthStorage.saveToken(response.data.token);
-        // final userId = response.data.user.id;
-
         Navigator.pushReplacement(
-          // ignore: use_build_context_synchronously
           context,
           MaterialPageRoute(builder: (context) => MainScreen()),
         );
@@ -43,33 +49,45 @@ class _RegisterScreenState extends State<RegisterScreen> {
         throw Exception(response.message);
       }
     } catch (e) {
-      // _errorMessage = e.toString();
-      ScaffoldMessenger.of(
-        // ignore: use_build_context_synchronously
-        context,
-      ).showSnackBar(SnackBar(content: Text("Kayıt başarısız: ")));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Kayıt başarısız: ${e.toString()}"),
+          backgroundColor: Appcolor.grey,
+        ),
+      );
     } finally {
-      isLoading =
-          false; // Kayıt işlemi başlatıldığında yükleniyor durumunu ayarla
-      // setButtonPressed(false);
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 
-  final TextEditingController _nameController = TextEditingController();
-
-  final TextEditingController _emailController = TextEditingController();
-  // Kullanıcıdan şifre almak için kontrolcü
-  final TextEditingController _passwordController = TextEditingController();
-  // Kullanıcıdan şifre doğrulama bilgisi almak için kontrolcü
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
-  final FocusNode _nameFocusNode = FocusNode();
-  final FocusNode _emailFocusNode = FocusNode();
-  final FocusNode _passwordFocusNode = FocusNode();
-  final FocusNode _confirmPasswordFocusNode = FocusNode();
+  void _handleRegister() {
+    if (_passwordController.text != _confirmPasswordController.text) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Row(
+            children: [
+              Icon(Icons.error_outline, color: Appcolor.white),
+              SizedBox(width: 8),
+              Text('Şifreler eşleşmiyor!'),
+            ],
+          ),
+          backgroundColor: Colors.red.shade600,
+        ),
+      );
+      return;
+    }
+    register(context);
+  }
 
   @override
   void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    _nameFocusNode.dispose();
     _emailFocusNode.dispose();
     _passwordFocusNode.dispose();
     _confirmPasswordFocusNode.dispose();
@@ -80,167 +98,151 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        WidgetsBinding.instance.focusManager.primaryFocus
-            ?.unfocus(); // Klavye kapanır
+        WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
       },
       child: Scaffold(
-        resizeToAvoidBottomInset:
-            true, // Klavye açıldığında ekranın boyutunu küçültür
-        extendBodyBehindAppBar: true, // Appbar'ın arka plana geçmesini sağlar
-        extendBody: true,
-        backgroundColor: Renkler.arkaPlanRengi,
-
+        resizeToAvoidBottomInset: true,
+        backgroundColor: Appcolor.appBackgroundColor,
         body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.only(
-                bottom:
-                    MediaQuery.of(context).viewInsets.bottom +
-                    MediaQuery.of(context).padding.bottom,
+                left: 16.0,
+                right: 16.0,
+                top: 16.0,
+                bottom: MediaQuery.of(context).viewInsets.bottom + 16.0,
               ),
               child: ConstrainedBox(
                 constraints: BoxConstraints(
-                  minHeight: MediaQuery.of(context).size.height,
+                  minHeight:
+                      MediaQuery.of(context).size.height -
+                      MediaQuery.of(context).padding.top -
+                      32,
                 ),
                 child: Container(
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black, width: 2),
-                    borderRadius: BorderRadius.circular(50),
-                    gradient: LinearGradient(
-                      // Arka plan rengi
-                      colors: [
-                        const Color.fromARGB(255, 8, 12, 9),
-                        const Color.fromARGB(255, 90, 85, 134),
-                      ],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
+                    color: Appcolor.darkGrey,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: Appcolor.grey, width: 1),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(24.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Image.asset('assets/images/video.gif', height: 80),
-                        SizedBox(height: 40),
+                        // Logo/Icon
+                        Container(
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            color: Appcolor.buttonColor.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Image.asset(
+                            'assets/images/video.gif',
+                            height: 60,
+                            color: Appcolor.buttonColor,
+                          ),
+                        ),
+                        const SizedBox(height: 32),
 
+                        // App Title
                         Text(
                           'SAHNE',
                           style: TextStyle(
-                            fontSize: 24,
+                            fontSize: 32,
                             fontWeight: FontWeight.bold,
-                            color: const Color.fromARGB(255, 247, 247, 247),
+                            color: Appcolor.white,
+                            letterSpacing: 2,
                           ),
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 8),
 
+                        // Subtitle
                         Text(
                           'Film Dünyasına Kayıt Olun',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 16,
-                            color: Color.fromARGB(255, 149, 223, 223),
+                            color: Appcolor.white.withOpacity(0.7),
                           ),
                         ),
-                        SizedBox(height: 30),
+                        const SizedBox(height: 32),
 
-                        UsarnameInput(
-                          controller: _nameController,
-                          focusNode: _nameFocusNode,
-                        ),
-                        UsarnameInput(
-                          controller: _emailController,
-                          focusNode: _emailFocusNode,
-                        ),
+                        // Name Input
+                        _buildNameInput(),
+                        const SizedBox(height: 16),
 
+                        // Email Input
+                        _buildEmailInput(),
+                        const SizedBox(height: 16),
+
+                        // Password Input
                         PasswordInput(
                           controller: _passwordController,
                           focusNode: _passwordFocusNode,
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 16),
 
-                        // Şifre Tekrar Giriş Alanı
-                        TextField(
-                          controller: _confirmPasswordController,
-                          focusNode: _confirmPasswordFocusNode,
-                          obscureText: true,
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
-                            labelText: 'Şifre Tekrar',
-                            labelStyle: TextStyle(color: Colors.grey),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color.fromARGB(255, 149, 223, 223),
-                              ),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color.fromARGB(255, 149, 223, 223),
-                              ),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            prefixIcon: Icon(Icons.lock, color: Colors.grey),
-                          ),
-                        ),
-                        SizedBox(height: 30),
+                        // Confirm Password Input
+                        _buildConfirmPasswordInput(),
+                        const SizedBox(height: 32),
 
-                        // Kayıt Ol Butonu
-                        ElevatedButton(
-                          onPressed: () {
-                            // Kayıt işlemi burada yapılacak
-                            // Şifrelerin eşleşip eşleşmediği kontrol edilebilir
-                            if (_passwordController.text ==
-                                _confirmPasswordController.text) {
-                              register(context);
-                            } else {
-                              // Şifreler eşleşmiyorsa uyarı göster
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text('Şifreler eşleşmiyor!'),
-                                  backgroundColor: Colors.red,
-                                ),
-                              );
-                            }
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color.fromARGB(
-                              255,
-                              42,
-                              43,
-                              38,
+                        // Register Button
+                        SizedBox(
+                          width: double.infinity,
+                          height: 56,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Appcolor.buttonColor,
+                              foregroundColor: Appcolor.appBackgroundColor,
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
                             ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 40,
-                              vertical: 15,
-                            ),
-                            minimumSize: Size(double.infinity, 0),
-                          ),
-                          child:
-                              isLoading
-                                  ? CircularProgressIndicator()
-                                  : Text(
-                                    'Kayıt Ol',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
+                            onPressed: isLoading ? null : _handleRegister,
+                            child:
+                                isLoading
+                                    ? SizedBox(
+                                      height: 24,
+                                      width: 24,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 2,
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                              Appcolor.appBackgroundColor,
+                                            ),
+                                      ),
+                                    )
+                                    : Text(
+                                      "Kayıt Ol",
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                        color: Appcolor.appBackgroundColor,
+                                      ),
                                     ),
-                                  ),
+                          ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
 
-                        // Giriş Ekranına Dön Butonu
+                        // Back to Login Button
                         TextButton(
                           onPressed: () {
                             Navigator.pop(context);
                           },
+                          style: TextButton.styleFrom(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 12,
+                            ),
+                          ),
                           child: Text(
                             "Zaten hesabın var mı? Giriş yap",
                             style: TextStyle(
-                              color: const Color.fromARGB(255, 149, 223, 223),
+                              color: Appcolor.buttonColor,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                         ),
@@ -252,6 +254,129 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildNameInput() {
+    return TextField(
+      controller: _nameController,
+      focusNode: _nameFocusNode,
+      style: TextStyle(color: Appcolor.white),
+      decoration: InputDecoration(
+        labelText: 'Ad Soyad',
+        labelStyle: TextStyle(
+          color: Appcolor.white.withOpacity(0.7),
+          fontSize: 16,
+        ),
+        hintText: 'Adınızı ve soyadınızı girin',
+        hintStyle: TextStyle(
+          color: Appcolor.white.withOpacity(0.5),
+          fontSize: 14,
+        ),
+        filled: true,
+        fillColor: Appcolor.grey.withOpacity(0.3),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Appcolor.grey, width: 1),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Appcolor.buttonColor, width: 2),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        prefixIcon: Icon(
+          Icons.person_outline,
+          color: Appcolor.white.withOpacity(0.7),
+          size: 22,
+        ),
+        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      ),
+    );
+  }
+
+  Widget _buildEmailInput() {
+    return TextField(
+      controller: _emailController,
+      focusNode: _emailFocusNode,
+      keyboardType: TextInputType.emailAddress,
+      style: TextStyle(color: Appcolor.white),
+      decoration: InputDecoration(
+        labelText: 'E-posta',
+        labelStyle: TextStyle(
+          color: Appcolor.white.withOpacity(0.7),
+          fontSize: 16,
+        ),
+        hintText: 'ornek@email.com',
+        hintStyle: TextStyle(
+          color: Appcolor.white.withOpacity(0.5),
+          fontSize: 14,
+        ),
+        filled: true,
+        fillColor: Appcolor.grey.withOpacity(0.3),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Appcolor.grey, width: 1),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Appcolor.buttonColor, width: 2),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        prefixIcon: Icon(
+          Icons.email_outlined,
+          color: Appcolor.white.withOpacity(0.7),
+          size: 22,
+        ),
+        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      ),
+    );
+  }
+
+  Widget _buildConfirmPasswordInput() {
+    return TextField(
+      controller: _confirmPasswordController,
+      focusNode: _confirmPasswordFocusNode,
+      obscureText: !_confirmPasswordVisible,
+      style: TextStyle(color: Appcolor.white),
+      decoration: InputDecoration(
+        labelText: 'Şifre Tekrar',
+        labelStyle: TextStyle(
+          color: Appcolor.white.withOpacity(0.7),
+          fontSize: 16,
+        ),
+        hintText: 'Şifrenizi tekrar girin',
+        hintStyle: TextStyle(
+          color: Appcolor.white.withOpacity(0.5),
+          fontSize: 14,
+        ),
+        filled: true,
+        fillColor: Appcolor.grey.withOpacity(0.3),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Appcolor.grey, width: 1),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Appcolor.buttonColor, width: 2),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        prefixIcon: Icon(
+          Icons.lock_outline,
+          color: Appcolor.white.withOpacity(0.7),
+          size: 22,
+        ),
+        suffixIcon: IconButton(
+          icon: Icon(
+            _confirmPasswordVisible ? Icons.visibility : Icons.visibility_off,
+            color: Appcolor.white.withOpacity(0.7),
+            size: 22,
+          ),
+          onPressed: () {
+            setState(() {
+              _confirmPasswordVisible = !_confirmPasswordVisible;
+            });
+          },
+          splashRadius: 20,
+        ),
+        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       ),
     );
   }

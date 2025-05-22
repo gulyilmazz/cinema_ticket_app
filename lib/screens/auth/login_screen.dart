@@ -180,7 +180,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         strokeWidth: 2,
                                         valueColor:
                                             AlwaysStoppedAnimation<Color>(
-                                              Appcolor.appBackgroundColor,
+                                              Appcolor.buttonColor,
                                             ),
                                       ),
                                     )
