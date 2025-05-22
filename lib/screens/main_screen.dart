@@ -14,7 +14,6 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
-  // Sayfaları düzgün sırayla listeliyoruz
   final List<Widget> _pages = [HomeScreen(), UserTicketsPage(), ProfilScreen()];
 
   @override
@@ -33,61 +32,7 @@ class _MainScreenState extends State<MainScreen> {
         ),
         child: _pages[_selectedIndex],
       ),
-      appBar: AppBar(
-        title: const Text(
-          '',
-          style: TextStyle(
-            color: Color.fromARGB(255, 10, 223, 230),
-            fontWeight: FontWeight.w300,
-          ),
-        ),
-        centerTitle: true,
-        actions: [
-          // Şehir seçim butonu
-          Padding(
-            padding: const EdgeInsets.only(right: 10.0),
-            child: GestureDetector(
-              onTap: () {
-                _showSehirSecimDialog(context);
-              },
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.location_on,
-                    color: const Color.fromARGB(255, 10, 223, 230),
-                  ),
-                  SizedBox(width: 2.5),
-                  Text(
-                    'İstanbul',
-                    style: TextStyle(
-                      color: const Color.fromARGB(255, 10, 223, 230),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: const Color.fromARGB(255, 10, 222, 230),
-              width: 0.50,
-            ),
-            gradient: LinearGradient(
-              colors: [
-                const Color.fromARGB(255, 9, 14, 10),
-                const Color.fromARGB(255, 118, 113, 167),
-              ],
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-            ),
-          ),
-        ),
-        iconTheme: IconThemeData(
-          color: const Color.fromARGB(255, 10, 223, 230),
-        ),
-      ),
+
       drawer: LeftDrawer(),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: const Color.fromARGB(255, 9, 14, 10),
@@ -112,83 +57,6 @@ class _MainScreenState extends State<MainScreen> {
             label: 'Profil',
           ),
         ],
-      ),
-    );
-  }
-
-  // Şehir seçim dialog penceresi
-  void _showSehirSecimDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return Dialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Container(
-            padding: EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  const Color.fromARGB(255, 9, 14, 10),
-                  const Color.fromARGB(255, 118, 113, 167),
-                ],
-              ),
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(
-                color: const Color.fromARGB(255, 10, 222, 230),
-                width: 1.5,
-              ),
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  'Şehir Seçin',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-                SizedBox(height: 16),
-                _buildSehirButton(context, 'İstanbul'),
-                _buildSehirButton(context, 'Ankara'),
-                _buildSehirButton(context, 'İzmir'),
-                _buildSehirButton(context, 'Bursa'),
-                _buildSehirButton(context, 'Antalya'),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _buildSehirButton(BuildContext context, String sehir) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0),
-      child: InkWell(
-        onTap: () {
-          Navigator.pop(context);
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text('$sehir seçildi')));
-        },
-        child: Container(
-          width: double.infinity,
-          padding: EdgeInsets.symmetric(vertical: 12),
-          decoration: BoxDecoration(
-            color: Colors.white.withValues(alpha: 0.1),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Center(
-            child: Text(
-              sehir,
-              style: TextStyle(color: Colors.white, fontSize: 16),
-            ),
-          ),
-        ),
       ),
     );
   }
