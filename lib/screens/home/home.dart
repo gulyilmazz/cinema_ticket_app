@@ -1,4 +1,5 @@
 import 'package:cinemaa/core/storage.dart';
+import 'package:cinemaa/core/theme/theme.dart';
 import 'package:cinemaa/screens/movie/film_detail_screen.dart';
 import 'package:cinemaa/services/movies/movie_service.dart';
 import 'package:flutter/material.dart';
@@ -29,15 +30,6 @@ class _HomeScreenState extends State<HomeScreen>
   String _selectedCategory = 'All';
 
   final ScrollController _scrollController = ScrollController();
-
-  // App theme
-  final LinearGradient appGradient = const LinearGradient(
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter,
-    colors: [Color(0xFF090E0A), Color(0xFF55517C)],
-  );
-
-  final Color accentColor = const Color(0xFF0ADEE6);
 
   @override
   void initState() {
@@ -231,45 +223,56 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(gradient: appGradient),
-        child: SafeArea(
-          child: Column(
-            children: [
-              _buildAppBar(),
-              _buildSearchBar(),
-              if (_categories.length > 1) _buildCategoryTabs(),
-
-              Expanded(
-                child:
-                    _errorMessage != null
-                        ? _buildErrorView()
-                        : _buildMovieList(),
-              ),
-            ],
-          ),
+      backgroundColor: Appcolor.appBackgroundColor,
+      body: SafeArea(
+        child: Column(
+          children: [
+            _buildAppBar(),
+            _buildSearchBar(),
+            if (_categories.length > 1) _buildCategoryTabs(),
+            Expanded(
+              child:
+                  _errorMessage != null ? _buildErrorView() : _buildMovieList(),
+            ),
+          ],
         ),
       ),
     );
   }
 
   Widget _buildAppBar() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      decoration: BoxDecoration(
+        color: Appcolor.darkGrey,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
+          const Text(
             'Cinemaa',
             style: TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.bold,
-              color: accentColor,
+              color: Appcolor.buttonColor,
             ),
           ),
-          IconButton(
-            icon: Icon(Icons.refresh, color: accentColor),
-            onPressed: _refreshMovies,
+          Container(
+            decoration: BoxDecoration(
+              color: Appcolor.buttonColor.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: IconButton(
+              icon: const Icon(Icons.refresh, color: Appcolor.buttonColor),
+              onPressed: _refreshMovies,
+            ),
           ),
         ],
       ),
@@ -278,7 +281,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   Widget _buildSearchBar() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.all(16),
       child: GestureDetector(
         onTap: () {
           setState(() {
@@ -288,29 +291,45 @@ class _HomeScreenState extends State<HomeScreen>
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: accentColor, width: 1),
-            color: Colors.black26,
+            color: Appcolor.darkGrey,
+            border: Border.all(color: Appcolor.buttonColor, width: 1),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                blurRadius: 8,
+                offset: const Offset(0, 2),
+              ),
+            ],
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           child: Row(
             children: [
-              Icon(Icons.search, color: accentColor),
+              const Icon(Icons.search, color: Appcolor.buttonColor),
               const SizedBox(width: 12),
               _isSearchVisible
                   ? Expanded(
                     child: TextField(
                       controller: _searchController,
                       decoration: const InputDecoration(
-                        hintText: 'Search movies...',
-                        hintStyle: TextStyle(color: Colors.white70),
+                        hintText: 'Film ara...',
+                        hintStyle: TextStyle(
+                          color: Appcolor.white,
+                          fontSize: 16,
+                        ),
                         border: InputBorder.none,
                       ),
-                      style: const TextStyle(color: Colors.white),
+                      style: const TextStyle(
+                        color: Appcolor.white,
+                        fontSize: 16,
+                      ),
                     ),
                   )
-                  : const Text(
-                    'Search movies',
-                    style: TextStyle(color: Colors.white70),
+                  : Text(
+                    'Film ara...',
+                    style: TextStyle(
+                      color: Appcolor.white.withOpacity(0.7),
+                      fontSize: 16,
+                    ),
                   ),
             ],
           ),
@@ -320,18 +339,29 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   Widget _buildCategoryTabs() {
-    // ignore: unnecessary_null_comparison
     return _tabController != null
         ? Container(
           height: 50,
-          margin: const EdgeInsets.only(top: 8),
+          margin: const EdgeInsets.symmetric(horizontal: 16),
+          decoration: BoxDecoration(
+            color: Appcolor.darkGrey,
+            borderRadius: BorderRadius.circular(12),
+          ),
           child: TabBar(
             controller: _tabController,
             isScrollable: true,
-            indicatorColor: accentColor,
+            indicatorColor: Appcolor.buttonColor,
             indicatorWeight: 3,
-            labelColor: accentColor,
-            unselectedLabelColor: Colors.white70,
+            labelColor: Appcolor.buttonColor,
+            unselectedLabelColor: Appcolor.white.withOpacity(0.7),
+            labelStyle: const TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 14,
+            ),
+            unselectedLabelStyle: const TextStyle(
+              fontWeight: FontWeight.normal,
+              fontSize: 14,
+            ),
             tabs: _categories.map((category) => Tab(text: category)).toList(),
           ),
         )
@@ -343,16 +373,31 @@ class _HomeScreenState extends State<HomeScreen>
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          const Icon(Icons.error_outline, color: Colors.redAccent, size: 60),
+          const SizedBox(height: 16),
           Text(
             _errorMessage!,
-            style: const TextStyle(color: Colors.red),
+            style: TextStyle(
+              color: Appcolor.white.withOpacity(0.8),
+              fontSize: 16,
+            ),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 24),
           ElevatedButton(
             onPressed: _fetchMovies,
-            style: ElevatedButton.styleFrom(backgroundColor: accentColor),
-            child: const Text('Retry'),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Appcolor.buttonColor,
+              foregroundColor: Appcolor.appBackgroundColor,
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            child: const Text(
+              'Yeniden Dene',
+              style: TextStyle(fontWeight: FontWeight.w600),
+            ),
           ),
         ],
       ),
@@ -362,25 +407,42 @@ class _HomeScreenState extends State<HomeScreen>
   Widget _buildMovieList() {
     return RefreshIndicator(
       onRefresh: _refreshMovies,
-      color: accentColor,
+      backgroundColor: Appcolor.darkGrey,
+      color: Appcolor.buttonColor,
       child:
           _filteredMovies.isEmpty && !_isLoading
-              ? const Center(
-                child: Text(
-                  'No movies available',
-                  style: TextStyle(color: Colors.white70),
+              ? Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.movie_filter_outlined,
+                      size: 80,
+                      color: Appcolor.white.withOpacity(0.4),
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      'Henüz film bulunamadı',
+                      style: TextStyle(
+                        color: Appcolor.white.withOpacity(0.7),
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
                 ),
               )
               : ListView.builder(
                 controller: _scrollController,
-                padding: const EdgeInsets.all(12),
+                padding: const EdgeInsets.all(16),
                 itemCount: _filteredMovies.length + (_isLoading ? 1 : 0),
                 itemBuilder: (context, index) {
                   if (index == _filteredMovies.length) {
                     return const Center(
                       child: Padding(
                         padding: EdgeInsets.all(16.0),
-                        child: CircularProgressIndicator(),
+                        child: CircularProgressIndicator(
+                          color: Appcolor.buttonColor,
+                        ),
                       ),
                     );
                   }
@@ -397,19 +459,9 @@ class _HomeScreenState extends State<HomeScreen>
       margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            // ignore: deprecated_member_use
-            Colors.black.withOpacity(0.8),
-            // ignore: deprecated_member_use
-            const Color(0xFF333355).withOpacity(0.7),
-          ],
-        ),
+        color: Appcolor.darkGrey,
         boxShadow: [
           BoxShadow(
-            // ignore: deprecated_member_use
             color: Colors.black.withOpacity(0.3),
             blurRadius: 10,
             offset: const Offset(0, 5),
@@ -443,26 +495,22 @@ class _HomeScreenState extends State<HomeScreen>
                             fit: BoxFit.cover,
                             errorBuilder: (context, error, stackTrace) {
                               return Container(
-                                color: Colors.grey.shade800,
-                                child: const Center(
-                                  child: Icon(
-                                    Icons.movie,
-                                    size: 50,
-                                    color: Colors.white30,
-                                  ),
+                                color: Appcolor.grey,
+                                child: Icon(
+                                  Icons.movie,
+                                  size: 50,
+                                  color: Appcolor.white.withOpacity(0.3),
                                 ),
                               );
                             },
                           ),
                         )
                         : Container(
-                          color: Colors.grey.shade800,
-                          child: const Center(
-                            child: Icon(
-                              Icons.movie,
-                              size: 50,
-                              color: Colors.white30,
-                            ),
+                          color: Appcolor.grey,
+                          child: Icon(
+                            Icons.movie,
+                            size: 50,
+                            color: Appcolor.white.withOpacity(0.3),
                           ),
                         ),
               ),
@@ -474,11 +522,11 @@ class _HomeScreenState extends State<HomeScreen>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        movie.title ?? 'Unknown Title',
+                        movie.title ?? 'Bilinmeyen Film',
                         style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Appcolor.white,
                         ),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
@@ -489,29 +537,34 @@ class _HomeScreenState extends State<HomeScreen>
                       Row(
                         children: [
                           if (movie.imdbRating != null) ...[
-                            Icon(Icons.star, color: Colors.amber, size: 18),
+                            const Icon(
+                              Icons.star,
+                              color: Appcolor.buttonColor,
+                              size: 18,
+                            ),
                             const SizedBox(width: 4),
                             Text(
                               '${movie.imdbRating}/10',
                               style: const TextStyle(
                                 fontSize: 14,
-                                color: Colors.white,
+                                color: Appcolor.white,
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
                             const SizedBox(width: 12),
                           ],
                           if (movie.duration != null) ...[
-                            const Icon(
+                            Icon(
                               Icons.access_time,
-                              color: Colors.white70,
+                              color: Appcolor.white.withOpacity(0.7),
                               size: 16,
                             ),
                             const SizedBox(width: 4),
                             Text(
-                              '${movie.duration} min',
-                              style: const TextStyle(
+                              '${movie.duration} dk',
+                              style: TextStyle(
                                 fontSize: 14,
-                                color: Colors.white70,
+                                color: Appcolor.white.withOpacity(0.7),
                               ),
                             ),
                           ],
@@ -521,8 +574,8 @@ class _HomeScreenState extends State<HomeScreen>
                       if (movie.language != null)
                         Text(
                           movie.language!,
-                          style: const TextStyle(
-                            color: Colors.white70,
+                          style: TextStyle(
+                            color: Appcolor.white.withOpacity(0.7),
                             fontSize: 14,
                           ),
                         ),
@@ -530,21 +583,20 @@ class _HomeScreenState extends State<HomeScreen>
                       if (movie.isInTheaters == true)
                         Container(
                           padding: const EdgeInsets.symmetric(
-                            horizontal: 10,
-                            vertical: 4,
+                            horizontal: 12,
+                            vertical: 6,
                           ),
                           decoration: BoxDecoration(
-                            // ignore: deprecated_member_use
                             color: Colors.green.withOpacity(0.2),
                             borderRadius: BorderRadius.circular(12),
                             border: Border.all(color: Colors.green, width: 1),
                           ),
                           child: const Text(
-                            'In Theaters',
+                            'Vizyonda',
                             style: TextStyle(
                               color: Colors.green,
                               fontSize: 12,
-                              fontWeight: FontWeight.w500,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                         ),
@@ -571,17 +623,16 @@ class _HomeScreenState extends State<HomeScreen>
             return Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
               decoration: BoxDecoration(
-                // ignore: deprecated_member_use
-                color: accentColor.withOpacity(0.2),
+                color: Appcolor.buttonColor.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: accentColor, width: 1),
+                border: Border.all(color: Appcolor.buttonColor, width: 1),
               ),
               child: Text(
                 genre,
-                style: TextStyle(
-                  color: accentColor,
+                style: const TextStyle(
+                  color: Appcolor.buttonColor,
                   fontSize: 12,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             );
