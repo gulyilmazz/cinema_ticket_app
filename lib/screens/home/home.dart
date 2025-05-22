@@ -2,6 +2,7 @@ import 'package:cinemaa/core/storage.dart';
 import 'package:cinemaa/core/theme/theme.dart';
 import 'package:cinemaa/screens/movie/film_detail_screen.dart';
 import 'package:cinemaa/services/movies/movie_service.dart';
+import 'package:cinemaa/widgets/buttons/left_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:cinemaa/models/movie_response1.dart';
 
@@ -223,6 +224,7 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: LeftDrawer(),
       backgroundColor: Appcolor.appBackgroundColor,
       body: SafeArea(
         child: Column(
@@ -256,6 +258,12 @@ class _HomeScreenState extends State<HomeScreen>
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          IconButton(
+            onPressed: () {
+              Scaffold.of(context).openDrawer();
+            },
+            icon: Icon(Icons.menu, color: Appcolor.buttonColor),
+          ),
           const Text(
             'Cinemaa',
             style: TextStyle(

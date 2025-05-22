@@ -1,3 +1,4 @@
+import 'package:cinemaa/core/theme/theme.dart';
 import 'package:cinemaa/screens/drawers/account_screen.dart';
 import 'package:cinemaa/screens/drawers/orders_screen.dart';
 import 'package:cinemaa/screens/drawers/settings_sreen.dart';
@@ -15,80 +16,21 @@ class _LeftDrawerState extends State<LeftDrawer> {
   Widget build(BuildContext context) {
     return Drawer(
       child: Container(
-        // Container ekledik
         decoration: BoxDecoration(
-          // Container'a decoration ekledik
           gradient: LinearGradient(
-            colors: [
-              const Color.fromARGB(255, 20, 20, 20), // Başlangıç rengi
-              const Color.fromARGB(255, 50, 50, 50), // Bitiş rengi
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+            colors: [Appcolor.appBackgroundColor, Appcolor.darkGrey],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
           ),
         ),
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            //MENU
-            DrawerHeader(
-              child: Container(
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: const Color.fromARGB(255, 10, 222, 230),
-                    width: 0.75,
-                  ),
-                  borderRadius: BorderRadius.circular(15),
-                  gradient: LinearGradient(
-                    colors: [
-                      const Color.fromARGB(255, 9, 14, 10),
-                      const Color.fromARGB(255, 118, 113, 167),
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                ),
-                child: Text(
-                  'Menü',
-                  style: TextStyle(
-                    color: const Color.fromARGB(255, 237, 240, 240),
-                    fontSize: 24,
-                  ),
-                ),
-              ),
-            ),
-
-            //GİRİS
-            ListTile(
-              leading: Icon(
-                Icons.person,
-                color: const Color.fromARGB(255, 10, 222, 230),
-              ),
-              title: Container(
-                padding: EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: const Color.fromARGB(255, 10, 222, 230),
-                    width: 0.75,
-                  ),
-                  borderRadius: BorderRadius.circular(15),
-                  gradient: LinearGradient(
-                    colors: [
-                      const Color.fromARGB(255, 9, 14, 10),
-                      const Color.fromARGB(255, 118, 113, 167),
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                ),
-                child: Text(
-                  'Giriş',
-                  style: TextStyle(
-                    color: const Color.fromARGB(255, 236, 238, 238),
-                  ),
-                ),
-              ),
+            _buildDrawerHeader(),
+            SizedBox(height: 10),
+            _buildMenuItem(
+              icon: Icons.person_outline,
+              title: 'Ana Sayfa',
               onTap: () {
                 Navigator.push(
                   context,
@@ -96,111 +38,10 @@ class _LeftDrawerState extends State<LeftDrawer> {
                 );
               },
             ),
-            //SİPARİŞLER
-            ListTile(
-              leading: Icon(
-                Icons.favorite,
-                color: const Color.fromARGB(255, 10, 222, 230),
-              ),
-              title: Container(
-                padding: EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: const Color.fromARGB(255, 10, 222, 230),
-                    width: 0.75,
-                  ),
-                  borderRadius: BorderRadius.circular(15),
-                  gradient: LinearGradient(
-                    colors: [
-                      const Color.fromARGB(255, 9, 14, 10),
-                      const Color.fromARGB(255, 118, 113, 167),
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                ),
-                child: Text(
-                  'Favorilerim',
-                  style: TextStyle(
-                    color: const Color.fromARGB(255, 251, 252, 252),
-                  ),
-                ),
-              ),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => OrdersScreen()),
-                );
-              },
-            ),
-            //SİPARİŞLER
-            ListTile(
-              leading: Icon(
-                Icons.shopping_bag_outlined,
-                color: const Color.fromARGB(255, 10, 222, 230),
-              ),
-              title: Container(
-                padding: EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: const Color.fromARGB(255, 10, 222, 230),
-                    width: 0.75,
-                  ),
-                  borderRadius: BorderRadius.circular(15),
-                  gradient: LinearGradient(
-                    colors: [
-                      const Color.fromARGB(255, 9, 14, 10),
-                      const Color.fromARGB(255, 118, 113, 167),
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                ),
-                child: Text(
-                  'Siparişler',
-                  style: TextStyle(
-                    color: const Color.fromARGB(255, 251, 252, 252),
-                  ),
-                ),
-              ),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => OrdersScreen()),
-                );
-              },
-            ),
 
-            //kuponlarım
-            ListTile(
-              leading: Icon(
-                Icons.location_on_outlined,
-                color: const Color.fromARGB(255, 10, 222, 230),
-              ),
-              title: Container(
-                padding: EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: const Color.fromARGB(255, 10, 222, 230),
-                    width: 0.75,
-                  ),
-                  borderRadius: BorderRadius.circular(15),
-                  gradient: LinearGradient(
-                    colors: [
-                      const Color.fromARGB(255, 9, 14, 10),
-                      const Color.fromARGB(255, 118, 113, 167),
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                ),
-                child: Text(
-                  'Kuponlarım',
-                  style: TextStyle(
-                    color: const Color.fromARGB(255, 251, 252, 252),
-                  ),
-                ),
-              ),
+            _buildMenuItem(
+              icon: Icons.shopping_bag_outlined,
+              title: 'Biletlerim',
               onTap: () {
                 Navigator.push(
                   context,
@@ -208,73 +49,9 @@ class _LeftDrawerState extends State<LeftDrawer> {
                 );
               },
             ),
-            //kartlarım
-            ListTile(
-              leading: Icon(
-                Icons.credit_card,
-                color: const Color.fromARGB(255, 10, 222, 230),
-              ),
-              title: Container(
-                padding: EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: const Color.fromARGB(255, 10, 222, 230),
-                    width: 0.75,
-                  ),
-                  borderRadius: BorderRadius.circular(15),
-                  gradient: LinearGradient(
-                    colors: [
-                      const Color.fromARGB(255, 9, 14, 10),
-                      const Color.fromARGB(255, 118, 113, 167),
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                ),
-                child: Text(
-                  'Kartlarım',
-                  style: TextStyle(
-                    color: const Color.fromARGB(255, 251, 252, 252),
-                  ),
-                ),
-              ),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => OrdersScreen()),
-                );
-              },
-            ),
-            //AYARLAR
-            ListTile(
-              leading: Icon(
-                Icons.settings,
-                color: const Color.fromARGB(255, 10, 222, 230),
-              ),
-              title: Container(
-                padding: EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: const Color.fromARGB(255, 10, 222, 230),
-                    width: 0.75,
-                  ),
-                  borderRadius: BorderRadius.circular(15),
-                  gradient: LinearGradient(
-                    colors: [
-                      const Color.fromARGB(255, 9, 14, 10),
-                      const Color.fromARGB(255, 118, 113, 167),
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                ),
-                child: Text(
-                  'Ayarlar',
-                  style: TextStyle(
-                    color: const Color.fromARGB(255, 234, 238, 238),
-                  ),
-                ),
-              ),
+            _buildMenuItem(
+              icon: Icons.settings_outlined,
+              title: 'Ayarlar',
               onTap: () {
                 Navigator.push(
                   context,
@@ -282,7 +59,184 @@ class _LeftDrawerState extends State<LeftDrawer> {
                 );
               },
             ),
+
+            SizedBox(height: 300),
+            Divider(
+              color: Appcolor.grey,
+              thickness: 0.5,
+              indent: 20,
+              endIndent: 20,
+            ),
+            _buildSimpleMenuItem(
+              icon: Icons.help_outline,
+              title: 'Yardım',
+              onTap: () {
+                // TODO: Implement help screen
+              },
+            ),
+            _buildSimpleMenuItem(
+              icon: Icons.info_outline,
+              title: 'Hakkında',
+              onTap: () {
+                // TODO: Implement about screen
+              },
+            ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDrawerHeader() {
+    return Container(
+      height: 200,
+      padding: EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Appcolor.buttonColor.withOpacity(0.8),
+            Appcolor.buttonColor.withOpacity(0.6),
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(30),
+          bottomRight: Radius.circular(30),
+        ),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 70,
+            height: 70,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.2),
+                  blurRadius: 10,
+                  offset: Offset(0, 5),
+                ),
+              ],
+            ),
+            child: Icon(Icons.person, size: 35, color: Appcolor.buttonColor),
+          ),
+          SizedBox(height: 15),
+          Text(
+            'Hoş Geldiniz',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            'Cinema App',
+            style: TextStyle(
+              color: Colors.white.withOpacity(0.9),
+              fontSize: 16,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMenuItem({
+    required IconData icon,
+    required String title,
+    required VoidCallback onTap,
+  }) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 15, vertical: 4),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(15),
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            decoration: BoxDecoration(
+              color: Appcolor.grey.withOpacity(0.3),
+              borderRadius: BorderRadius.circular(15),
+              border: Border.all(
+                color: Appcolor.buttonColor.withOpacity(0.3),
+                width: 0.5,
+              ),
+            ),
+            child: Row(
+              children: [
+                Container(
+                  padding: EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: Appcolor.buttonColor.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Icon(icon, color: Appcolor.buttonColor, size: 22),
+                ),
+                SizedBox(width: 16),
+                Expanded(
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      color: Appcolor.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  color: Appcolor.white.withOpacity(0.5),
+                  size: 16,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSimpleMenuItem({
+    required IconData icon,
+    required String title,
+    required VoidCallback onTap,
+  }) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 15, vertical: 2),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(10),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+            child: Row(
+              children: [
+                Icon(
+                  icon,
+                  color: Appcolor.buttonColor.withOpacity(0.8),
+                  size: 20,
+                ),
+                SizedBox(width: 16),
+                Expanded(
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      color: Appcolor.white.withOpacity(0.8),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

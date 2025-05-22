@@ -1,41 +1,117 @@
+import 'package:cinemaa/core/storage.dart';
+import 'package:cinemaa/core/theme/theme.dart';
+import 'package:cinemaa/screens/auth/login_screen.dart';
+import 'package:cinemaa/services/profile/profile_service.dart';
 import 'package:flutter/material.dart';
+import 'package:cinemaa/models/profile_response.dart';
 
 class ProfilScreen extends StatefulWidget {
   const ProfilScreen({super.key});
+
   @override
   State<ProfilScreen> createState() => _ProfilScreenState();
 }
 
 class _ProfilScreenState extends State<ProfilScreen> {
-  final Color cyanAccent = const Color(0xFF00E5E5);
+  final ProfileService _profileService = ProfileService();
+  ProfileData? _profileData;
+  bool _isLoading = true;
+  String? _errorMessage;
 
-  // Bright cyan color
+  @override
+  void initState() {
+    super.initState();
+    _loadProfile();
+  }
+
+  Future<void> _loadProfile() async {
+    try {
+      setState(() {
+        _isLoading = true;
+        _errorMessage = null;
+      });
+      final token = await AuthStorage.getToken();
+      if (token == null) {
+        setState(() {
+          _errorMessage = 'Token bulunamadı';
+          _isLoading = false;
+        });
+        return;
+      }
+
+      final response = await _profileService.getProfile(token: token);
+
+      if (response.success == true && response.data != null) {
+        setState(() {
+          _profileData = response.data;
+          _isLoading = false;
+        });
+      } else {
+        setState(() {
+          _errorMessage = response.message ?? 'Profil bilgileri alınamadı';
+          _isLoading = false;
+        });
+      }
+    } catch (e) {
+      setState(() {
+        _errorMessage = 'Bir hata oluştu: $e';
+        _isLoading = false;
+      });
+    }
+  }
+
+  void _logout() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Appcolor.darkGrey,
+          title: Text('Çıkış Yap', style: TextStyle(color: Appcolor.white)),
+          content: Text(
+            'Çıkış yapmak istediğinizden emin misiniz?',
+            style: TextStyle(color: Appcolor.white),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text('İptal', style: TextStyle(color: Appcolor.white)),
+            ),
+            TextButton(
+              onPressed: () {
+                AuthStorage.clearToken();
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginScreen()),
+                );
+              },
+              child: Text(
+                'Çıkış Yap',
+                style: TextStyle(color: Appcolor.buttonColor),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          color: Colors.black, // Base background color
-        ),
-        child: SafeArea(
-          child: Column(
-            children: [
-              _buildAppBar(),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      _buildProfileHeader(),
-                      _buildAccountInfoSection(),
-                      SizedBox(height: 12),
-                      _buildSettingsButtons(),
-                      SizedBox(height: 20),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
+      backgroundColor: Appcolor.appBackgroundColor,
+      body: SafeArea(
+        child: Column(
+          children: [
+            _buildAppBar(),
+            Expanded(
+              child:
+                  _isLoading
+                      ? _buildLoadingWidget()
+                      : _errorMessage != null
+                      ? _buildErrorWidget()
+                      : _buildProfileContent(),
+            ),
+          ],
         ),
       ),
     );
@@ -43,9 +119,10 @@ class _ProfilScreenState extends State<ProfilScreen> {
 
   Widget _buildAppBar() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
       decoration: BoxDecoration(
-        border: Border(bottom: BorderSide(color: Colors.grey.shade900)),
+        color: Appcolor.darkGrey,
+        border: Border(bottom: BorderSide(color: Appcolor.grey, width: 0.5)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -53,12 +130,84 @@ class _ProfilScreenState extends State<ProfilScreen> {
           Text(
             'Profil',
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: Colors.white,
+              color: Appcolor.white,
             ),
           ),
-          Icon(Icons.edit, color: cyanAccent, size: 20),
+          IconButton(
+            onPressed: _loadProfile,
+            icon: Icon(Icons.refresh, color: Appcolor.buttonColor, size: 24),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLoadingWidget() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CircularProgressIndicator(color: Appcolor.buttonColor),
+          SizedBox(height: 16),
+          Text(
+            'Profil bilgileri yükleniyor...',
+            style: TextStyle(color: Appcolor.white, fontSize: 16),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildErrorWidget() {
+    return Center(
+      child: Padding(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.error_outline, color: Colors.red, size: 64),
+            SizedBox(height: 16),
+            Text(
+              _errorMessage!,
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Appcolor.white, fontSize: 16),
+            ),
+            SizedBox(height: 24),
+            ElevatedButton(
+              onPressed: _loadProfile,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Appcolor.buttonColor,
+                foregroundColor: Colors.black,
+                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              child: Text(
+                'Tekrar Dene',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildProfileContent() {
+    if (_profileData == null) return Container();
+
+    return SingleChildScrollView(
+      padding: EdgeInsets.all(20),
+      child: Column(
+        children: [
+          _buildProfileHeader(),
+          SizedBox(height: 32),
+          _buildProfileInfo(),
+          SizedBox(height: 32),
+          _buildLogoutButton(),
         ],
       ),
     );
@@ -66,58 +215,52 @@ class _ProfilScreenState extends State<ProfilScreen> {
 
   Widget _buildProfileHeader() {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 24),
+      padding: EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: Appcolor.darkGrey,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Appcolor.grey, width: 0.5),
+      ),
       child: Column(
         children: [
-          CircleAvatar(
-            radius: 40,
-            backgroundColor: cyanAccent,
+          Container(
+            width: 80,
+            height: 80,
+            decoration: BoxDecoration(
+              color: Appcolor.buttonColor,
+              shape: BoxShape.circle,
+            ),
             child: Icon(Icons.person, size: 40, color: Colors.black),
           ),
           SizedBox(height: 16),
           Text(
-            'Gül Yılmaz',
+            _profileData?.name ?? 'Kullanıcı',
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: Colors.white,
+              color: Appcolor.white,
             ),
           ),
-          SizedBox(height: 6),
+          SizedBox(height: 8),
           Text(
-            'gul.yilmaz@gmail.com',
-            style: TextStyle(fontSize: 14, color: Colors.grey.shade400),
-          ),
-          SizedBox(height: 20),
-          Column(
-            children: [
-              Text(
-                '14',
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: cyanAccent,
-                ),
-              ),
-              SizedBox(height: 4),
-              Text(
-                'Favoriler',
-                style: TextStyle(fontSize: 14, color: Colors.grey.shade400),
-              ),
-            ],
+            _profileData?.email ?? '',
+            style: TextStyle(
+              fontSize: 16,
+              color: Appcolor.white.withOpacity(0.7),
+            ),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildAccountInfoSection() {
+  Widget _buildProfileInfo() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 16),
-      padding: EdgeInsets.all(16),
+      padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
-        border: Border.all(color: cyanAccent, width: 1),
-        borderRadius: BorderRadius.circular(12),
+        color: Appcolor.darkGrey,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Appcolor.grey, width: 0.5),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,28 +268,26 @@ class _ProfilScreenState extends State<ProfilScreen> {
           Text(
             'Hesap Bilgileri',
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: cyanAccent,
+              color: Appcolor.buttonColor,
             ),
           ),
+          SizedBox(height: 20),
+          _buildInfoRow('Kullanıcı ID:', _profileData?.id?.toString() ?? '-'),
           SizedBox(height: 16),
-          _buildInfoRow('Ad Soyad:', 'Gül Yılmaz'),
-          SizedBox(height: 12),
-          _buildInfoRow('Telefon:', '+90 555 123 4567'),
-          SizedBox(height: 12),
-          _buildInfoRow('Doğum Tarihi:', '15.06.1990'),
+          _buildInfoRow('Ad Soyad:', _profileData?.name ?? '-'),
           SizedBox(height: 16),
-          Center(
-            child: TextButton.icon(
-              icon: Icon(Icons.edit, color: cyanAccent, size: 18),
-              label: Text(
-                'Düzenle',
-                style: TextStyle(color: cyanAccent, fontSize: 14),
-              ),
-              onPressed: () {},
+          _buildInfoRow('E-posta:', _profileData?.email ?? '-'),
+          SizedBox(height: 16),
+          _buildInfoRow('Rol:', _profileData?.roleName ?? '-'),
+          if (_profileData?.createdAt != null) ...[
+            SizedBox(height: 16),
+            _buildInfoRow(
+              'Kayıt Tarihi:',
+              _formatDate(_profileData!.createdAt!),
             ),
-          ),
+          ],
         ],
       ),
     );
@@ -156,76 +297,63 @@ class _ProfilScreenState extends State<ProfilScreen> {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          label,
-          style: TextStyle(color: Colors.grey.shade400, fontSize: 14),
-        ),
-        SizedBox(width: 8),
-        Expanded(
+        SizedBox(
+          width: 100,
           child: Text(
-            value,
-            style: TextStyle(color: Colors.white, fontSize: 14),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildSettingsButtons() {
-    return Column(
-      children: [
-        _buildSettingButton('Ödeme Yöntemleri', Icons.credit_card),
-        SizedBox(height: 2),
-        _buildSettingButton('Bildirim Ayarları', Icons.notifications_none),
-        SizedBox(height: 2),
-        _buildSettingButton('Dil Seçenekleri', Icons.language),
-      ],
-    );
-  }
-
-  Widget _buildSettingButton(String title, IconData icon) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
-          colors: [
-            Colors.black,
-            Color(
-              0xFF7B68EE,
-            ).withValues(alpha: 0.7), // Purple-blue shade matching menu
-          ],
-        ),
-        borderRadius: BorderRadius.circular(30),
-        border: Border.all(color: cyanAccent.withValues(alpha: 0.5), width: 1),
-      ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: () {},
-          borderRadius: BorderRadius.circular(30),
-          child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 14, horizontal: 16),
-            child: Row(
-              children: [
-                Icon(icon, size: 22, color: cyanAccent),
-                SizedBox(width: 16),
-                Text(
-                  title,
-                  style: TextStyle(fontSize: 15, color: Colors.white),
-                ),
-                Spacer(),
-                Icon(
-                  Icons.arrow_forward_ios,
-                  size: 16,
-                  color: Colors.grey.shade400,
-                ),
-              ],
+            label,
+            style: TextStyle(
+              color: Appcolor.white.withOpacity(0.7),
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
             ),
           ),
         ),
+        Expanded(
+          child: Text(
+            value,
+            style: TextStyle(
+              color: Appcolor.white,
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildLogoutButton() {
+    return Container(
+      width: double.infinity,
+      child: ElevatedButton.icon(
+        onPressed: _logout,
+        icon: Icon(Icons.logout, color: Colors.black),
+        label: Text(
+          'Çıkış Yap',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Appcolor.buttonColor,
+          padding: EdgeInsets.symmetric(vertical: 16),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          elevation: 4,
+        ),
       ),
     );
+  }
+
+  String _formatDate(String dateString) {
+    try {
+      final date = DateTime.parse(dateString);
+      return '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}';
+    } catch (e) {
+      return dateString;
+    }
   }
 }
