@@ -42,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
           transitionDuration: Duration(milliseconds: 1000), // Animasyon süresi
           pageBuilder:
               (context, animation, secondaryAnimation) =>
-                  token == "" ? LoginScreen() : CitiesScreen(),
+                  token == "" ? LoginScreen() : LoginScreen(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             var begin = Offset(1.0, 0.0); // Sağdan sola kayan animasyon
             var end = Offset.zero;

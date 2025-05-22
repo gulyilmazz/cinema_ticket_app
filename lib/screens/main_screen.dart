@@ -1,7 +1,6 @@
 import 'package:cinemaa/screens/profil/profil_screen.dart';
-import 'package:cinemaa/screens/tickets/bilet_screen.dart';
-import 'package:cinemaa/screens/favorites/fav_screen.dart';
 import 'package:cinemaa/screens/home/home.dart';
+import 'package:cinemaa/screens/ticket/ticket_list.dart';
 import 'package:cinemaa/widgets/buttons/left_drawer.dart';
 import 'package:flutter/material.dart';
 
@@ -16,12 +15,7 @@ class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
   // Sayfaları düzgün sırayla listeliyoruz
-  final List<Widget> _pages = [
-    HomeScreen(),
-    // FavScreen(),
-    BiletlerSayfasi(),
-    ProfilScreen(),
-  ];
+  final List<Widget> _pages = [HomeScreen(), UserTicketsPage(), ProfilScreen()];
 
   @override
   Widget build(BuildContext context) {
@@ -108,10 +102,7 @@ class _MainScreenState extends State<MainScreen> {
         },
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Ana Sayfa'),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'Favoriler',
-          ),
+
           BottomNavigationBarItem(
             icon: Icon(Icons.filter_list),
             label: 'Biletler',

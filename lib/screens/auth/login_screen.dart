@@ -8,7 +8,14 @@ import 'package:cinemaa/widgets/auth_widgets/register_button.dart';
 import 'package:cinemaa/widgets/auth_widgets/usarname_input.dart';
 import 'package:flutter/material.dart';
 import 'register_screen.dart';
-import '../../utils/renkler.dart';
+
+class Appcolor {
+  static const appBackgroundColor = Color(0xFF1c1c27);
+  static const grey = Color(0xFF373741);
+  static const buttonColor = Color(0xFFffb43b);
+  static const white = Colors.white;
+  static const darkGrey = Color(0xFF252532);
+}
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -26,6 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final FocusNode _passwordFocusNode = FocusNode();
 
   bool isLoading = false;
+
   Future<void> login(BuildContext context) async {
     setState(() {
       isLoading = true;
@@ -40,19 +48,17 @@ class _LoginScreenState extends State<LoginScreen> {
         await AuthStorage.saveToken(response.data!.token!);
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(
-            builder: (context) => CitiesScreen(),
-          ), // Giriş sonrası gidilecek ekran
+          MaterialPageRoute(builder: (context) => CitiesScreen()),
         );
       } else {
-        // Giriş başarısızsa hatayı göster
         throw Exception(response.message);
       }
     } catch (e) {
-      // Hata durumunda kullanıcıya bilgi ver
-      // ignore:
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Giriş başarısız: ${e.toString()}")),
+        SnackBar(
+          content: Text("Giriş başarısız: ${e.toString()}"),
+          backgroundColor: Appcolor.grey,
+        ),
       );
     } finally {
       setState(() {
@@ -63,6 +69,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
     _emailFocusNode.dispose();
     _passwordFocusNode.dispose();
     super.dispose();
@@ -72,109 +80,130 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        WidgetsBinding.instance.focusManager.primaryFocus
-            ?.unfocus(); // Klavye kapanır
+        WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
       },
       child: Scaffold(
-        resizeToAvoidBottomInset:
-            true, // Klavye açıldığında ekranın boyutunu küçültür
-        extendBodyBehindAppBar: true, // Appbar'ın arka plana geçmesini sağlar
-        extendBody: true,
-        backgroundColor: Renkler.arkaPlanRengi,
+        resizeToAvoidBottomInset: true,
+        backgroundColor: Appcolor.appBackgroundColor,
         body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.only(
-                bottom:
-                    MediaQuery.of(context).viewInsets.bottom +
-                    MediaQuery.of(context).padding.bottom,
+                left: 16.0,
+                right: 16.0,
+                top: 16.0,
+                bottom: MediaQuery.of(context).viewInsets.bottom + 16.0,
               ),
               child: ConstrainedBox(
                 constraints: BoxConstraints(
-                  minHeight: MediaQuery.of(context).size.height,
+                  minHeight:
+                      MediaQuery.of(context).size.height -
+                      MediaQuery.of(context).padding.top -
+                      32,
                 ),
                 child: Container(
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black, width: 2),
+                    color: Appcolor.darkGrey,
                     borderRadius: BorderRadius.circular(20),
-                    gradient: LinearGradient(
-                      // Arka plan rengi
-                      colors: [
-                        const Color.fromARGB(255, 8, 12, 9),
-                        const Color.fromARGB(255, 90, 85, 134),
-                      ],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
+                    border: Border.all(color: Appcolor.grey, width: 1),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(24.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Image.asset('assets/images/video.gif', height: 80),
-                        SizedBox(height: 40),
+                        // Logo/Icon
+                        Container(
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            color: Appcolor.buttonColor.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Image.asset(
+                            'assets/images/video.gif',
+                            height: 60,
+                            color: Appcolor.buttonColor,
+                          ),
+                        ),
+                        const SizedBox(height: 40),
 
+                        // App Title
                         Text(
                           'SAHNE',
                           style: TextStyle(
-                            fontSize: 24,
+                            fontSize: 32,
                             fontWeight: FontWeight.bold,
-                            color: const Color.fromARGB(255, 247, 247, 247),
+                            color: Appcolor.white,
+                            letterSpacing: 2,
                           ),
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 8),
 
+                        // Subtitle
                         Text(
                           'Film Dünyasına Giriş Yapın',
                           textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 16, color: Colors.grey),
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Appcolor.white.withOpacity(0.7),
+                          ),
                         ),
-                        SizedBox(height: 30),
+                        const SizedBox(height: 40),
 
+                        // Username Input
                         UsarnameInput(
                           controller: _emailController,
                           focusNode: _emailFocusNode,
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
 
+                        // Password Input
                         PasswordInput(
                           controller: _passwordController,
                           focusNode: _passwordFocusNode,
                         ),
-                        SizedBox(height: 30),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color.fromARGB(
-                              255,
-                              42,
-                              43,
-                              38,
+                        const SizedBox(height: 40),
+
+                        // Login Button
+                        SizedBox(
+                          width: double.infinity,
+                          height: 56,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Appcolor.buttonColor,
+                              foregroundColor: Appcolor.appBackgroundColor,
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
                             ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                          ),
-                          onPressed: () {
-                            login(context); // Giriş yapma işlemi
-                          },
-                          child:
-                              isLoading
-                                  ? CircularProgressIndicator()
-                                  : Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
+                            onPressed: isLoading ? null : () => login(context),
+                            child:
+                                isLoading
+                                    ? SizedBox(
+                                      height: 24,
+                                      width: 24,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 2,
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                              Appcolor.appBackgroundColor,
+                                            ),
+                                      ),
+                                    )
+                                    : Text(
                                       "Giriş Yap",
-                                      style: TextStyle(color: Colors.white),
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                        color: Appcolor.appBackgroundColor,
+                                      ),
                                     ),
-                                  ),
+                          ),
                         ),
-                        // LoginButton(
-                        //   onPressed: () {
-                        //     login(context); // Giriş yapma işlemi
-                        //   },
-                        // ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 24),
+
+                        // Register Button
                         RegisterButton(
                           onPressed: () {
                             Navigator.push(
@@ -185,132 +214,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             );
                           },
                         ),
-
-                        /*//  Kullanıcı Adı (Username) Giriş Alanı
-                        TextField(
-                          controller:
-                              _emailController, // Kullanıcı adını kontrol eder.
-                          focusNode: _emailFocusNode,
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
-                            labelText: 'Username',
-                            labelStyle: TextStyle(color: Colors.grey),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.grey),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: const Color.fromARGB(255, 3, 12, 19),
-                              ),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            prefixIcon: Icon(
-                              Icons.person,
-                              color: Colors.grey,
-                            ), // Kullanıcı ikonu
-                          ),
-                        ),
-                        SizedBox(height: 20),*/
-                        /*//  Şifre Giriş Alanı
-                        TextField(
-                          controller:
-                              _passwordController, // Şifreyi kontrol eder.
-                          focusNode: _passwordFocusNode,
-                          obscureText:
-                              !_passwordVisible, // Şifreyi gizler veya gösterir.
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
-                            labelText: 'Password',
-                            labelStyle: TextStyle(color: Colors.grey),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.grey),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: const Color.fromARGB(255, 203, 217, 229),
-                              ),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            prefixIcon: Icon(
-                              Icons.lock,
-                              color: Colors.grey,
-                            ), // Kilit ikonu
-                            // Şifreyi göster/gizle butonu
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                _passwordVisible
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
-                                color: Colors.grey,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  _passwordVisible = !_passwordVisible;
-                                });
-                              },
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 30),*/
-
-                        /*//  Giriş Yap Butonu
-                        ElevatedButton(
-                          onPressed: () {
-                            // Kullanıcı giriş yaptıktan sonra film listesi ekranına gider.
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => FilmTry(),
-                              ),
-                            );
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color.fromARGB(
-                              255,
-                              42,
-                              43,
-                              38,
-                            ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 40,
-                              vertical: 15,
-                            ),
-                            child: Text(
-                              'Giriş >',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 20),*/
-
-                        /*//Kayıt ol butonu
-                        TextButton(
-                          onPressed: () {
-                            // Kullanıcı, kayıt ekranına yönlendirilir.
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => RegisterScreen(),
-                              ),
-                            );
-                          },
-                          child: Text(
-                            "Hesabın yok mu? Kayıt ol",
-                            style: TextStyle(
-                              color: const Color.fromARGB(255, 199, 195, 195),
-                            ),
-                          ),
-                        ),*/
                       ],
                     ),
                   ),

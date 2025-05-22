@@ -1,3 +1,4 @@
+import 'package:cinemaa/core/storage.dart';
 import 'package:cinemaa/models/auth_response.dart';
 import 'package:cinemaa/services/client_service.dart';
 
@@ -34,7 +35,7 @@ class AuthService {
 
     final authResponse = AuthResponse.fromJson(response);
 
-    //await AuthStorage.saveId(authResponse.data.user.id);
+    await AuthStorage.saveUserId(authResponse.data!.id.toString());
 
     return authResponse;
   }

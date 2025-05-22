@@ -4,6 +4,7 @@ class AuthStorage {
   static const String _tokenKey = 'auth_token';
   static const String _citiesIdKey = 'cities_id';
   static const String _cinemaIdKey = 'cinema"_id';
+  static const String _userId = 'user_id';
 
   static Future<void> saveToken(String token) async {
     final prefs = await SharedPreferences.getInstance();
@@ -48,5 +49,20 @@ class AuthStorage {
   static Future<void> clearCinemaId() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(_cinemaIdKey);
+  }
+
+  static Future<void> saveUserId(String userId) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_userId, userId);
+  }
+
+  static Future<String?> getUserId() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_userId);
+  }
+
+  static Future<void> clearUserId() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(_userId);
   }
 }

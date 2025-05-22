@@ -212,7 +212,10 @@ class _SessionsPageState extends State<SeansPage> {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder:
-                        (context) => SeatSelectionScreen(hallId: widget.hallId),
+                        (context) => SeatSelectionScreen(
+                          hallId: widget.hallId,
+                          showtimeId: session.id!,
+                        ),
                   ),
                 );
               } else {

@@ -1,12 +1,18 @@
 import 'package:cinemaa/core/storage.dart';
 import 'package:cinemaa/models/seats_response.dart';
+import 'package:cinemaa/screens/ticket/ticket_buy.dart';
 import 'package:cinemaa/services/seat/seat_service.dart';
 import 'package:flutter/material.dart';
 
 class SeatSelectionScreen extends StatefulWidget {
   final int hallId;
+  final int showtimeId;
 
-  const SeatSelectionScreen({super.key, required this.hallId});
+  const SeatSelectionScreen({
+    super.key,
+    required this.hallId,
+    required this.showtimeId,
+  });
 
   @override
   State<SeatSelectionScreen> createState() => _SeatSelectionScreenState();
@@ -756,12 +762,25 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
                         _selectedSeatIds.isEmpty
                             ? null
                             : () {
-                              debugPrint(
-                                'Seçilen Koltuk IDleri: $_selectedSeatIds',
-                              );
-                              debugPrint('Toplam Fiyat: $_totalPrice');
-                              _showMessage(
-                                '${_selectedSeatIds.length} koltuk seçildi. İşlem devam ediyor...',
+                              if (_selectedSeatIds.length > 1) {
+                                _showMessage(
+                                  'Lütfen sadece bir koltuk seçin.',
+                                  isError: true,
+                                );
+                                return;
+                              }
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder:
+                                      (context) => TicketCreatePage(
+                                        showtimeId:
+                                            widget.showtimeId.toString(),
+                                        seatNumber:
+                                            _selectedSeatIds
+                                                .first, // İlk seçilen koltuğun ID'si
+                                      ),
+                                ),
                               );
                             },
                     style: ElevatedButton.styleFrom(
