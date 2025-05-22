@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:cinemaa/core/storage.dart';
+import 'package:cinemaa/core/theme/theme.dart';
 import 'package:cinemaa/screens/cities/cities.dart';
 import 'package:cinemaa/services/auth/auth_service.dart';
 import 'package:cinemaa/widgets/auth_widgets/password_input.dart';
@@ -8,14 +9,6 @@ import 'package:cinemaa/widgets/auth_widgets/register_button.dart';
 import 'package:cinemaa/widgets/auth_widgets/usarname_input.dart';
 import 'package:flutter/material.dart';
 import 'register_screen.dart';
-
-class Appcolor {
-  static const appBackgroundColor = Color(0xFF1c1c27);
-  static const grey = Color(0xFF373741);
-  static const buttonColor = Color(0xFFffb43b);
-  static const white = Colors.white;
-  static const darkGrey = Color(0xFF252532);
-}
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

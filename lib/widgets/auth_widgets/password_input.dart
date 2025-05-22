@@ -1,4 +1,4 @@
-// password_input.dart
+import 'package:cinemaa/core/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class PasswordInput extends StatefulWidget {
@@ -21,36 +21,58 @@ class _PasswordInputState extends State<PasswordInput> {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      controller: widget.controller, // Şifreyi kontrol eder.
+      controller: widget.controller,
       focusNode: widget.focusNode,
-      obscureText: !_passwordVisible, // Şifreyi gizler veya gösterir.
-      style: TextStyle(color: Colors.white),
+      obscureText: !_passwordVisible,
+      style: TextStyle(color: Appcolor.white),
       decoration: InputDecoration(
-        labelText: 'Password',
-        labelStyle: TextStyle(color: Colors.grey),
+        labelText: 'Şifre',
+        labelStyle: TextStyle(
+          color: Appcolor.white.withOpacity(0.7),
+          fontSize: 16,
+        ),
+        hintText: 'Şifrenizi girin',
+        hintStyle: TextStyle(
+          color: Appcolor.white.withOpacity(0.5),
+          fontSize: 14,
+        ),
+        filled: true,
+        fillColor: Appcolor.grey.withOpacity(0.3),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Color.fromARGB(255, 149, 223, 223)),
-          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Appcolor.grey, width: 1),
+          borderRadius: BorderRadius.circular(12),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: const Color.fromARGB(255, 203, 217, 229),
-          ),
-          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Appcolor.buttonColor, width: 2),
+          borderRadius: BorderRadius.circular(12),
         ),
-        prefixIcon: Icon(Icons.lock, color: Colors.grey), // Kilit ikonu
-        // Şifreyi göster/gizle butonu
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.red, width: 1),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.red, width: 2),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        prefixIcon: Icon(
+          Icons.lock_outline,
+          color: Appcolor.white.withOpacity(0.7),
+          size: 22,
+        ),
         suffixIcon: IconButton(
           icon: Icon(
             _passwordVisible ? Icons.visibility : Icons.visibility_off,
-            color: Colors.grey,
+            color: Appcolor.white.withOpacity(0.7),
+            size: 22,
           ),
           onPressed: () {
             setState(() {
               _passwordVisible = !_passwordVisible;
             });
           },
+          splashRadius: 20,
         ),
+        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       ),
     );
   }
