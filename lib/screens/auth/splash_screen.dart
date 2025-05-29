@@ -1,7 +1,6 @@
 import 'package:cinemaa/core/storage.dart';
 import 'package:cinemaa/core/theme/theme.dart';
 import 'package:cinemaa/screens/auth/login_screen.dart';
-import 'package:cinemaa/screens/cities/cities.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:lottie/lottie.dart';
