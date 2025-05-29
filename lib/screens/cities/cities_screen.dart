@@ -41,7 +41,7 @@ class _CitiesScreenState extends State<CitiesScreen>
     _animationController.forward().then((_) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => CinemaScreen()),
+        MaterialPageRoute(builder: (context) => const HallScreen()),
       );
     });
   }
