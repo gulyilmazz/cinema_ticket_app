@@ -2,7 +2,7 @@
 
 import 'package:cinemaa/core/storage.dart';
 import 'package:cinemaa/core/theme/theme.dart';
-import 'package:cinemaa/screens/cities/cities.dart';
+import 'package:cinemaa/screens/cities/cities_screen.dart';
 import 'package:cinemaa/services/auth/auth_service.dart';
 import 'package:cinemaa/widgets/auth_widgets/password_input.dart';
 import 'package:cinemaa/widgets/auth_widgets/register_button.dart';
