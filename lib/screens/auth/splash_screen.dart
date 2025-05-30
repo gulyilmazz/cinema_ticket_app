@@ -14,7 +14,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   // Splash ekranının kaç saniye görüneceği
-  static const int splashDuration = 3;
+  static const int splashDuration = 5;
   late String token;
 
   void initToken() async {
