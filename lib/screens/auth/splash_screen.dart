@@ -61,8 +61,8 @@ class _SplashScreenState extends State<SplashScreen> {
         MediaQuery.of(context).size; // Ekran boyutlarını alıyorum
     return Scaffold(
       body: Container(
-        width: screenSize.width, // Tam genişlik
-        height: screenSize.height, // Tam yükseklik
+        width: screenSize.width,
+        height: screenSize.height,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,

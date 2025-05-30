@@ -1,7 +1,7 @@
 import 'package:cinemaa/core/theme/theme.dart';
-import 'package:cinemaa/screens/drawers/account_screen.dart';
-import 'package:cinemaa/screens/drawers/orders_screen.dart';
-import 'package:cinemaa/screens/drawers/settings_sreen.dart';
+import 'package:cinemaa/screens/drawers/account_screen.dart' as account;
+import 'package:cinemaa/screens/drawers/orders_screen.dart' as orders;
+import 'package:cinemaa/screens/drawers/settings_sreen.dart' hide Appcolor;
 import 'package:flutter/material.dart';
 
 class LeftDrawer extends StatefulWidget {
@@ -34,7 +34,9 @@ class _LeftDrawerState extends State<LeftDrawer> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => AccountScreen()),
+                  MaterialPageRoute(
+                    builder: (context) => account.AccountScreen(),
+                  ),
                 );
               },
             ),
@@ -45,7 +47,9 @@ class _LeftDrawerState extends State<LeftDrawer> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => OrdersScreen()),
+                  MaterialPageRoute(
+                    builder: (context) => orders.OrdersScreen(),
+                  ),
                 );
               },
             ),
@@ -55,7 +59,7 @@ class _LeftDrawerState extends State<LeftDrawer> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => SettingsSreen()),
+                  MaterialPageRoute(builder: (context) => SettingsScreen()),
                 );
               },
             ),
